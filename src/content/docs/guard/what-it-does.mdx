@@ -55,7 +55,7 @@ and it keeps a record.
 | Fixed patterns (this command, this file) | Yes | Yes |
 | **Depends on what just happened**: "a push is fine, but not right after reading a page with hidden instructions" | No, a rule is the same every time | Yes |
 | Spots **prompt injection** in a page or file the agent read | No | Yes |
-| **Sees through disguises** such as `cat .e''nv` or `bash -c "cat .env"` | Only what your pattern matches | Yes, it reads the command the way the shell does |
+| **Sees through disguises** such as `cat .e''nv`, or a download-and-run wrapped in `bash -c "…"` | Only what your pattern matches | Yes, it reads the command the way the shell does |
 | **Reads a script before it runs** (`sh setup.sh`) | No, it sees only the command | Yes |
 | A **new or changed plugin, skill or MCP server** asks before its first use | No | Yes |
 | Checks what an **MCP tool is about to send** (a key, a `DROP TABLE`) | No | Yes |
