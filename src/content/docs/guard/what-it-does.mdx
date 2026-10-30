@@ -1,0 +1,90 @@
+---
+title: Why you need the guard
+description: Your agent runs commands on your computer and reads pages you did not write. The guard checks every step before it runs.
+---
+import GuardDiagram from '../../../components/GuardDiagram.astro';
+import GuardStory from '../../../components/GuardStory.astro';
+
+:::note[Coming in 0.6.0]
+The guard is built and tested, and ships with the next release (0.6.0). The released version, 0.5.15, does not have it
+yet.
+:::
+
+:::tip[One name to remember: the guard]
+`/livesession` is only the command that turns the guard on for the chat you are in. "Live session" means "this chat,
+guarded while it runs". There is one thing to understand: **the guard**.
+:::
+
+## The question: why would I need this?
+
+Your agent does real things on your computer, with your access: it runs commands, reads and writes files, installs
+packages, pushes code. Almost every step is fine. A few can hurt you:
+
+- **leak a secret**, such as an API key from your `.env` file;
+- **send your code somewhere** it should not go;
+- **run a script from the internet** without anyone reading it.
+
+And the agent reads things **you did not write**: web pages, downloaded files, the output of tools. Any of them can
+contain instructions aimed at the agent. This is called **prompt injection**, and the agent cannot always tell an
+instruction from you apart from one hidden in a page.
+
+## A story: one afternoon with the guard on
+
+<GuardStory />
+
+Without the guard, both steps could have run. You would have found out later, if at all. With the guard, they never ran,
+the agent told you why, and the [report](/sessioncost-help/report/risk-map/) keeps a record of it.
+
+## How it works: three answers
+
+Before each step, the guard looks at it and gives one of three answers.
+
+<GuardDiagram />
+
+| Answer | When | What you see |
+|---|---|---|
+| <span class="go-t">Goes ahead</span> | Ordinary work: editing project files, reading, searching. | Nothing. The step is written to the guard's log. |
+| <span class="ask-t">Asks you</span> | Risky steps: a push, an install, the network, a file outside the project, deleting, the agent's own rules or memory. Also any risky step right after the agent read outside content. | Your agent asks yes or no. Say yes once and that push, site or folder is not asked again in this chat. |
+| <span class="stop-t">Blocked</span> | The never list: reading or sending a secret (`.env`, keys, `~/.ssh`), a script piped from the internet (`curl … \| sh`), force-push, printing every environment variable, switching off a security tool or the commit checks. Also a risky step right after a page with signs of an injection. | The step does not run. The agent tells you what it wanted and why. |
+
+It runs on your computer, uses no AI model, and sends nothing anywhere. It is **off** until you turn it on.
+
+## Isn't Claude Code's settings.json enough?
+
+Claude Code lets you write permission rules in `settings.json`: "never run this", "ask before that". Keep them. They are
+a **fixed list**. The guard is a **watchman**: it also looks at what the agent just read, what changed since last time,
+and it keeps a record.
+
+| | `settings.json` rules | SessionCost guard |
+|---|---|---|
+| Fixed patterns (this command, this file) | Yes | Yes |
+| **Depends on what just happened**: "a push is fine, but not right after reading a page with hidden instructions" | No, a rule is the same every time | Yes |
+| Spots **prompt injection** in a page or file the agent read | No | Yes |
+| **Sees through disguises** such as `cat .e''nv` or `bash -c "cat .env"` | Only what your pattern matches | Yes, it reads the command the way the shell does |
+| **Reads a script before it runs** (`sh setup.sh`) | No, it sees only the command | Yes |
+| A **new or changed plugin, skill or MCP server** asks before its first use | No | Yes |
+| Checks what an **MCP tool is about to send** (a key, a `DROP TABLE`) | No | Yes |
+| Secrets blocked **without writing any rules** | No | Yes |
+| A **record you can trust** of every ask and block | No | Yes: a chained log, the Trace & risk map and the [guard report](/sessioncost-help/guard/settings/#the-guard-report) |
+| Codex, Cursor, Antigravity | No, Claude Code only | Yes, the same rules |
+| The agent can switch it off | — | No. Only you can. |
+
+**In plain words:** for one developer with simple needs, good `settings.json` rules may be enough. The guard matters
+when the agent reads the web or files from outside, when you use more than one agent, for teams and security leads, and
+for the risks a fixed list misses.
+
+## How often will it bother me?
+
+On the author's own 497 chats across all four agents (48,835 tool steps), replayed through the guard: **0.53% of steps
+were blocked and 3.8% were asked**. Everything else went ahead with no question.
+
+## What it cannot do
+
+- It checks steps against known patterns; it does not understand them the way a person does. Treat it as a safety net,
+  not a guarantee.
+- If the guard itself breaks, the never list still blocks, and other steps go ahead so your work does not stop. To block
+  everything instead, turn on [fail-closed](/sessioncost-help/guard/settings/).
+- **Claude Code** gets the full guard with the plugin. **Codex, Cursor and Antigravity** get it with
+  `sessioncost guard setup`. Codex cannot ask, so a step that would ask is blocked, and the agent asks you in the chat.
+
+Next: [Try the guard](/sessioncost-help/guard/try-it/) in five minutes, and see all three answers yourself.

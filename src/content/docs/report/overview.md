@@ -1,0 +1,44 @@
+---
+title: The report at a glance
+description: Every part of the SessionCost report, top to bottom, and what its colours mean.
+---
+The report is one page that reads top to bottom. A sidebar stays on the left with the chat, its key numbers and the
+sections. On a phone the sections move into a menu.
+
+## The parts, in order
+
+| Part | What it answers |
+|---|---|
+| **The biggest fixes** | How much was sent, how much the fixes would cut, and the three fixes worth most. |
+| **The path, Step 0 to the last turn** | Every turn as a tile. Switch between **Board**, **Charts** and **Table**. |
+| **[Step 0](/sessioncost-help/report/step-0/)** | What the agent sent before you said a word. Opens from the first tile. |
+| **[The turn panel](/sessioncost-help/report/turn-panel/)** | One turn in detail. Opens when you tap a tile. |
+| **[Agent flow](/sessioncost-help/report/risk-map/#agent-flow)** | Which agents worked, what each did, and what it handed back. Only when helpers ran. |
+| **[How to save](/sessioncost-help/report/fixes/)** | Every fix, its saving, and the rule to paste. |
+| **[Safety rules](/sessioncost-help/report/fixes/#safety-rules)** | Rules for the risky steps the map found. Only when it found some. |
+| **[Trace & risk map](/sessioncost-help/report/risk-map/)** | Every turn, call and tool step, with the risky ones lit up. |
+
+## The path: Board, Charts, Table
+
+- **Board**: the tiles, in order. The bigger and redder a turn, the more it cost.
+- **Charts**: cost per call, the running total, chat size against price, breaks and compactions, the dearest turns, a
+  time breakdown, and the cost breakdown.
+- **Table**: the same numbers as rows, to sort.
+
+## What the colours mean
+
+Each colour has one meaning everywhere in the report.
+
+| Colour | Means |
+|---|---|
+| Blue | Step 0, what was needed, the main agent. Pale blue is earlier conversation. |
+| Purple | Re-read from the cache: cheap, about a tenth of the price. |
+| White / dark | Written fresh: full price. |
+| Green | What the model wrote back. |
+| Orange stripes | What could be cut. |
+| Red | How heavy a turn is. |
+| Its own colour | Each helper agent. |
+
+## Light and dark
+
+The switch at the top changes between light and dark. The report remembers your choice in this browser.

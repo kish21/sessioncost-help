@@ -1,0 +1,67 @@
+---
+title: Welcome to SessionCost
+description: See where every token of your AI coding chat went, and what to fix to send fewer.
+hero:
+  title: See where every token of your AI chat went
+  tagline: SessionCost turns your coding chat into one picture, finds the turns that cost the most, and tells you what to change so the next chat sends less. Free, open source, and nothing leaves your computer.
+  actions:
+    - text: Install in a minute
+      link: /sessioncost-help/start/install/
+      icon: right-arrow
+    - text: Read your first report
+      link: /sessioncost-help/start/first-report/
+      variant: minimal
+---
+import ChatGrowth from '../../components/ChatGrowth.astro';
+import LoopDiagram from '../../components/LoopDiagram.astro';
+
+## Why is my chat so expensive?
+
+Because **every message you send makes the agent send the whole chat again.** Your first message is small. By the
+twentieth, the agent is sending its own instructions, its tools, and all nineteen turns before it, every time, and you
+pay for all of it.
+
+<ChatGrowth />
+
+You cannot see this from inside the chat. SessionCost can: it reads your agent's own log on your computer and shows
+every turn on one path, what each one sent, and what it cost.
+
+![Every turn of a chat on one path; tap a turn to see the calls inside it](https://raw.githubusercontent.com/kish21/sessioncost/v0.5.15/media/path.gif)
+
+<sub>The pictures on this site use a made-up demo chat.</sub>
+
+## What you get
+
+- **The answer first.** How much the chat sent, and how much it would have sent with the fixes.
+- **The heavy turns.** Tap any turn to see what you asked, what the agent did, and where the money went.
+- **Fixes you can paste.** Each one with its saving, measured from your own chat, and a rule to give your agent.
+- **A guard, if you want one.** It checks each step the agent is about to take, and stops the dangerous ones.
+  [Why you need the guard](/sessioncost-help/guard/what-it-does/).
+
+It works with **Claude Code, Codex, Cursor, Antigravity and GitHub Copilot**. No AI model is called, and nothing is
+sent anywhere.
+
+## Find your starting point
+
+<LoopDiagram />
+
+<div class="start-lines">
+
+**You have not installed it yet.** [Install SessionCost](/sessioncost-help/start/install/) takes about a minute.
+
+**You just ran `/sessioncost` and the report is open.** [Your first report](/sessioncost-help/start/first-report/)
+walks through it in five minutes.
+
+**One turn cost far more than the rest.** [The turn panel](/sessioncost-help/report/turn-panel/) shows what happened
+inside it.
+
+**The chat was expensive before you typed anything.** That is [Step 0](/sessioncost-help/report/step-0/): the rules,
+tools and skills the agent sends with every message.
+
+**You want the agent stopped before it does something risky.** [Why you need the guard](/sessioncost-help/guard/what-it-does/).
+
+**Something does not work.** [Fix a problem](/sessioncost-help/help/fix-a-problem/).
+
+</div>
+
+▶ Prefer a video? [Watch the 1-minute tour on YouTube](https://youtu.be/TYfaJuEWr7U).

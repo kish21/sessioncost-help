@@ -1,0 +1,32 @@
+---
+// The guard's three answers for each step the agent is about to take.
+const answers = [
+	{ x: 20, cls: 'go', mark: 'GOES AHEAD', ex: 'write hello.txt', why: 'ordinary work; written to the log' },
+	{ x: 260, cls: 'ask', mark: 'ASKS YOU', ex: 'pip install, git push', why: 'risky: you say yes or no' },
+	{ x: 500, cls: 'stop', mark: 'BLOCKED', ex: 'read .env, curl … | sh', why: 'on the never list' },
+];
+---
+<figure class="diagram" aria-label="The agent wants to take a step. The guard checks it before it runs and gives one of three answers: goes ahead, asks you, or blocked.">
+	<svg viewBox="0 0 740 270" role="img">
+		<text class="kicker" x="370" y="20" text-anchor="middle">Before every step</text>
+		<rect class="box" x="230" y="36" width="280" height="44" rx="4" />
+		<text class="label" x="370" y="63" text-anchor="middle">The agent wants to take a step</text>
+		<path class="line" d="M370 82 V108" marker-end="url(#garrow)" />
+		<rect class="box" x="230" y="110" width="280" height="44" rx="4" />
+		<text class="label" x="370" y="137" text-anchor="middle">The guard checks it first</text>
+		{answers.map((a) => (
+			<g>
+				<path class="line" d={`M370 156 L${a.x + 110} 186`} marker-end="url(#garrow)" />
+				<rect class={a.cls} x={a.x} y="188" width="220" height="26" rx="3" />
+				<text class="on-mark" x={a.x + 110} y="206" text-anchor="middle">{a.mark}</text>
+				<text class="label" x={a.x + 110} y="236" text-anchor="middle">{a.ex}</text>
+				<text class="small" x={a.x + 110} y="256" text-anchor="middle">{a.why}</text>
+			</g>
+		))}
+		<defs>
+			<marker id="garrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+				<path d="M0 0 L10 5 L0 10 z" fill="currentColor" />
+			</marker>
+		</defs>
+	</svg>
+</figure>

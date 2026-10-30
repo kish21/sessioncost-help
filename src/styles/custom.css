@@ -1,0 +1,142 @@
+/* SessionCost help: black-and-white pages, one blue accent, IBM Plex (as on the commands page). */
+:root {
+	--sl-font: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+	--sl-font-mono: 'IBM Plex Mono', ui-monospace, Consolas, Menlo, monospace;
+	--sl-line-height: 1.7;
+	--sl-text-h1: 2.6rem;
+	--sl-text-h2: 1.65rem;
+	--sl-text-h3: 1.25rem;
+	--sl-color-accent-low: #1c2550;
+	--sl-color-accent: #6f86f0;
+	--sl-color-accent-high: #c9d3fb;
+	--sl-content-width: 46rem;
+}
+:root[data-theme='light'] {
+	--sl-color-accent-low: #e3e8fb;
+	--sl-color-accent: #2f4fd6;
+	--sl-color-accent-high: #1a2c80;
+	--sl-color-white: #111418;
+	--sl-color-bg: #ffffff;
+	--sl-color-bg-nav: #ffffff;
+	--sl-color-bg-sidebar: #ffffff;
+}
+
+/* sidebar group names: bold, upper case, monospace (the look of a printed manual) */
+.sidebar-content summary .group-label .large {
+	font-family: var(--sl-font-mono);
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	font-size: 0.95rem;
+	color: var(--sl-color-white);
+}
+.sidebar-content a[aria-current='page'] {
+	border-inline-start: 2px solid var(--sl-color-accent);
+}
+
+/* diagrams drawn for these pages */
+.diagram {
+	margin-block: 1.5rem;
+	color: var(--sl-color-white);
+}
+.diagram svg {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+.diagram .kicker {
+	font: 600 0.75rem var(--sl-font-mono);
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	fill: var(--sl-color-accent);
+}
+.diagram .foot {
+	font: 0.72rem var(--sl-font-mono);
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	fill: var(--sl-color-gray-3);
+}
+.diagram .box {
+	fill: var(--sl-color-gray-6);
+	stroke: var(--sl-color-gray-5);
+}
+.diagram .label {
+	font: 600 0.95rem var(--sl-font);
+	fill: var(--sl-color-white);
+}
+.diagram .small {
+	font: 0.8rem var(--sl-font);
+	fill: var(--sl-color-gray-2);
+}
+.diagram .line {
+	stroke: var(--sl-color-gray-3);
+	fill: none;
+	stroke-width: 1.5;
+}
+.diagram .accent {
+	stroke: var(--sl-color-accent);
+}
+.diagram .go { fill: #1d7a4e; }
+.diagram .ask { fill: #a35a00; }
+.diagram .stop { fill: #b3261e; }
+.diagram .on-mark {
+	font: 700 0.8rem var(--sl-font);
+	fill: #ffffff;
+}
+
+/* headings: tight and heavy, like a product page */
+.sl-markdown-content :is(h2, h3),
+h1#_top {
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	line-height: 1.2;
+}
+.sl-markdown-content h2 {
+	margin-top: 2.6rem;
+}
+
+/* tables: ruled, a tinted header, readable at phone width */
+.sl-markdown-content table {
+	display: table;
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.92rem;
+}
+.sl-markdown-content :is(th, td) {
+	border: 1px solid var(--sl-color-gray-5);
+	padding: 0.55rem 0.75rem;
+	vertical-align: top;
+}
+.sl-markdown-content th {
+	background: var(--sl-color-gray-6);
+	text-align: left;
+	font-weight: 600;
+}
+@media (max-width: 50rem) {
+	.sl-markdown-content table {
+		display: block;
+		overflow-x: auto;
+	}
+}
+
+/* inline code: a soft chip */
+.sl-markdown-content :not(pre) > code {
+	background: var(--sl-color-gray-6);
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 4px;
+	padding: 0.05em 0.35em;
+	font-size: 0.88em;
+}
+
+/* the guard's three answers as coloured words */
+.go-t { color: #1d7a4e; font-weight: 700; }
+.ask-t { color: #a35a00; font-weight: 700; }
+.stop-t { color: #b3261e; font-weight: 700; }
+:root:not([data-theme='light']) .go-t { color: #6fd3a2; }
+:root:not([data-theme='light']) .ask-t { color: #f0b26a; }
+:root:not([data-theme='light']) .stop-t { color: #ff8a80; }
+
+/* "Find your starting point" lines */
+.start-lines p {
+	margin-block: 0.9rem;
+}

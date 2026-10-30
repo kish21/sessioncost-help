@@ -1,0 +1,23 @@
+---
+// Why a chat gets dearer: every turn sends Step 0 and the whole chat so far, plus the new message.
+const turns = [1, 2, 3, 4, 5];
+const unit = 92;
+---
+<figure class="diagram" aria-label="Turn 1 sends Step 0 and your message. Turn 5 sends Step 0, the four turns before it and your new message. You pay for the whole row every time.">
+	<svg viewBox="0 0 740 300" role="img">
+		<text class="kicker" x="370" y="20" text-anchor="middle">What each message sends</text>
+		{turns.map((n) => (
+			<g>
+				<text class="small" x="0" y={58 + (n - 1) * 44} >Turn {n}</text>
+				<rect x="70" y={40 + (n - 1) * 44} width={unit} height="28" rx="3" fill="#2f4fd6" />
+				{n === 1 && <text class="on-mark" x={70 + unit / 2} y={59} text-anchor="middle">Step 0</text>}
+				{n > 1 && <rect x={70 + unit + 2} y={40 + (n - 1) * 44} width={(n - 1) * unit - 2} height="28" rx="3" fill="#9aa9e8" />}
+				{n === 2 && <text class="on-mark" x={70 + unit + unit / 2} y={103} text-anchor="middle">turn 1</text>}
+				<rect x={70 + n * unit + 2} y={40 + (n - 1) * 44} width={unit - 4} height="28" rx="3" fill="#e0a43a" />
+				<text class="on-mark" x={70 + n * unit + unit / 2} y={59 + (n - 1) * 44} text-anchor="middle">new</text>
+			</g>
+		))}
+		<text class="small" x="70" y="268">Step 0 is sent every time. Every earlier turn is sent again. Only "new" is what you just typed.</text>
+		<text class="foot" x="370" y="292" text-anchor="middle">you pay for the whole row, every turn</text>
+	</svg>
+</figure>
