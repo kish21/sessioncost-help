@@ -10,9 +10,7 @@ opens in your browser.
 Why only one line? Anything written into the chat is sent again with every later message, so a long summary there would
 cost you on every turn. All the numbers are in the report. If you do want them in the chat, ask for the summary.
 
-:::note
-In 0.5.15 the agent shows a short summary first. From 0.6.0 it answers with the link only.
-:::
+![/sessioncost in a Claude Code chat: one command runs, and the agent answers with only the report's link](/sessioncost-help/img/chat.png)
 
 ## 2. Read the top: the answer first
 

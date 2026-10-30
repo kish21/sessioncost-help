@@ -55,7 +55,7 @@ With the plugin installed, you don't need the copy from way 1 or 2 in that agent
 Restart the agent, open any chat, and type **`/sessioncost`** (or ask: "run sessioncost"). The report opens in your
 browser.
 
-![/sessioncost in a Claude Code chat](https://raw.githubusercontent.com/kish21/sessioncost/v0.5.15/media/chat.png)
+![/sessioncost in a Claude Code chat: one command runs, and the agent answers with only the report's link](/sessioncost-help/img/chat.png)
 
 | Agent | Where `/sessioncost` is added |
 |---|---|

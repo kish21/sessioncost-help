@@ -11,7 +11,7 @@ description: What SessionCost reads, what it keeps, and what it never sends.
 ## Keys stay out of the report
 
 An API key or token inside a command (`sk-…`, `ghp_…`, `AKIA…` and the like) is shown as **[secret hidden]**
-everywhere in the report, the exports and the guard's notes. (From 0.6.0.)
+everywhere in the report, the exports and the guard's notes.
 
 ## The guard
 

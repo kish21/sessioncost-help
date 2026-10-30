@@ -21,5 +21,3 @@ SessionCost reads each agent's own log on your computer. How exact the numbers a
 | Codex | `sessioncost guard setup codex`, then `sessioncost guard on`. Codex cannot ask, so a step that would ask is blocked and the agent asks you in the chat. |
 | Cursor | `sessioncost guard setup cursor`, then `sessioncost guard on`. |
 | Antigravity | `sessioncost guard setup antigravity`, then `sessioncost guard on`. |
-
-The guard ships with 0.6.0.

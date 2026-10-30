@@ -2,9 +2,6 @@
 title: Try the guard
 description: Turn the guard on in a test folder and see all three answers in five minutes.
 ---
-:::note[Coming in 0.6.0]
-The guard is built and tested, and ships with the next release (0.6.0). The released version, 0.5.15, does not have it yet.
-:::
 
 Try it in a **test folder**, not a real project, so nothing important is touched.
 

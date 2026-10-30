@@ -43,7 +43,6 @@ export default defineConfig({
 				},
 				{
 					label: 'The guard',
-					badge: { text: '0.6.0', variant: 'note' },
 					items: [
 						{ label: 'Why you need the guard', slug: 'guard/what-it-does' },
 						{ label: 'Try the guard', slug: 'guard/try-it' },
