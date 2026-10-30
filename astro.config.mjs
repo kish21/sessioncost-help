@@ -33,6 +33,7 @@ export default defineConfig({
 				{
 					label: 'Read your report',
 					items: [
+						{ label: 'Take the report tour', slug: 'report/tour', badge: { text: 'New', variant: 'tip' } },
 						{ label: 'The report at a glance', slug: 'report/overview' },
 						{ label: 'The turn panel', slug: 'report/turn-panel' },
 						{ label: 'Step 0', slug: 'report/step-0' },
