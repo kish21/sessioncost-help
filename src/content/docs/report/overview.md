@@ -5,6 +5,10 @@ description: Every part of the SessionCost report, top to bottom, and what its c
 The report is one page that reads top to bottom. A sidebar stays on the left with the chat, its key numbers and the
 sections. On a phone the sections move into a menu.
 
+Want it shown to you instead? [Take the report tour](/sessioncost-help/report/tour/).
+
+![The top of the report: the sidebar with the sections and key numbers, the answer, and the three biggest fixes](/sessioncost-help/img/answer.png)
+
 ## The parts, in order
 
 | Part | What it answers |
@@ -24,6 +28,12 @@ sections. On a phone the sections move into a menu.
 - **Charts**: cost per call, the running total, chat size against price, breaks and compactions, the dearest turns, a
   time breakdown, and the cost breakdown.
 - **Table**: the same numbers as rows, to sort.
+
+![The path on the Board: Step 0 first, then each turn as a tile with what it sent and what a fix would cut](/sessioncost-help/img/path.png)
+
+On a phone, the key numbers sit in a bar at the top and the sections open from the ☰ menu.
+
+<img src="/sessioncost-help/img/phone.png" alt="The report on a phone: the answer first, the sections in a menu" width="320">
 
 ## What the colours mean
 

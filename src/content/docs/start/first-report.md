@@ -19,7 +19,7 @@ In 0.5.15 the agent shows a short summary first. From 0.6.0 it answers with the 
 The report starts with the answer: how much this chat sent, how much it would have sent with the fixes, and the three
 biggest fixes.
 
-![9.9M tokens sent, 5.4M with the fixes, and the three biggest fixes](https://raw.githubusercontent.com/kish21/sessioncost/v0.5.15/media/answer.png)
+![9.9M tokens sent, 5.4M with the fixes, and the three biggest fixes](/sessioncost-help/img/answer.png)
 
 If you read nothing else, read **The biggest fixes**. Each one names its saving.
 
@@ -29,12 +29,14 @@ Below that is **the path**: one tile for each turn, from Step 0 to the last. Red
 heaviest one: the [turn panel](/sessioncost-help/report/turn-panel/) opens and shows what you said, what the agent did, and where the
 money went.
 
+![The path: twelve turns as tiles; turns 5, 6 and 9 are outlined in red as the three heaviest](/sessioncost-help/img/path.png)
+
 ## 4. Paste a fix
 
 Open **How to save**. Each fix has its saving and a rule to paste to your agent, for example into `CLAUDE.md` or
 `AGENTS.md`. Tick **I did this** and the report stops repeating it.
 
-![Recommended rules and fix cards](https://raw.githubusercontent.com/kish21/sessioncost/v0.5.15/media/fixes.png)
+![How to save: the rules for your agent, each with what it would have saved](/sessioncost-help/img/fixes.png)
 
 ## 5. Next time
 

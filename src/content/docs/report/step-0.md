@@ -13,6 +13,8 @@ is 6 million tokens sent, before counting a word you typed.
 Step 0 is the first tile on the path. Tap it, then **What is in Step 0**. One bar splits Step 0 into its parts, then
 lists every tool, used or never used, so you can see what you pay for and never use.
 
+![Step 0: 32k sent on every call, split into tool definitions, the system prompt and more; ten connected tools never used](/sessioncost-help/img/step-0.png)
+
 ## Make it smaller
 
 **How to save in Step 0** lists the fixes for this chat. The usual ones:

@@ -15,7 +15,7 @@ Above the cards, **Rules for your agent** collects the recommended rules in one 
 
 Tick **I did this** on a fix and the report stops repeating it in later chats.
 
-![Recommended rules and fix cards](https://raw.githubusercontent.com/kish21/sessioncost/v0.5.15/media/fixes.png)
+![How to save: the rules for your agent, each with what it would have saved, then the fix cards](/sessioncost-help/img/fixes.png)
 
 ### How the saving is counted
 

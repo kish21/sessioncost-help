@@ -11,6 +11,8 @@ the chat, so you can follow what the agent actually did.
 - **Zoom and move around** a long chat.
 - **Export** the map as PDF or Excel to keep or share.
 
+![The Trace & risk map: each turn as a star of its calls, the risky steps as red stars, and the kinds of risk found at the top](/sessioncost-help/img/risk-map.png)
+
 Risky steps are marked. When the [guard](/sessioncost-help/guard/what-it-does/) was on, its decisions (blocked, asked) show here
 too.
 
