@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Set up a small FastAPI todo app with tests, in this folder. · SessionCost</title>
-<script>try{var th=localStorage.getItem('sessioncost-theme');if(th==='light'||th==='dark')document.documentElement.dataset.theme=th;}catch(e){}</script>
+<script>try{var th=localStorage.getItem('sessioncost-theme');if(th==='light'||th==='dark')document.documentElement.dataset.theme=th;}catch(e){}</script><!-- light unless dark was chosen (owner, 2026-10-30) -->
 <style>
 /* The session board. A sidebar that stays (the session, its key numbers, the sections) and one story, top to bottom:
    Overview (before/after + the top fixes) · The path (Board | Charts | Table; Charts holds the Cost breakdown) ·
@@ -14,7 +14,7 @@
    conversation, blue = new, purple = re-read from the cache (cheap), dark = written fresh (full price),
    green = output, orange stripes = could be cut, red = how heavy a turn is. */
 /* Colours: product-factory design guide + the Slate-Indigo accent (one accent; dark text on the bright accent; no pure
-   black or white). Dark is the default look; light is the alternate (the toggle). Dark = "Slate" (owner, 2026-10-29):
+   black or white). Light is the default look (owner, 2026-10-30); dark is the alternate (the toggle). Dark = "Slate" (owner, 2026-10-29):
    a cool blue-grey, the light theme's family, so page, cards, board and map read as one; the old near-black "Ink" made
    the board look like a hole and mixed three different darks. */
 :root{
@@ -1292,7 +1292,7 @@ const sum = (xs, f) => xs.reduce((a, x) => a + (f ? f(x) : x), 0);
   const btn = $('theme'), root = document.documentElement;
   const sun = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6 13 13M3 13l1.4-1.4M11.6 4.4 13 3"/></svg>';
   const moon = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13.5 9.5A5.5 5.5 0 0 1 6.5 2.5a5.5 5.5 0 1 0 7 7z"/></svg>';
-  const isDark = () => root.dataset.theme !== 'light';      // dark is the default look; light only when chosen
+  const isDark = () => root.dataset.theme === 'dark';       // light is the default look; dark only when chosen
   const paint = () => { const d = isDark(), say = d ? 'Switch to light mode' : 'Switch to dark mode';
     btn.innerHTML = d ? sun : moon; btn.setAttribute('aria-label', say); btn.title = say; btn.removeAttribute('aria-pressed'); };
   btn.onclick = () => { const next = isDark() ? 'light' : 'dark'; root.dataset.theme = next; try { localStorage.setItem('sessioncost-theme', next); } catch (e) {} paint(); };
