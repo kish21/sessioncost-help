@@ -14,6 +14,7 @@ Type these to your agent. In Claude Code with the plugin they may show as `/sess
 | `/sessioncost` | Builds the report of this chat and gives you its link. |
 | `/sessioncost clean` | Deletes the reports of older chats and keeps the latest. |
 | `/sessioncost update` | Updates every copy of SessionCost on this computer. Restart your agent afterwards. |
+| `/sessioncost version` | Lists every copy of SessionCost on this computer and its version. |
 | `/sessioncost auto off` | Stops rebuilding the report after each answer. `/sessioncost auto on` starts it again. |
 | `/livesession` | Claude Code: turns the [guard](/sessioncost-help/guard/what-it-does/) on for this chat, from your next message. |
 | `/livesession strict` | The same, stricter: outside content stays untrusted for the whole chat. |
@@ -31,6 +32,7 @@ Run from the project folder whose chats you want to see.
 | `sessioncost setup` | Adds `/sessioncost` to every agent it finds. Restart the agents. |
 | `sessioncost clean` | Deletes the reports of older chats and keeps the latest. |
 | `sessioncost update` | Updates every copy. `--dry-run` shows the steps without running them. |
+| `sessioncost version` | Lists every copy (terminal, each agent's plugin, each `/sessioncost` from setup) and its version, and names the ones that differ. |
 | `sessioncost auto off` | Stops rebuilding each chat's report after each answer. `sessioncost auto on` starts it again. |
 
 ## The report keeps itself up to date
