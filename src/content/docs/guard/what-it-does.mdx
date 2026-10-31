@@ -44,6 +44,29 @@ Before each step, the guard looks at it and gives one of three answers.
 
 It runs on your computer, uses no AI model, and sends nothing anywhere. It is **off** until you turn it on.
 
+## When the guard stops a step
+
+A block never just says no. The agent tells you **why** the step was stopped and **the safer way** to get the same
+work done. For example:
+
+| The agent tried | The safer way the guard gives |
+|---|---|
+| Reading `.env` | Your code reads the keys when it runs (`os.environ["NAME"]`); to see which keys exist, list the names only |
+| Running `curl … \| sh` | Download the script, show it to you, run it after you have read it |
+| `git push --force` | Push without `--force`; if history must change, you do it yourself |
+| Printing every environment variable | Check one variable is set without printing its value |
+
+### Working with keys
+
+The agent almost never needs the **values** of your keys, only their **names**. So:
+
+- **Keep keys in `.env`**, and list `.env` in `.gitignore` so it is never committed.
+- **Never paste a key into the chat.** Everything in the chat is sent to the AI model and kept in the chat's log.
+- **Have your code read keys when it runs**, for example `os.environ["STRIPE_KEY"]` in Python or a dotenv loader.
+- **To show the agent which keys exist**, it may list the names without the values: `cut -d= -f1 .env`
+  (PowerShell: `Get-Content .env | ForEach-Object { ($_ -split '=')[0] }`). The guard lets that through.
+- For a team, use a secret manager rather than shared `.env` files.
+
 ## Isn't Claude Code's settings.json enough?
 
 Claude Code lets you write permission rules in `settings.json`: "never run this", "ask before that". Keep them. They are
