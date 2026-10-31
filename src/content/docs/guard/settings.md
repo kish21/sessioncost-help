@@ -13,7 +13,7 @@ Run these in a terminal. On Windows, if `sessioncost` is not found, use `python 
 | `sessioncost guard on` | Guards every new chat. Add `strict` for the stricter mode. |
 | `sessioncost guard start` | Guards only the chat you are in, from your next message (what `/livesession` runs). |
 | `sessioncost guard off` | Turns it off. The logs are kept. |
-| `sessioncost guard auto on` | Guards every chat and builds its report after each answer, with nothing to type. `auto off` stops the reports. |
+| `sessioncost guard auto on` | Guards every chat and builds its report after each answer, with nothing to type. `auto off` stops the reports. (Reports after each answer are on by default even without the guard; `sessioncost auto off` stops only them.) |
 
 ## How strict
 

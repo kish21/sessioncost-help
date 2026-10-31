@@ -14,6 +14,7 @@ Type these to your agent. In Claude Code with the plugin they may show as `/sess
 | `/sessioncost` | Builds the report of this chat and gives you its link. |
 | `/sessioncost clean` | Deletes the reports of older chats and keeps the latest. |
 | `/sessioncost update` | Updates every copy of SessionCost on this computer. Restart your agent afterwards. |
+| `/sessioncost auto off` | Stops rebuilding the report after each answer. `/sessioncost auto on` starts it again. |
 | `/livesession` | Claude Code: turns the [guard](/sessioncost-help/guard/what-it-does/) on for this chat, from your next message. |
 | `/livesession strict` | The same, stricter: outside content stays untrusted for the whole chat. |
 | `/livesession off` | Shows the line for you to type to turn the guard off. |
@@ -30,6 +31,16 @@ Run from the project folder whose chats you want to see.
 | `sessioncost setup` | Adds `/sessioncost` to every agent it finds. Restart the agents. |
 | `sessioncost clean` | Deletes the reports of older chats and keeps the latest. |
 | `sessioncost update` | Updates every copy. `--dry-run` shows the steps without running them. |
+| `sessioncost auto off` | Stops rebuilding each chat's report after each answer. `sessioncost auto on` starts it again. |
+
+## The report keeps itself up to date
+
+After each answer, SessionCost rebuilds that chat's report on your computer, at most once a minute. Press F5 on the
+open report to see the latest. It uses no AI model, sends nothing, and adds no text the agent reads; the first time
+in a chat, you see one line saying where the report is. It is on by default and does not turn the guard on.
+
+It works in Claude Code with the plugin, and in Codex, Cursor, Antigravity and Copilot CLI once you ran
+`sessioncost guard setup <agent>` for them (that is what gives SessionCost a signal at the end of each answer).
 
 ## Options for a report
 
