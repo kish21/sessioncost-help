@@ -29,4 +29,18 @@ When the [Trace & risk map](/sessioncost-help/report/risk-map/) finds risky step
 piped from the internet), **Safety rules** appears with rules to paste that stop those steps next time. It only shows
 when there is something to fix.
 
+The rules come in the language of the agent the chat was with:
+
+| Agent | Where the rules go |
+|---|---|
+| Claude Code | `.claude/settings.json`: `deny` and `ask` permissions |
+| Codex | `~/.codex/rules/default.rules`: `prefix_rule` lines (commands only) |
+| Cursor | `.cursor/cli.json`: a `deny` list (Cursor has no ask list) |
+| Antigravity | `~/.gemini/antigravity-cli/settings.json`: `deny` and `ask` lists |
+| Copilot CLI | `--deny-tool` flags when you start it (one session only) |
+
+Each comes with a link to that agent's own docs. Every agent also gets the same rules in plain words, for its rules
+file (`CLAUDE.md`, `AGENTS.md`, Cursor rules). For Codex, Cursor and Antigravity, the section also shows how to turn the
+SessionCost guard on there: `sessioncost guard setup codex` (or `cursor`, `antigravity`), then `sessioncost guard on`.
+
 For a check **while** the agent works, rather than after, see [the guard](/sessioncost-help/guard/what-it-does/).

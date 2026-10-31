@@ -80,7 +80,7 @@ and it keeps a record.
 | Spots **prompt injection** in a page or file the agent read | No | Yes |
 | **Sees through disguises** such as `cat .e''nv`, or `bash -c "cat .env"` | Only what your pattern matches | Yes, it reads the command the way the shell does, inner shells too |
 | **Reads a script before it runs** (`sh setup.sh`), and asks first when it prints a key | No, it sees only the command | Yes |
-| Reads what the agent **loads with the chat** (`CLAUDE.md`, `AGENTS.md`, its memory, each skill's description) for hidden instructions | No | Yes: if one has them, risky steps are stopped for the whole chat |
+| Reads what the agent **loads with the chat** (`CLAUDE.md`, `AGENTS.md`, its memory, each skill's description, each MCP tool's description) for hidden instructions | No | Yes: if one has them, risky steps are stopped for the whole chat, and a poisoned MCP server's tools are blocked |
 | Notices a **key that showed up in a tool result**, and asks before anything sends data out | No | Yes |
 | A **new or changed plugin, skill or MCP server** asks before its first use | No | Yes |
 | Checks what an **MCP tool is about to send** (a key, a `DROP TABLE`) | No | Yes |
@@ -102,8 +102,11 @@ were blocked and 3.8% were asked**. Everything else went ahead with no question.
 
 - It checks steps against known patterns; it does not understand them the way a person does. Treat it as a safety net,
   not a guarantee.
-- It does not yet read an MCP tool's **description** (the agent gets it from the server when the chat starts). What the
-  tool sends and what it answers are checked.
+- It reads an MCP tool's **description** by asking its own copy of each local server when the chat starts. By then the
+  agent has read it too: the guard cannot take it back out of the chat, but it blocks that server's tools and every
+  risky step, so a poisoned description cannot make the agent push, upload or read a secret. A poisoned description
+  that only asks for a wrong answer, with no step behind it, cannot be blocked: remove that server. Online servers, and
+  any that do not answer within 5 seconds, are not checked; the guard names them.
 - If the guard itself breaks, the never list still blocks, and other steps go ahead so your work does not stop. To block
   everything instead, turn on [fail-closed](/sessioncost-help/guard/settings/).
 - **Claude Code** gets the full guard with the plugin. **Codex, Cursor and Antigravity** get it with
