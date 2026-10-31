@@ -29,7 +29,7 @@ Four sheets, with a coloured header, filters and wrapped text:
 The same data the report is drawn from: `meta` (agent, model, chat id, times), `totals` and `money`, `setup` (Step 0),
 `turns`, `calls`, `helpers` and `agents`, `fixes` with their savings, `watch` (the risky steps) and `guard` (its
 decisions for this chat). It is long: send it to a file. Field names follow the report and can change between
-versions; `tool` records the version that wrote it.
+versions; `meta.version` records the version that wrote it.
 
 ## SARIF
 
