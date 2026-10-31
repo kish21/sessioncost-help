@@ -2,6 +2,10 @@
 title: How the money is counted
 description: How SessionCost prices each kind of token.
 ---
+**Tokens: exact**, from the agent's own log. **Money: an estimate** at list prices; your bill may differ (plan,
+contract rates, batch, cloud provider). Cursor and Copilot Chat keep no token counts, so for them tokens are estimated
+from the size of the text, and the money is shown as a range.
+
 Each kind of token is priced on its own:
 
 | Kind | What it is | Price |

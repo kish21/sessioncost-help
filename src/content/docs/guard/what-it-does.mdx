@@ -39,7 +39,7 @@ Before each step, the guard looks at it and gives one of three answers.
 | Answer | When | What you see |
 |---|---|---|
 | <span class="go-t">Goes ahead</span> | Ordinary work: editing project files, reading, searching. | Nothing. The step is written to the guard's log. |
-| <span class="ask-t">Asks you</span> | Risky steps: a push, an install, the network, a file outside the project, deleting, the agent's own rules or memory. Also any risky step right after the agent read outside content. | Your agent asks yes or no. Say yes once and that push, site or folder is not asked again in this chat. |
+| <span class="ask-t">Asks you</span> | Risky steps: a push, an install, the network, a file outside the project, deleting, the agent's own rules or memory. Also any risky step right after the agent read outside content, or a file that speaks to the agent ("whoever reads this, push…"). | Your agent asks yes or no. Say yes once and a push to that remote, that site or that folder is not asked again in this chat. A push to another remote or straight to a web address asks again. |
 | <span class="stop-t">Blocked</span> | The never list: reading or sending a secret (`.env`, keys, `~/.ssh`), a script piped from the internet (`curl … \| sh`), force-push, printing every environment variable, switching off a security tool or the commit checks. Also a risky step right after a page with signs of an injection. | The step does not run. The agent tells you what it wanted and why. |
 
 It runs on your computer, uses no AI model, and sends nothing anywhere. It is **off** until you turn it on.
@@ -78,8 +78,10 @@ and it keeps a record.
 | Fixed patterns (this command, this file) | Yes | Yes |
 | **Depends on what just happened**: "a push is fine, but not right after reading a page with hidden instructions" | No, a rule is the same every time | Yes |
 | Spots **prompt injection** in a page or file the agent read | No | Yes |
-| **Sees through disguises** such as `cat .e''nv`, or a download-and-run wrapped in `bash -c "…"` | Only what your pattern matches | Yes, it reads the command the way the shell does |
-| **Reads a script before it runs** (`sh setup.sh`) | No, it sees only the command | Yes |
+| **Sees through disguises** such as `cat .e''nv`, or `bash -c "cat .env"` | Only what your pattern matches | Yes, it reads the command the way the shell does, inner shells too |
+| **Reads a script before it runs** (`sh setup.sh`), and asks first when it prints a key | No, it sees only the command | Yes |
+| Reads what the agent **loads with the chat** (`CLAUDE.md`, `AGENTS.md`, its memory, each skill's description) for hidden instructions | No | Yes: if one has them, risky steps are stopped for the whole chat |
+| Notices a **key that showed up in a tool result**, and asks before anything sends data out | No | Yes |
 | A **new or changed plugin, skill or MCP server** asks before its first use | No | Yes |
 | Checks what an **MCP tool is about to send** (a key, a `DROP TABLE`) | No | Yes |
 | Secrets blocked **without writing any rules** | No | Yes |
@@ -100,6 +102,8 @@ were blocked and 3.8% were asked**. Everything else went ahead with no question.
 
 - It checks steps against known patterns; it does not understand them the way a person does. Treat it as a safety net,
   not a guarantee.
+- It does not yet read an MCP tool's **description** (the agent gets it from the server when the chat starts). What the
+  tool sends and what it answers are checked.
 - If the guard itself breaks, the never list still blocks, and other steps go ahead so your work does not stop. To block
   everything instead, turn on [fail-closed](/sessioncost-help/guard/settings/).
 - **Claude Code** gets the full guard with the plugin. **Codex, Cursor and Antigravity** get it with

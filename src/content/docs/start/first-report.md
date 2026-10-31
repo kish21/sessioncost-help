@@ -19,6 +19,10 @@ biggest fixes.
 
 ![9.9M tokens sent, 5.4M with the fixes, and the three biggest fixes](/sessioncost-help/img/answer.png)
 
+Under the numbers, one line says what is exact: **Tokens: exact**, from the agent's own log. **Money: an estimate** at
+list prices; your bill may differ (plan, contract rates, batch, cloud provider). Above them, the report says when it
+was made: a saved report does not update itself, so type `/sessioncost` again for the latest.
+
 If you read nothing else, read **The biggest fixes**. Each one names its saving.
 
 ## 3. Find the heavy turn
