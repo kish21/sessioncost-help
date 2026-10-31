@@ -36,6 +36,9 @@ python -m sessioncost setup              # adds /sessioncost to your agents
 - On Mac or Linux, use `python3` if `python` is not found.
 - `python -m` works even when Windows cannot find the `sessioncost` command (common with the Microsoft Store Python).
 - Prefer isolated tools? `pipx install sessioncost` or `uv tool install sessioncost`, then `sessioncost setup`.
+- Use Node? `npx sessioncost` (then `npx sessioncost setup`, `npx sessioncost list`, …). The first run installs
+  SessionCost once into its own folder, `~/.sessioncost/npm/venv`: with [uv](https://docs.astral.sh/uv/) when you
+  have it, which also fetches Python for you, otherwise with your Python 3.10 or newer. Your own Python is left as it is.
 
 ## Way 3: as a plugin, from your agent
 
