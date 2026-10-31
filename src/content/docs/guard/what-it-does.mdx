@@ -86,7 +86,7 @@ and it keeps a record.
 | Checks what an **MCP tool is about to send** (a key, a `DROP TABLE`) | No | Yes |
 | Secrets blocked **without writing any rules** | No | Yes |
 | A **record you can trust** of every ask and block | No | Yes: a chained log, the Trace & risk map and the [guard report](/sessioncost-help/guard/settings/#the-guard-report) |
-| Codex, Cursor, Antigravity | No, Claude Code only | Yes, the same rules |
+| Codex, Cursor, Antigravity, Copilot | No, Claude Code only | Yes, the same rules |
 | The agent can switch it off | — | No. Only you can. |
 
 **In plain words:** for one developer with simple needs, good `settings.json` rules may be enough. The guard matters
@@ -109,7 +109,10 @@ were blocked and 3.8% were asked**. Everything else went ahead with no question.
   any that do not answer within 5 seconds, are not checked; the guard names them.
 - If the guard itself breaks, the never list still blocks, and other steps go ahead so your work does not stop. To block
   everything instead, turn on [fail-closed](/sessioncost-help/guard/settings/).
-- **Claude Code** gets the full guard with the plugin. **Codex, Cursor and Antigravity** get it with
-  `sessioncost guard setup`. Codex cannot ask, so a step that would ask is blocked, and the agent asks you in the chat.
+- **Claude Code** gets the full guard with the plugin. **Codex, Cursor, Antigravity and Copilot** get it with
+  `sessioncost guard setup`, and their hooks show the guard less: Codex cannot ask, so a step that would ask is
+  blocked and the agent asks you in the chat; Cursor has no hook before a file edit; Antigravity's hook carries no
+  tool result. The full comparison: [What the guard checks](/sessioncost-help/guard/checks/#by-agent).
 
-Next: [Try the guard](/sessioncost-help/guard/try-it/) in five minutes, and see all three answers yourself.
+Next: [Try the guard](/sessioncost-help/guard/try-it/) in five minutes, and see all three answers yourself. Every
+check, with its answer: [What the guard checks](/sessioncost-help/guard/checks/).

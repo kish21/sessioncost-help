@@ -31,6 +31,13 @@ export default defineConfig({
 					],
 				},
 				{
+					label: 'Scenarios',
+					items: [
+						{ label: 'Tokens and cost', slug: 'scenarios/developers' },
+						{ label: 'Security', slug: 'scenarios/security' },
+					],
+				},
+				{
 					label: 'Read your report',
 					items: [
 						{ label: 'Take the report tour', slug: 'report/tour', badge: { text: 'New', variant: 'tip' } },
@@ -46,6 +53,7 @@ export default defineConfig({
 					items: [
 						{ label: 'Why you need the guard', slug: 'guard/what-it-does' },
 						{ label: 'Try the guard', slug: 'guard/try-it' },
+						{ label: 'What the guard checks', slug: 'guard/checks' },
 						{ label: 'Guard settings', slug: 'guard/settings' },
 					],
 				},
@@ -54,6 +62,7 @@ export default defineConfig({
 					items: [
 						{ label: 'Commands', slug: 'reference/commands' },
 						{ label: 'Which agents', slug: 'reference/agents' },
+						{ label: 'Exports and integrations', slug: 'reference/exports' },
 						{ label: 'How the money is counted', slug: 'reference/money' },
 						{ label: 'Privacy and security', slug: 'reference/privacy' },
 					],

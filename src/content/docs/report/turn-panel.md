@@ -5,7 +5,7 @@ description: What happened inside one turn, and why it cost what it did.
 Tap any tile on the path and the turn panel opens. It tells the story of that one turn: what you asked, what the agent
 did, and where the money went.
 
-<img src="/sessioncost-help/img/turn-panel.png" alt="The turn panel for turn 5: what you said, the cost, the tabs, where the money went, and the dearest call" width="460">
+<img src="/sessioncost-help/img/turn-panel.png" alt="The turn panel for turn 6: what you said, the cost, the tabs, where the money went, and the dearest call" width="460">
 
 ## The top line
 
