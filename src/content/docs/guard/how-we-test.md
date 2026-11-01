@@ -5,7 +5,7 @@ description: How the live guard is tested before each release, what the tests co
 The guard makes a decision on every step an agent takes, so we test those decisions on their own, for every agent,
 before each release. This page says how, what is covered, and where the testing stops.
 
-**Release tested:** 0.6.0-rc.6, 1 November 2026.
+**Release tested:** 0.6.0-rc.7, 1 November 2026.
 
 ## How we test
 
@@ -64,7 +64,7 @@ Besides the answers to each step, the test program checks the guard itself:
 
 | | Claude Code | Codex | Cursor | Antigravity | Copilot |
 |---|---|---|---|---|---|
-| Steps with the expected answer | 190 of 190 | 185 of 185 | 185 of 185 | 190 of 190 | 190 of 190 |
+| Steps with the expected answer | 249 of 249 | 215 of 215 | 205 of 205 | 220 of 220 | 220 of 220 |
 | Steps the agent's hooks do not show the guard | none | file reads, searches and web fetches (Codex does these through its shell, which is checked) | file writes, searches and web fetches | none | none |
 | Tried in the real agent for this release | yes | not yet | not yet | yes (Windows) | not yet |
 
@@ -78,8 +78,6 @@ page read just before a push. Those are tested in real chats only, not by the te
 
 ## Known problems
 
-- The guard sometimes stops the agent from reading the guard's own allow-list file (`.sessioncost-allow`), although
-  reading it is fine. Open the file yourself if you need to see it.
 - In Antigravity on Windows, a black window flashes briefly before and after each step. That is the guard starting;
   it does no harm.
 - The log's turn-taking (two steps written at the same moment) is tested on Windows only so far. macOS and Linux use
