@@ -20,12 +20,12 @@ powershell -ExecutionPolicy ByPass -c "irm https://raw.githubusercontent.com/kis
 
 ## "git not found" when adding the plugin
 
-Use way 1 of [Install SessionCost](/sessioncost-help/start/install/) instead. It needs neither Git nor Python.
+Use [way A of Install SessionCost](/sessioncost-help/start/install/#way-a-one-line-no-python-or-git-needed) instead. It needs neither Git nor Python.
 
 ## Cursor shows no plugin after adding the repository
 
-Some Cursor versions import a repository without listing its plugins. Use way 1 of
-[Install SessionCost](/sessioncost-help/start/install/).
+Some Cursor versions import a repository without listing its plugins. Use
+[way A of Install SessionCost](/sessioncost-help/start/install/#way-a-one-line-no-python-or-git-needed).
 
 ## Update
 

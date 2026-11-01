@@ -22,7 +22,9 @@ Type these to your agent. In Claude Code with the plugin they may show as `/sess
 
 ## In a terminal
 
-Run from the project folder whose chats you want to see.
+Run from the project folder whose chats you want to see. `sessioncost` below is typed `python -m sessioncost` if you
+installed with pip, or `npx sessioncost` with npm: see
+[Which command to type](/sessioncost-help/start/install/#which-command-to-type-in-a-terminal).
 
 | Command | What it does |
 |---|---|
