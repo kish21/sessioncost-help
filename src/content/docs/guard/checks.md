@@ -14,8 +14,8 @@ about to run it, and each result as it comes back. This page is the complete lis
   destination; an MCP tool per server; a script on disk per version of the file.
 - **Untrusted content raises the bar.** After the agent reads a web page, an MCP or network result, or a file from
   outside the project, pushes, sending data out, secrets and rule changes ask again even if you allowed them. After a
-  result with **signs of a prompt injection**, any risky step is blocked instead. Your next message resets this; with
-  **strict** mode it lasts for the whole chat.
+  result with **signs of a prompt injection**, any risky step is blocked instead, and a SessionCost line says so at
+  once, to you and the agent. Your next message resets this; with **strict** mode it lasts for the whole chat.
 - **Commands are read the way the shell reads them**: quotes joined (`.e''nv` is `.env`), inner shells opened
   (`bash -c`, `sh -c`, `pwsh -Command`, `cmd /c`), heredocs, PowerShell here-strings and `python -c` scripts looked
   into. Text that is only quoted (a commit message, an issue comment) is not taken for a command.
@@ -91,11 +91,12 @@ others.
 | Steps checked before they run | all tools | all tools, patches included | shell commands, MCP calls, file reads (not file edits: Cursor has no hook before an edit) | all tools | all tools |
 | Asked steps | you are asked | blocked; the agent asks you in the chat, and your yes allows that step once | you are asked (a file read cannot ask, so it is blocked) | asked with `force_ask`, so Antigravity's "Always allow" cannot skip it | you are asked; in Autopilot mode, blocked |
 | Results scanned for injection and keys | yes | yes | shell, MCP and file reads | no (its hook carries no result; a page still counts as untrusted) | yes |
+| A line at once when a result shows injection signs | yes | sent (not tried yet) | no (in the log and report) | no | no (in the log and report) |
 | Third try of a failing command | yes | no | no | no | no |
 | Untrusted content lasts until | your next message | your next message | the end of the chat | the end of the chat, unless the build sends your message | your next message |
 | Turn on (every chat, until off) | `/livesession`, or `sessioncost guard on` | `sessioncost guard on` | same | same | same |
 | Turn off | `/livesession off`, or `sessioncost guard off` | `sessioncost guard off` | same | same | same |
-| Says it is on when a chat starts | a line, and 🛡 under the message box | the agent says it | the agent says it | not yet known | the agent says it |
+| Says it is on when a chat starts | a line, and **🛡 Guard on** beside the model name (terminal, desktop app) or under the message box (VS Code) | the agent says it | the agent says it | not yet known | the agent says it |
 
 **When the guard itself fails**, the never list still blocks and other steps go ahead, so work does not stop;
 `sessioncost guard fail-closed on` blocks everything instead. Copilot lets a step run if a check takes longer than 10
