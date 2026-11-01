@@ -24,6 +24,8 @@ The test program also replays every command the agents ran in those real chats, 
 think of (one agent wrote `.\.venv\Scripts\pip.exe install requests` instead of `pip install requests`) becomes a
 test for every agent.
 
+Every release, this testing finds commands that slipped through, and we fix them before the release goes out.
+
 ## What the tests cover
 
 Each area is tested with the everyday form of the command and the forms agents really use: Windows and PowerShell
@@ -66,19 +68,12 @@ those agents as a preview.
 Some answers depend on what happened earlier in the chat: a yes you already gave, a file the agent made itself, a web
 page read just before a push. Those are tested in real chats only, not by the test program.
 
-## Found and fixed by this testing
+## Known problems
 
-Testing for this release found risky commands that went ahead without a question, all fixed before release:
-
-- Windows forms of known commands: `pip.exe install`, `python.exe -c`, `npm.cmd`, `git.exe push`, `powershell -ec`.
-- Package tools beyond pip and npm: `poetry add`, `pipx install`, `conda install`.
-- Secrets read in other ways: `.NET` file reads, `%VAR%` and `GetEnvironmentVariable`, a `.env` path in quotes.
-- Whole areas: other stored logins, throwing work away, wiping a disk, changes to the computer itself.
-
-Two things found are not fixed yet:
-
-- Reading `.sessioncost-allow` (allowed by design) is blocked as if the agent were changing it.
-- In Antigravity on Windows, a command window flashes before and after each step while the guard starts.
+- The guard sometimes stops the agent from reading the guard's own allow-list file (`.sessioncost-allow`), although
+  reading it is fine. Open the file yourself if you need to see it.
+- In Antigravity on Windows, a black window flashes briefly before and after each step. That is the guard starting;
+  it does no harm.
 
 ## Limits
 
