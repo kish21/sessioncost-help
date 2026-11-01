@@ -26,7 +26,7 @@ Type:
 
 You should see: **SessionCost guard: on for every chat, this one included, until you type /livesession off.** It is
 one switch: every chat you open from now on starts with the line "SessionCost guard is on", and Claude Code shows
-**🛡 SessionCost guard on** under the message box while it is on.
+**🛡 Guard on** while it is on: beside the model name in the terminal and the desktop app, under the message box in VS Code.
 
 ## 3. See the three answers
 
