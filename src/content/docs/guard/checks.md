@@ -99,7 +99,8 @@ others.
 | Says it is on when a chat starts | a line, and **🛡 Guard on** beside the model name (terminal, desktop app) or under the message box (VS Code) | the agent says it | the agent says it | the agent says it after `/livesession` | the agent says it |
 
 **When the guard itself fails**, the never list still blocks and other steps go ahead, so work does not stop;
-`sessioncost guard fail-closed on` blocks everything instead. Copilot lets a step run if a check takes longer than 10
+`sessioncost guard fail-closed on` blocks everything instead, including a step whose message the guard cannot read
+(not valid JSON). Copilot lets a step run if a check takes longer than 10
 seconds. Antigravity reads its hooks only when it starts: after setup, close it fully (a window reload is not
 enough). On Windows a command window flashes briefly before and after each Antigravity step: that is the guard
 starting, and it cannot be hidden from our side.

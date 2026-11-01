@@ -19,7 +19,7 @@ Run these in a terminal. On Windows, if `sessioncost` is not found, use `python 
 | Command | What it does |
 |---|---|
 | `sessioncost guard allow-list on` | Every step that changes something asks you, unless the project's `.sessioncost-allow` lists it. Reads and searches still go ahead. `off` goes back to asking only for risky steps. |
-| `sessioncost guard fail-closed on` | If the guard itself breaks, every step is blocked until it is fixed. `off` lets ordinary steps pass while the never list stays blocked. |
+| `sessioncost guard fail-closed on` | If the guard itself breaks, or the agent sends it a step it cannot read, every step is blocked until it is fixed. `off` lets ordinary steps pass while the never list stays blocked. |
 
 ### The allow file
 
@@ -39,6 +39,11 @@ outside_project  ~/.claude/projects/*/memory/*
 
 Any mark can be listed except changing the guard, and that includes never-list marks such as `force_push`. List
 those only on purpose, with a narrow pattern.
+
+**A rule covers one step, never the steps chained to it.** In a chained command (`&&`, `||`, `;`, `|`, or one step
+per line), each part is checked on its own, and a `*` stops where the next part starts. So `deletes  rm -rf build*`
+covers `rm -rf build/cache`, but in `rm -rf build && rm -rf src` the second delete still asks. Parts that do not do
+the thing need no rule: the same rule covers `rm -rf build && npm test`. A `;` or `|` inside quotes is not a chain.
 
 ### Look-up sites
 
@@ -65,4 +70,16 @@ agent, project and day, and whether each chat's log is still intact. Add `--json
 ## Where the log is
 
 Every decision is written to `~/.sessioncost/guard/`, one file per chat. Each line is chained to the one before by a
-SHA-256 hash, so a changed or removed line shows.
+SHA-256 hash, so a changed or removed line shows. When two steps of one chat are written at the same moment, they
+take turns (the small `.lock` file next to each log is for that).
+
+The report and the guard report check each log and say what they found:
+
+| The report says | What it means | What to do |
+|---|---|---|
+| untouched | Every line checks out. A log with no lines yet counts as untouched too. | Nothing. |
+| edited | A line was changed or removed after it was written, or a line is not a guard entry. | Ask who could reach the file. The lines before the change can still be trusted; the ones after it cannot be proven. |
+| cut off | A line was not written in full, as when the computer or the agent stopped in the middle of a step. | Usually harmless. The guard writes its next line on a new row, marked as following a cut-off line, and checks the lines after it as usual. The log is still never shown as untouched. |
+| could not be read | The guard has no permission to open the file, or it is not a file. | Check the file's permissions. A log that cannot be read is never shown as untouched. |
+
+The guard never repairs or empties a log: what was written stays as it was.

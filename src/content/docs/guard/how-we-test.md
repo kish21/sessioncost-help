@@ -52,6 +52,14 @@ versions, `.exe` names, a folder in front, quoted paths with spaces.
 
 The last row matters as much as the others: a guard that asks about everyday work gets switched off.
 
+Besides the answers to each step, the test program checks the guard itself:
+
+| Area | What is tested |
+|---|---|
+| The log | very long steps (over 4 KB, 64 KB and 300 KB); an empty, missing, unreadable, edited or cut-off log; 2, 10 and 20 steps of one chat written at the same moment, with other chats beside them; a write that waited too long for its turn |
+| Fail-closed | a step message that is not valid JSON, or not an object, for each of the five agents, with fail-closed on and off |
+| The allow file | rules with and without `*` against chained commands: a rule never covers a second delete, install or unlisted step chained after the one it names, and never a never-list step |
+
 ## Results
 
 | | Claude Code | Codex | Cursor | Antigravity | Copilot |
@@ -74,6 +82,8 @@ page read just before a push. Those are tested in real chats only, not by the te
   reading it is fine. Open the file yourself if you need to see it.
 - In Antigravity on Windows, a black window flashes briefly before and after each step. That is the guard starting;
   it does no harm.
+- The log's turn-taking (two steps written at the same moment) is tested on Windows only so far. macOS and Linux use
+  a different system call, which has not been run yet.
 
 ## Limits
 
