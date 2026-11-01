@@ -24,7 +24,7 @@ about to run it, and each result as it comes back. This page is the complete lis
 
 | Check | Examples | OWASP |
 |---|---|---|
-| Reading or sending a secret | `.env`, `~/.ssh`, `id_rsa`, `.pem` / `.key`, credentials, `.npmrc` / `.pypirc`; Grep inside them; a key-shaped value in a command, URL or MCP call | LLM02:2025, ASI03 |
+| Reading or sending a secret | `.env`, `~/.ssh`, `id_rsa`, `.pem` / `.key`, credentials, `.npmrc` / `.pypirc`; other stored logins: `.git-credentials`, GitHub CLI, Docker, Kubernetes, Azure and Google Cloud logins, Terraform state, a browser's cookies and saved passwords; commands that print a stored login (`cmdkey /list`, `gh auth token`); Grep inside them; a key-shaped value in a command, URL or MCP call | LLM02:2025, ASI03 |
 | A secrets file in a commit | `git commit` that would take one into history, including what `git add -A`, `git add .` or `commit -a` in the same command adds; `.gitignore`d files never count | — |
 | Printing the environment | `printenv`, `env`, `Get-ChildItem env:`, `print(os.environ)`, `echo $OPENAI_API_KEY` | LLM02:2025 |
 | Running code from the internet | `curl … \| sh`, `iex (iwr …)`, `bash <(curl …)`, download then run in one command | ASI05 |
@@ -33,7 +33,7 @@ about to run it, and each result as it comes back. This page is the complete lis
 | Switching off commit checks | `--no-verify`, `commit -n`, `SKIP=…`, `HUSKY=0`; marked even when refused | LLM06:2025 |
 | Persistence | `crontab`, `schtasks /create`, `Register-ScheduledTask`, Run keys, startup folders, `systemctl enable`, `launchctl load`, `~/.bashrc`, `$PROFILE` | ASI10 |
 | Switching off a security tool | Defender, the firewall, SELinux, Gatekeeper | LLM06:2025 |
-| Wiping | `rm -rf /`, `rm -rf ~`, `Remove-Item C:\` | LLM06:2025, ASI02 |
+| Wiping | `rm -rf /`, `rm -rf ~`, `Remove-Item C:\`, `format D:`, `diskpart`, `mkfs`, `dd` onto a disk | LLM06:2025, ASI02 |
 | Changing the guard | its settings, log or folder, `.sessioncost-allow`, the agents' hook files, `disableAllHooks`, installed plugins, `guard off` | LLM06:2025, ASI10 |
 | A poisoned MCP server's tools | every tool of a server whose descriptions showed injection signs at the start | LLM01:2025, ASI04 |
 | A risky step after an injection | any asked step below, right after a result with injection signs | LLM01:2025, ASI01 |
@@ -45,12 +45,12 @@ about to run it, and each result as it comes back. This page is the complete lis
 | Push | once per destination; a push straight to a web address every time | LLM06:2025 |
 | Install | once per package for the project's own packages | LLM03:2025, ASI04 |
 | A package not in the project's lists | **every time**, named (`pyproject.toml`, `requirements*.txt`, `uv.lock`, `package.json`; a folder with no list is not judged) | LLM03:2025, ASI04 |
-| Deleting files | once each; files the agent created in this chat go ahead | LLM06:2025 |
+| Deleting files or work | once each; files the agent created in this chat go ahead. Also: throwing away changes (`git checkout -- .`, `git restore`, `git stash drop`), emptying a file, moving one out of the project, `docker prune`, `kubectl delete`, `terraform destroy`, a database client running `DROP TABLE` or `DELETE FROM` | LLM06:2025 |
 | Writing outside the project | once each; the system temp folder goes ahead | LLM06:2025 |
-| A new website | once per site; well-known look-up sites (language docs, PyPI, npm, GitHub, Read the Docs…) and localhost go ahead | ASI02 |
+| A new website | once per site; well-known look-up sites (language docs, PyPI, npm, GitHub, Read the Docs…) and localhost go ahead. DNS look-ups (`nslookup`) and email (`Send-MailMessage`) ask the same way | ASI02 |
 | The agent's own rules and checks | **every time**: `CLAUDE.md`, `AGENTS.md`, `GEMINI.md`, agent settings, `.mcp.json`, git hooks, pre-commit, CI workflows. A plain note in the agent's own memory folder: once per chat | — |
 | An MCP tool that changes or sends | once per server; arguments with a path outside the project, `DROP TABLE` or `DELETE FROM` ask too | ASI02 |
-| Raising its own rights | **every time**: `sudo`, `su`, `runas`, `chmod 777`, `Set-ExecutionPolicy Bypass` | LLM06:2025, ASI03 |
+| Raising its own rights or changing the computer | **every time**: `sudo`, `su`, `runas`, `chmod 777`, an execution-policy bypass; new users and admin groups, services, the machine's registry or PATH, shutting down, a container with the host's rights, `rundll32` / `regsvr32` / `mshta` | LLM06:2025, ASI03 |
 | A script that prints a key | a script about to print a key, token or password variable | LLM02:2025, ASI03 |
 | Sending data out after a key appeared | **every time**, once a key-shaped value came back in a tool result | LLM02:2025, ASI03 |
 | A script on disk with a never-list step | `sh setup.sh`, `python tool.py`, `./build.sh`: once per version of the file | ASI05 |
@@ -94,13 +94,15 @@ others.
 | A line at once when a result shows injection signs | yes | sent (not tried yet) | no (in the log and report) | no | no (in the log and report) |
 | Third try of a failing command | yes | no | no | no | no |
 | Untrusted content lasts until | your next message | your next message | the end of the chat | the end of the chat, unless the build sends your message | your next message |
-| Turn on (every chat, until off) | `/livesession`, or `sessioncost guard on` | `sessioncost guard on` | same | same | same |
-| Turn off | `/livesession off`, or `sessioncost guard off` | `sessioncost guard off` | same | same | same |
-| Says it is on when a chat starts | a line, and **🛡 Guard on** beside the model name (terminal, desktop app) or under the message box (VS Code) | the agent says it | the agent says it | not yet known | the agent says it |
+| Turn on (every chat, until off) | `/livesession`, or `sessioncost guard on` | `/livesession` (added by `sessioncost setup`), or `sessioncost guard on` | same as Codex | same as Codex | `sessioncost guard on` |
+| Turn off | `/livesession off`, or `sessioncost guard off` | `sessioncost guard off` in a terminal | same | same | same |
+| Says it is on when a chat starts | a line, and **🛡 Guard on** beside the model name (terminal, desktop app) or under the message box (VS Code) | the agent says it | the agent says it | the agent says it after `/livesession` | the agent says it |
 
 **When the guard itself fails**, the never list still blocks and other steps go ahead, so work does not stop;
 `sessioncost guard fail-closed on` blocks everything instead. Copilot lets a step run if a check takes longer than 10
-seconds.
+seconds. Antigravity reads its hooks only when it starts: after setup, close it fully (a window reload is not
+enough). On Windows a command window flashes briefly before and after each Antigravity step: that is the guard
+starting, and it cannot be hidden from our side.
 
 ## What it cannot do
 
@@ -112,4 +114,5 @@ seconds.
 - A determined program running with your rights can get around text rules. The guard catches an agent being steered;
   it is not a boundary against malware already on the machine.
 
+How we test all this, and what has been tried in which agent: [How we test the guard](/sessioncost-help/guard/how-we-test/).
 How often it asks in real work: [Why you need the guard](/sessioncost-help/guard/what-it-does/#how-often-will-it-bother-me).

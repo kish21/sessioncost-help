@@ -54,6 +54,7 @@ export default defineConfig({
 						{ label: 'Why you need the guard', slug: 'guard/what-it-does' },
 						{ label: 'Try the guard', slug: 'guard/try-it' },
 						{ label: 'What the guard checks', slug: 'guard/checks' },
+						{ label: 'How we test the guard', slug: 'guard/how-we-test' },
 						{ label: 'Guard settings', slug: 'guard/settings' },
 					],
 				},
