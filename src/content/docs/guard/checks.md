@@ -93,8 +93,9 @@ others.
 | Results scanned for injection and keys | yes | yes | shell, MCP and file reads | no (its hook carries no result; a page still counts as untrusted) | yes |
 | Third try of a failing command | yes | no | no | no | no |
 | Untrusted content lasts until | your next message | your next message | the end of the chat | the end of the chat, unless the build sends your message | your next message |
-| Turn on for one chat | `/livesession` | — | — | — | — |
-| Turn on for every chat | `sessioncost guard on` | same | same | same | same |
+| Turn on (every chat, until off) | `/livesession`, or `sessioncost guard on` | `sessioncost guard on` | same | same | same |
+| Turn off | `/livesession off`, or `sessioncost guard off` | `sessioncost guard off` | same | same | same |
+| Says it is on when a chat starts | a line, and 🛡 under the message box | the agent says it | the agent says it | not yet known | the agent says it |
 
 **When the guard itself fails**, the never list still blocks and other steps go ahead, so work does not stop;
 `sessioncost guard fail-closed on` blocks everything instead. Copilot lets a step run if a check takes longer than 10

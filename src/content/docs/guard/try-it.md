@@ -24,7 +24,9 @@ Type:
 /livesession
 ```
 
-You should see: **SessionCost guard: on for this chat from your next message.** It starts with your next message.
+You should see: **SessionCost guard: on for every chat, this one included, until you type /livesession off.** It is
+one switch: every chat you open from now on starts with the line "SessionCost guard is on", and Claude Code shows
+**🛡 SessionCost guard on** under the message box while it is on.
 
 ## 3. See the three answers
 
@@ -61,17 +63,20 @@ guarded chats at once, run `sessioncost guard report` in a terminal.
 
 ## 5. Turn it off
 
-The agent cannot turn the guard off for you, on purpose. Type `/livesession off`: it shows you a line starting with `!`.
-Type that line yourself. Or, with the command line installed, run `sessioncost guard off` in a terminal.
+Type `/livesession off`. The guard reads your own message and switches itself off, for every chat. Or run
+`sessioncost guard off` in a terminal. The agent itself cannot turn the guard off, on purpose: if a web page or a file
+tells it to, that step is blocked.
 
 ## Stricter
 
 `/livesession strict` keeps outside content (a web page, a downloaded file) untrusted for the rest of the chat, not only
-until your next message, and counts files from `node_modules`, `vendor` and `site-packages` as untrusted too.
+until your next message, and counts files from `node_modules`, `vendor` and `site-packages` as untrusted too. Typing
+`/livesession` again keeps strict; to leave it, type `/livesession off`, then `/livesession`.
 
 ## On another agent
 
-Codex, Cursor, Antigravity and Copilot have no `/livesession`. In a terminal:
+Codex, Cursor, Antigravity and Copilot get the guard's hooks once, in a terminal. The same switch then covers them;
+each of their chats starts with the agent saying "SessionCost guard is on" (they cannot show a line of their own).
 
 ```sh
 sessioncost guard setup codex        # or cursor, antigravity, copilot

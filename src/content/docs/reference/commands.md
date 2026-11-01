@@ -16,9 +16,9 @@ Type these to your agent. In Claude Code with the plugin they may show as `/sess
 | `/sessioncost update` | Updates every copy of SessionCost on this computer. Restart your agent afterwards. |
 | `/sessioncost version` | Shows which SessionCost version this agent uses, and how many other copies are on this computer. |
 | `/sessioncost auto off` | Stops rebuilding the report after each answer. `/sessioncost auto on` starts it again. |
-| `/livesession` | Claude Code: turns the [guard](/sessioncost-help/guard/what-it-does/) on for this chat, from your next message. |
+| `/livesession` | Claude Code: turns the [guard](/sessioncost-help/guard/what-it-does/) on for every chat, this one included, until `/livesession off`. |
 | `/livesession strict` | The same, stricter: outside content stays untrusted for the whole chat. |
-| `/livesession off` | Shows the line for you to type to turn the guard off. |
+| `/livesession off` | Turns the guard off for every chat. Only your own message does this: the agent cannot. |
 
 ## In a terminal
 

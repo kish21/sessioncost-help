@@ -43,7 +43,7 @@ scanning and most SARIF viewers read it. Details: [Exports and integrations](/se
 
 | Agent | Turn it on |
 |---|---|
-| Claude Code (plugin) | `/livesession` in the chat (this chat only), or `sessioncost guard on` (every new chat) |
+| Claude Code (plugin) | `/livesession` in a chat, or `sessioncost guard on`: one switch, every chat until `/livesession off` |
 | Codex, Cursor, Antigravity | `sessioncost guard setup codex` (or `cursor`, `antigravity`) once, then `sessioncost guard on` |
 | Copilot CLI and Copilot Chat in VS Code | `sessioncost guard setup copilot` once, then `sessioncost guard on`, then restart Copilot or VS Code |
 

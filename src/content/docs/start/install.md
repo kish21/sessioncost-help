@@ -101,7 +101,7 @@ opens in your browser.
 | **Claude Code in VS Code** (the chat panel) | It has no `/plugin`. In a terminal: `claude plugin marketplace add kish21/sessioncost`, then `claude plugin install sessioncost@sessioncost`. Then reload VS Code (Ctrl+Shift+P → **Developer: Reload Window**). |
 
 Both share one install: do it once, and the CLI and VS Code both have it. In the chat, `/livesession` turns on the
-[guard](/sessioncost-help/guard/what-it-does/) for that chat.
+[guard](/sessioncost-help/guard/what-it-does/) for every chat, until `/livesession off`.
 
 ### Codex
 
