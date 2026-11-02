@@ -75,13 +75,9 @@ until your next message, and counts files from `node_modules`, `vendor` and `sit
 
 ## On another agent
 
-Codex, Cursor, Antigravity and Copilot get the guard's hooks once, in a terminal. The same switch then covers them;
-each of their chats starts with the agent saying "SessionCost guard is on" (they cannot show a line of their own).
-
-```sh
-sessioncost guard setup codex        # or cursor, antigravity, copilot
-sessioncost guard on
-```
+Your install already put the guard into Codex, Cursor, Antigravity and Copilot, and the same switch covers them: once
+`/livesession` is on in any agent, each of their chats starts with the agent saying "SessionCost guard is on" (they
+cannot show a line of their own).
 
 Restart the agent, open the test folder, and send the same messages. What changes by agent (Codex blocks instead of
 asking and lets you answer in the chat; Cursor checks shell commands, MCP calls and file reads) is on

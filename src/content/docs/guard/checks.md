@@ -87,7 +87,7 @@ others.
 
 | | Claude Code | Codex | Cursor | Antigravity | Copilot CLI / VS Code |
 |---|---|---|---|---|---|
-| How it is added | the plugin | `guard setup codex` | `guard setup cursor` | `guard setup antigravity` | `guard setup copilot` |
+| How it is added | every install (or the plugin) | every install (or the plugin's `/livesession`) | every install (or the plugin's `/livesession`) | every install (or the plugin's `/livesession`) | every install |
 | Steps checked before they run | all tools | all tools, patches included | shell commands, MCP calls, file reads (not file edits: Cursor has no hook before an edit) | all tools | all tools |
 | Asked steps | you are asked | blocked; the agent asks you in the chat, and your yes allows that step once | you are asked (a file read cannot ask, so it is blocked) | asked with `force_ask`, so Antigravity's "Always allow" cannot skip it | you are asked; in Autopilot mode, blocked |
 | Results scanned for injection and keys | yes | yes | shell, MCP and file reads | no (its hook carries no result; a page still counts as untrusted) | yes |

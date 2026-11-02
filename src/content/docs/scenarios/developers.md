@@ -83,9 +83,8 @@ Use **Highlight a fix** above the board to light up the turns a fix touches.
 
 The report rebuilds itself after each answer, at most once a minute, on by default. Keep the tab open and press F5.
 
-- Claude Code with the plugin: nothing to set up.
-- Codex, Cursor, Antigravity, Copilot CLI: run `sessioncost guard setup <agent>` once; that gives SessionCost a signal
-  at the end of each answer. It does **not** turn the guard on.
+- Nothing to set up: your install gave every agent the hooks that tell SessionCost an answer ended. They do **not**
+  turn the guard on.
 - To stop it: `sessioncost auto off` (or `/sessioncost auto off`).
 
 ## 8. Exact numbers in Cursor

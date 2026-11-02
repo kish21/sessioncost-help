@@ -109,8 +109,8 @@ were blocked and 3.8% were asked**. Everything else went ahead with no question.
   any that do not answer within 5 seconds, are not checked; the guard names them.
 - If the guard itself breaks, the never list still blocks, and other steps go ahead so your work does not stop. To block
   everything instead, turn on [fail-closed](/sessioncost-help/guard/settings/).
-- **Claude Code** gets the full guard with the plugin. **Codex, Cursor, Antigravity and Copilot** get it with
-  `sessioncost guard setup`, and their hooks show the guard less: Codex cannot ask, so a step that would ask is
+- Every install gives every agent the guard. **Claude Code**'s hooks show it everything; **Codex, Cursor,
+  Antigravity and Copilot**'s hooks show the guard less: Codex cannot ask, so a step that would ask is
   blocked and the agent asks you in the chat; Cursor has no hook before a file edit; Antigravity's hook carries no
   tool result. The full comparison: [What the guard checks](/sessioncost-help/guard/checks/#by-agent).
 

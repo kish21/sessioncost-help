@@ -15,12 +15,18 @@ SessionCost reads each agent's own log on your computer. How exact the numbers a
 
 ## The guard, by agent
 
-| Agent | How it gets the guard |
+Every way of [installing](/sessioncost-help/start/install/) gives every agent below `/sessioncost`, `/livesession`
+and the guard. The guard is off until you type `/livesession` in any agent; then every agent is guarded, until
+`/livesession off`. What differs by agent:
+
+| Agent | Notes |
 |---|---|
-| Claude Code | With the plugin; turn it on with `/livesession` (every chat, until `/livesession off`). |
-| Codex | `sessioncost guard setup codex`, then `sessioncost guard on`. Codex cannot ask, so a step that would ask is blocked and the agent asks you in the chat. |
-| Cursor | `sessioncost guard setup cursor`, then `sessioncost guard on`. |
-| Antigravity | `sessioncost guard setup antigravity`, then `sessioncost guard on`. |
-| GitHub Copilot CLI and Copilot Chat (VS Code) | `sessioncost guard setup copilot`, then `sessioncost guard on`, then restart Copilot or VS Code. Copilot's chat in VS Code runs the same hooks, so one setup covers both. It adds one file, `~/.copilot/hooks/sessioncost-guard.json`; delete it to take the guard out. Copilot lets a step run if a check takes longer than 10 seconds, and in Autopilot mode a step that would ask is blocked instead. |
+| Claude Code | `/livesession off` typed in the chat switches it off. |
+| Codex | Codex asks you once to trust new hooks: type `/hooks` there. Codex cannot ask, so a step that would ask is blocked and the agent asks you in the chat. |
+| Cursor | Cursor's hooks cannot read the chat: switch the guard off with `/livesession off` in another agent, or `sessioncost guard off` in a terminal. |
+| Antigravity | You can see the guard's hooks under **Customizations → Hooks**. |
+| GitHub Copilot CLI and Copilot Chat (VS Code) | One setup covers both: they read the same skills (`~/.copilot/skills`) and hooks (`~/.copilot/hooks/sessioncost-guard.json`; delete that file to take the guard out). Copilot lets a step run if a check takes longer than 10 seconds, and in Autopilot mode a step that would ask is blocked instead. |
+
+Installed an agent after SessionCost? Run `setup` again, or paste the one-line install again.
 
 What each agent's hooks let the guard see, side by side: [What the guard checks](/sessioncost-help/guard/checks/#by-agent).

@@ -43,8 +43,7 @@ After each answer, SessionCost rebuilds that chat's report on your computer, at 
 open report to see the latest. It uses no AI model, sends nothing, and adds no text the agent reads; the first time
 in a chat, you see one line saying where the report is. It is on by default and does not turn the guard on.
 
-It works in Claude Code with the plugin, and in Codex, Cursor, Antigravity and Copilot CLI once you ran
-`sessioncost guard setup <agent>` for them (that is what gives SessionCost a signal at the end of each answer).
+It works in every agent your install set up (the guard's hooks give SessionCost a signal at the end of each answer).
 
 ## Options for a report
 

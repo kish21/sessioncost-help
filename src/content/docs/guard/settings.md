@@ -55,7 +55,7 @@ nothing. To use your own list instead, put one site per line in `look-up-sites.t
 
 | Command | What it does |
 |---|---|
-| `sessioncost guard setup codex` | Adds the guard to Codex. Also `cursor`, `antigravity` and `copilot` (Copilot CLI and Copilot Chat in VS Code). |
+| `sessioncost guard setup codex` | Adds the guard to one agent again (`claude`, `codex`, `cursor`, `antigravity`, `copilot`). Every install already does this for each agent it finds; you only need it to repair one. |
 
 Claude Code gets the guard with the plugin. The setup changes that agent's hooks file; your other hooks are kept and a
 copy of the old file is saved next to it. Then `sessioncost guard on` switches it on there, and you restart the agent.
