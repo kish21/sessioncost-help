@@ -1,14 +1,14 @@
 ---
 title: Install in Antigravity
-description: The one-line install gives Antigravity /sessioncost and /livesession. The command-line plugin brings /sessioncost.
+description: The one-line install or the command-line plugin gives Antigravity /sessioncost and /livesession.
 ---
-The [one-line install](/sessioncost-help/start/install/) covers Antigravity, the app and the command line, with both
-`/sessioncost` and `/livesession`. That is the way to use.
+The [one-line install](/sessioncost-help/start/install/) covers Antigravity, the app and the command line.
 
-**Command-line plugin:** `agy plugin install https://github.com/kish21/sessioncost`, then start a new chat. It
-brings `/sessioncost` only.
+**Command-line plugin** (the other way): `agy plugin install https://github.com/kish21/sessioncost`, then start a new
+chat. It brings `/sessioncost` and `/livesession`, and needs Python 3.10 or newer and Git.
 
-After installing, restart Antigravity. You can see the guard's hooks under **Customizations → Hooks**.
+**The guard:** type `/livesession`. The first time, it puts the guard into Antigravity and asks you to restart it
+once. You can see the guard's hooks under **Customizations → Hooks**.
 
 **New versions:** `/sessioncost update` in a chat, or install again the same way.
 

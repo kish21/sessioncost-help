@@ -1,9 +1,9 @@
 ---
 title: Install in Cursor (plugin)
-description: The Cursor plugin brings /sessioncost. For /livesession too, use the one-line install.
+description: The Cursor plugin brings /sessioncost and /livesession. Or use the one-line install.
 ---
-The [one-line install](/sessioncost-help/start/install/) covers Cursor with both `/sessioncost` and `/livesession`:
-use it if you want the live guard. The plugin brings `/sessioncost` only.
+The [one-line install](/sessioncost-help/start/install/) already covers Cursor. The plugin is the other way: it
+brings `/sessioncost` and `/livesession`, and needs Python 3.10 or newer and Git.
 
 1. Open **Customize → Plugins**, choose **From GitHub Repository** (or **Add Marketplace**).
 2. Paste `https://github.com/kish21/sessioncost` and install **sessioncost**.
@@ -11,8 +11,9 @@ use it if you want the live guard. The plugin brings `/sessioncost` only.
 
 If no plugin shows up, use the one-line install instead.
 
-**The guard in Cursor:** Cursor's hooks cannot read the chat, so `/livesession off` there does not switch the guard
-off. Type `/livesession off` in another agent, or `sessioncost guard off` in a terminal.
+**The guard:** type `/livesession`. The first time, it puts the guard into Cursor and asks you to restart Cursor once.
+Cursor's hooks cannot read the chat, so to switch the guard off type `/livesession off` in another agent, or
+`sessioncost guard off` in a terminal.
 
 **New versions:** **Customize** → the marketplace with SessionCost → **Refresh**.
 
