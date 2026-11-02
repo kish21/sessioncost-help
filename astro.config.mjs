@@ -27,6 +27,18 @@ export default defineConfig({
 					items: [
 						{ label: 'Welcome', link: '/' },
 						{ label: 'Install SessionCost', slug: 'start/install' },
+						{
+							label: 'Other ways to install',
+							items: [
+								{ label: 'Node (npm)', slug: 'start/install/npm' },
+								{ label: 'Python (PyPI)', slug: 'start/install/python' },
+								{ label: 'Claude Code', slug: 'start/install/claude-code' },
+								{ label: 'Codex', slug: 'start/install/codex' },
+								{ label: 'Cursor', slug: 'start/install/cursor' },
+								{ label: 'Antigravity', slug: 'start/install/antigravity' },
+								{ label: 'GitHub Copilot', slug: 'start/install/copilot' },
+							],
+						},
 						{ label: 'Your first report', slug: 'start/first-report' },
 					],
 				},
