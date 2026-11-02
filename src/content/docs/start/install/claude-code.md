@@ -6,7 +6,19 @@ The [one-line install](/sessioncost-help/start/install/) already covers Claude C
 it brings `/sessioncost`, `/livesession` and the guard's hooks by itself, and needs Git. No Python? The first
 `/sessioncost` or `/livesession` fetches one.
 
-## Install: one command
+## Install from Claude Code's plugin menu
+
+1. Open **Manage Plugins** (in VS Code: the Claude Code panel's plugin menu; in the CLI: type `/plugin`).
+2. **Marketplaces** tab: paste `kish21/sessioncost` and click **Add**.
+3. **Plugins** tab: type `sessioncost` in **Search plugins…** (the list is sorted by installs, so it sits far down
+   without a search), then click **Install**.
+4. Reload VS Code (Ctrl+Shift+P → **Developer: Reload Window**) or restart the CLI, open a **new** chat and type
+   `/`: **/sessioncost** and **/livesession** are in the list (they may show as `/sessioncost:sessioncost` and
+   `/sessioncost:livesession`).
+
+Adding the marketplace (step 2) only lists the plugin; step 3 installs it.
+
+## Or: one command in a terminal
 
 Open a terminal (**Windows:** press the Windows key, type `powershell`, press Enter) and type:
 
@@ -32,7 +44,7 @@ In the Claude Code CLI you can also type it in the chat: `/plugin install sessio
 | `claude` is not recognized | Only the VS Code extension is installed, without Claude Code's command line. Use the [one-line install](/sessioncost-help/start/install/) instead: it gives Claude Code the same two commands. |
 | `git` is not found | A plugin is downloaded with Git. Install [Git](https://git-scm.com/downloads), open a new terminal, and run the command again, or use the one-line install. |
 | Installed, but no `/sessioncost` in the chat | The chat was open before the install. Reload VS Code (or restart the CLI) and open a **new** chat. |
-| You added the marketplace earlier (`claude plugin marketplace add …`) and nothing showed | Adding a marketplace only lists the plugin; it does not install it. Run the command above: it installs it. |
+| You added the marketplace and cannot find the plugin | It is in the **Plugins** tab under **Available**, far down: type `sessioncost` in **Search plugins…** and click **Install**. Adding a marketplace only lists the plugin; it does not install it. |
 | Your Claude Code is older than 2.1.275 (`claude --version`) | Use two steps: `claude plugin marketplace add kish21/sessioncost`, then `claude plugin install sessioncost@sessioncost`. |
 
 **New versions:** in the CLI, once: `/plugin` → **Marketplaces** → sessioncost → **Enable auto-update**. In VS Code: in
