@@ -5,7 +5,7 @@ description: How the live guard is tested before each release, what the tests co
 The guard makes a decision on every step an agent takes, so we test those decisions on their own, for every agent,
 before each release. This page says how, what is covered, and where the testing stops.
 
-**Release tested:** 0.6.0-rc.7, 1 November 2026.
+**Release tested:** 1.0.0, 2 November 2026.
 
 ## How we test
 
