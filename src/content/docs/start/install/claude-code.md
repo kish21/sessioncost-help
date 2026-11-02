@@ -3,7 +3,8 @@ title: Install in Claude Code (plugin)
 description: The Claude Code plugin brings /sessioncost, /livesession and the guard. Or use the one-line install.
 ---
 The [one-line install](/sessioncost-help/start/install/) already covers Claude Code. The plugin is the other way:
-it brings `/sessioncost`, `/livesession` and the guard's hooks by itself, and needs Python 3.10 or newer and Git.
+it brings `/sessioncost`, `/livesession` and the guard's hooks by itself, and needs Git. No Python? The first
+`/sessioncost` or `/livesession` fetches one.
 
 | Where you use it | Plugin install |
 |---|---|

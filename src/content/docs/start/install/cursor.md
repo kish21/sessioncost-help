@@ -3,7 +3,8 @@ title: Install in Cursor (plugin)
 description: The Cursor plugin brings /sessioncost and /livesession. Or use the one-line install.
 ---
 The [one-line install](/sessioncost-help/start/install/) already covers Cursor. The plugin is the other way: it
-brings `/sessioncost` and `/livesession`, and needs Python 3.10 or newer and Git.
+brings `/sessioncost` and `/livesession`, and needs Git. No Python? The first `/sessioncost` or `/livesession` fetches
+one.
 
 1. Open **Customize → Plugins**, choose **From GitHub Repository** (or **Add Marketplace**).
 2. Paste `https://github.com/kish21/sessioncost` and install **sessioncost**.

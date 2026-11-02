@@ -3,7 +3,7 @@ title: Install in Codex (plugin)
 description: The Codex plugin brings /sessioncost and /livesession. Or use the one-line install.
 ---
 The [one-line install](/sessioncost-help/start/install/) already covers Codex. The plugin is the other way: it brings
-`/sessioncost` and `/livesession`, and needs Python 3.10 or newer and Git.
+`/sessioncost` and `/livesession`, and needs Git. No Python? The first `/sessioncost` or `/livesession` fetches one.
 
 1. In a terminal: `codex plugin marketplace add kish21/sessioncost`.
 2. **Codex app:** open **Customize → Plugins**, choose **sessioncost**, click **Install plugin**.
