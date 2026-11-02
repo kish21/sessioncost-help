@@ -11,7 +11,9 @@ it brings `/sessioncost`, `/livesession` and the guard's hooks by itself, and ne
 1. Open **Manage Plugins** (in VS Code: the Claude Code panel's plugin menu; in the CLI: type `/plugin`).
 2. **Marketplaces** tab: paste `kish21/sessioncost` and click **Add**.
 3. **Plugins** tab: type `sessioncost` in **Search plugins…** (the list is sorted by installs, so it sits far down
-   without a search), then click **Install**.
+   without a search), then click **Install**. Where it asks where to install, choose **user** (every folder), not
+   **project** or **local**: those give SessionCost to one folder only, and chats in every other folder have no
+   `/sessioncost`, no `/livesession` and no guard.
 4. Reload VS Code (Ctrl+Shift+P → **Developer: Reload Window**) or restart the CLI, open a **new** chat and type
    `/`: **/sessioncost** and **/livesession** are in the list (they may show as `/sessioncost:sessioncost` and
    `/sessioncost:livesession`).
@@ -23,11 +25,11 @@ Adding the marketplace (step 2) only lists the plugin; step 3 installs it.
 Open a terminal (**Windows:** press the Windows key, type `powershell`, press Enter) and type:
 
 ```sh
-claude plugin install sessioncost --marketplace kish21/sessioncost
+claude plugin install sessioncost --marketplace kish21/sessioncost --scope user
 ```
 
-It adds SessionCost's marketplace and installs the plugin in one go. It ends with
-`✔ Successfully installed plugin: sessioncost@sessioncost`. Then:
+It adds SessionCost's marketplace and installs the plugin for every folder in one go. It ends with
+`✔ Successfully installed plugin: sessioncost@sessioncost (scope: user)`. Then:
 
 - **VS Code:** reload the window (Ctrl+Shift+P → **Developer: Reload Window**).
 - **Claude Code CLI** (`claude` in a terminal): start it again.
@@ -35,7 +37,7 @@ It adds SessionCost's marketplace and installs the plugin in one go. It ends wit
 Open a **new** chat and type `/`: **/sessioncost** and **/livesession** are in the list (they may show as
 `/sessioncost:sessioncost` and `/sessioncost:livesession`). The CLI and VS Code share one install.
 
-In the Claude Code CLI you can also type it in the chat: `/plugin install sessioncost --marketplace kish21/sessioncost`.
+In the Claude Code CLI you can also type it in the chat: `/plugin install sessioncost --marketplace kish21/sessioncost --scope user`.
 
 ## It does not show up?
 
@@ -45,7 +47,8 @@ In the Claude Code CLI you can also type it in the chat: `/plugin install sessio
 | `git` is not found | A plugin is downloaded with Git. Install [Git](https://git-scm.com/downloads), open a new terminal, and run the command again, or use the one-line install. |
 | Installed, but no `/sessioncost` in the chat | The chat was open before the install. Reload VS Code (or restart the CLI) and open a **new** chat. |
 | You added the marketplace and cannot find the plugin | It is in the **Plugins** tab under **Available**, far down: type `sessioncost` in **Search plugins…** and click **Install**. Adding a marketplace only lists the plugin; it does not install it. |
-| Your Claude Code is older than 2.1.275 (`claude --version`) | Use two steps: `claude plugin marketplace add kish21/sessioncost`, then `claude plugin install sessioncost@sessioncost`. |
+| It works in one folder, but not in chats in other folders | The plugin was installed for one folder only. Check in a terminal: `claude plugin list` shows sessioncost with **Scope: local** or **project**. Install it for every folder: `claude plugin install sessioncost@sessioncost --scope user`, reload VS Code (or restart the CLI) and open a **new** chat. |
+| Your Claude Code is older than 2.1.275 (`claude --version`) | Use two steps: `claude plugin marketplace add kish21/sessioncost`, then `claude plugin install sessioncost@sessioncost --scope user`. |
 
 **New versions:** in the CLI, once: `/plugin` → **Marketplaces** → sessioncost → **Enable auto-update**. In VS Code: in
 a terminal, `claude plugin update sessioncost@sessioncost`.
