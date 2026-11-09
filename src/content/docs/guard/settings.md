@@ -45,6 +45,14 @@ per line), each part is checked on its own, and a `*` stops where the next part 
 covers `rm -rf build/cache`, but in `rm -rf build && rm -rf src` the second delete still asks. Parts that do not do
 the thing need no rule: the same rule covers `rm -rf build && npm test`. A `;` or `|` inside quotes is not a chain.
 
+### Allow one step from the chat
+
+When the guard asks about a step that is normal for your project, its message ends with the exact line to send, for
+example `/livesession allow git_push git push origin main`. Send it as your own message and that step stops asking in
+this project. The rule is saved outside your repository, in `~/.sessioncost/guard/projects/`. `/livesession allow`
+alone lists the project's rules; `/livesession allow --clear` removes them. The agent cannot add rules, and secrets
+can never be allowed this way.
+
 ### Look-up sites
 
 Reading a well-known look-up site (language docs, PyPI, npm, GitHub, Read the Docs and others) or localhost asks

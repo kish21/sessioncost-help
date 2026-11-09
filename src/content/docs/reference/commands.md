@@ -7,18 +7,31 @@ On Windows, if `sessioncost` is not found, type `python -m sessioncost` instead 
 
 ## In a chat
 
-Type these to your agent. In Claude Code with the plugin they may show as `/sessioncost:sessioncost`.
+Type these to your agent, in any agent SessionCost set up (Claude Code, Codex, Cursor, Antigravity, Copilot). In
+Claude Code with the plugin they may show as `/sessioncost:sessioncost`.
+
+### The two you need
 
 | Type | What it does |
 |---|---|
-| `/sessioncost` | Builds the report of this chat and gives you its link. |
-| `/sessioncost clean` | Deletes the reports of older chats and keeps the latest. |
+| `/sessioncost` | Builds the report of this chat, gives you its link and names the top fix. Say "fix it" and your agent fixes the waste, after your yes. |
+| `/livesession` | Turns the [guard](/sessioncost-help/guard/what-it-does/) on for every chat in every agent, this one included, until `/livesession off`. Only your own message turns it off: the agent cannot. |
+
+You can also ask in your own words ("where did the tokens go?", "fix the waste"): the agent knows what to run.
+
+### Optional
+
+| Type | What it does |
+|---|---|
+| `/sessioncost fix` | This project's token waste as a to-do list, with the change for each. Your agent applies it on your yes, after a backup. |
+| `/sessioncost fix --undo` | Puts back the newest fix, unless you changed the file since. |
+| `/sessioncost fix auto on` | After each answer, new waste is listed at your next message and your agent asks before fixing. `off` stops it. |
+| `/livesession strict` | The guard, stricter: outside content stays untrusted for the whole chat. |
+| `/livesession allow <mark> <pattern>` | Stops one expected step asking in this project. You do not need to remember it: when the guard asks about a step, its message gives you the exact line. Secrets and never-list steps cannot be allowed. |
 | `/sessioncost update` | Updates every copy of SessionCost on this computer. Restart your agent afterwards. |
 | `/sessioncost version` | Shows which SessionCost version this agent uses, and how many other copies are on this computer. |
+| `/sessioncost clean` | Deletes the reports of older chats and keeps the latest. |
 | `/sessioncost auto off` | Stops rebuilding the report after each answer. `/sessioncost auto on` starts it again. |
-| `/livesession` | Claude Code: turns the [guard](/sessioncost-help/guard/what-it-does/) on for every chat, this one included, until `/livesession off`. |
-| `/livesession strict` | The same, stricter: outside content stays untrusted for the whole chat. |
-| `/livesession off` | Turns the guard off for every chat. Only your own message does this: the agent cannot. |
 
 ## In a terminal
 
