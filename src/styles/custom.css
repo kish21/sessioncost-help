@@ -192,6 +192,24 @@ h1#_top {
 	}
 }
 
+/* Welcome hero: text and the report picture side by side, the picture big enough to read */
+@media (min-width: 50rem) {
+	.hero {
+		grid-template-columns: 5fr 6fr;
+		gap: 3rem;
+		padding-block: 2.5rem 3rem;
+	}
+	.hero > .hero-html {
+		width: 100%;
+	}
+	.hero h1 {
+		font-size: clamp(2.2rem, 3.4vw, 3.4rem);
+	}
+}
+.hero .hero-shot {
+	margin-bottom: 0;
+}
+
 /* Welcome: hero picture, the two jobs, the numbers strip, screenshots */
 .duo > a,
 .stats > div,

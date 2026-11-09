@@ -8,13 +8,6 @@ export default defineConfig({
 	base: '/sessioncost-help',
 	// Pages that moved in the 2026-11 rewrite: old links (the released README, videos) keep working.
 	redirects: {
-		'/start/install/npm': '/sessioncost-help/start/install/',
-		'/start/install/python': '/sessioncost-help/start/install/',
-		'/start/install/claude-code': '/sessioncost-help/start/install/',
-		'/start/install/codex': '/sessioncost-help/start/install/',
-		'/start/install/cursor': '/sessioncost-help/start/install/',
-		'/start/install/antigravity': '/sessioncost-help/start/install/',
-		'/start/install/copilot': '/sessioncost-help/start/install/',
 		'/start/first-report': '/sessioncost-help/start/first-5-minutes/',
 		'/scenarios/developers': '/sessioncost-help/use/save-tokens/',
 		'/guard/what-it-does': '/sessioncost-help/use/stay-safe/',
@@ -40,12 +33,26 @@ export default defineConfig({
 			],
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/kish21/sessioncost' }],
 			components: { PageTitle: './src/components/PageTitle.astro' },
+			// no "On this page" column on the right: it took a quarter of the screen for 4-6 headings (owner, 2026-11-09)
+			tableOfContents: false,
 			sidebar: [
 				{
 					label: 'Start',
 					items: [
 						{ label: 'Welcome', link: '/' },
-						{ label: 'Install', slug: 'start/install' },
+						{ label: 'Install SessionCost', slug: 'start/install' },
+						{
+							label: 'Other ways to install',
+							items: [
+								{ label: 'Node (npm)', slug: 'start/install/npm' },
+								{ label: 'Python (PyPI)', slug: 'start/install/python' },
+								{ label: 'Claude Code', slug: 'start/install/claude-code' },
+								{ label: 'Codex', slug: 'start/install/codex' },
+								{ label: 'Cursor', slug: 'start/install/cursor' },
+								{ label: 'Antigravity', slug: 'start/install/antigravity' },
+								{ label: 'GitHub Copilot', slug: 'start/install/copilot' },
+							],
+						},
 						{ label: 'Your first 5 minutes', slug: 'start/first-5-minutes' },
 					],
 				},
