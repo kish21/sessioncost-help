@@ -1,0 +1,24 @@
+---
+// Starlight's page title, with the page's reader beside it: Everyone (no setup knowledge) or Technical.
+import Default from '@astrojs/starlight/components/PageTitle.astro';
+
+const audience = Astro.locals.starlightRoute.entry.data.audience;
+const tag = { everyone: 'For everyone', technical: 'Technical' }[audience ?? ''];
+---
+{tag && <p class={`audience ${audience}`}>{tag}</p>}
+<Default />
+
+<style>
+	.audience {
+		display: inline-block;
+		margin: 1rem 0 -0.5rem;
+		padding: 0.1rem 0.55rem;
+		border-radius: 3px;
+		font: 600 0.72rem var(--sl-font-mono);
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		border: 1px solid currentColor;
+	}
+	.everyone { color: var(--sl-color-accent); }
+	.technical { color: var(--sl-color-gray-2); }
+</style>

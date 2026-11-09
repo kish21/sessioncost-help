@@ -1,6 +1,7 @@
 ---
 title: The turn panel
 description: What happened inside one turn, and why it cost what it did.
+audience: everyone
 ---
 Tap any tile on the path and the turn panel opens. It tells the story of that one turn: what you asked, what the agent
 did, and where the money went.

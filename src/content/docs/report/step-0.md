@@ -1,6 +1,7 @@
 ---
 title: Step 0
 description: What your agent sends before you type anything, and how to make it smaller.
+audience: everyone
 ---
 **Step 0 is everything the agent sends before your first message**: its own instructions, the tools it can use, your
 rules files (such as `CLAUDE.md` or `AGENTS.md`), skills, and MCP servers.

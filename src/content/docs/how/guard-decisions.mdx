@@ -1,0 +1,80 @@
+---
+title: The guard's decision flow
+description: The questions the guard asks about each step, in order, what it remembers during a chat, and how it compares with Claude Code's permission rules.
+audience: technical
+---
+import GuardDecision from '../../../components/GuardDecision.astro';
+
+For every step the agent is about to take, the guard asks the same questions in the same order. The first "yes"
+decides. It runs on your computer, with rules, not an AI model.
+
+<GuardDecision />
+
+## Before the questions: what the step really is
+
+- **Commands are read the way the shell reads them**: quotes joined (`.e''nv` is `.env`), inner shells opened
+  (`bash -c`, `sh -c`, `pwsh -Command`, `cmd /c`), heredocs, PowerShell here-strings and `python -c` scripts looked
+  into. Text that is only quoted (a commit message, an issue comment) is not taken for a command.
+- **Chained commands are split** (`&&`, `||`, `;`, `|`, one step per line) and each part is checked on its own.
+- **A script on disk is read before it runs** (`sh setup.sh`, `python tool.py`): a never-list step inside it asks,
+  once per version of the file.
+- **Your project's allow rules** then take out the checks they cover, for this step only. They can never excuse
+  changing the guard.
+
+## What it remembers during a chat
+
+- **A yes is remembered** for the rest of the chat: a push per destination, a website per site, an MCP tool per
+  server, a script per version of the file.
+- **Some checks ask every time**: a package not in the project's own lists, raising rights, changing the agent's own
+  rules, sending data out after a key appeared in a result.
+- **Outside content raises the bar.** After the agent reads a web page, an MCP or network result, or a file from
+  outside the project, pushes, sending data out, secrets and rule changes ask again even if you allowed them. If that
+  content showed **signs of an injection**, those steps are blocked instead. Your next message resets this; with
+  `/livesession strict` it lasts for the whole chat.
+- **Files the agent made in this chat** can be deleted without asking.
+
+## The answer the agent gets
+
+- **Blocked:** the step does not run. The agent is told why, the safer way, and not to try another way to do the same
+  thing.
+- **Asks you:** the agent's own permission prompt opens. The message ends with the exact `/livesession allow …` line
+  for a step that is normal in your project.
+- **Goes ahead:** the step runs and is written to the log.
+
+## If the guard itself fails
+
+The never list still blocks and other steps go ahead, so your work does not stop. With
+`sessioncost guard fail-closed on`, every step is blocked until it is fixed, including a step whose message the guard
+cannot read. Copilot lets a step run if a check takes longer than 10 seconds.
+
+## Isn't Claude Code's settings.json enough?
+
+Claude Code lets you write permission rules in `settings.json`. Keep them: they are a **fixed list**. The guard is a
+**watchman**: it also looks at what the agent just read and what changed since, and it keeps a record.
+
+| | `settings.json` rules | SessionCost guard |
+|---|---|---|
+| Fixed patterns (this command, this file) | Yes | Yes |
+| **Depends on what just happened**: "a push is fine, but not right after a page with hidden instructions" | No | Yes |
+| Spots **prompt injection** in a page or file the agent read | No | Yes |
+| **Sees through disguises** such as `cat .e''nv`, or `bash -c "cat .env"` | Only what your pattern matches | Yes |
+| **Reads a script before it runs**, and asks first when it prints a key | No | Yes |
+| Reads what the agent **loads with the chat** (rules files, memory, skills, MCP tool descriptions) for hidden instructions | No | Yes |
+| A **new or changed plugin, skill or MCP server** asks before its first use | No | Yes |
+| Secrets blocked **without writing any rules** | No | Yes |
+| A **record you can trust** of every ask and block | No | Yes: a chained log |
+| Codex, Cursor, Antigravity, Copilot | No, Claude Code only | Yes, the same rules |
+| The agent can switch it off | — | No |
+
+For one developer with simple needs, good `settings.json` rules may be enough. The guard matters when the agent reads
+the web or outside files, when you use more than one agent, and for teams.
+
+## What it cannot do
+
+- It matches known patterns in the text of each step. It does not understand intent, and a risky command in a form
+  no rule knows goes ahead. Use it with your other controls, not instead of them.
+- By the time it reads a poisoned MCP description, the agent has read it too. It blocks that server's tools and every
+  risky step, but a description that only asks for a wrong answer, with no step behind it, cannot be blocked.
+- It catches an agent being steered. It is not a boundary against malware already running with your rights.
+
+Every check, with its answer and OWASP tag: [What the guard checks](/sessioncost-help/guard/checks/).

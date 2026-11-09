@@ -1,0 +1,105 @@
+---
+// When to use what: a situation on the left, what to type on the right. HTML, not SVG, so it reflows on a phone.
+const b = '/sessioncost-help/';
+const groups = [
+	{
+		name: 'Tokens and cost',
+		rows: [
+			{ q: 'Why did this chat cost so much?', a: '/sessioncost', where: 'in the chat', href: 'use/save-tokens/' },
+			{ q: 'Cut the waste it found', a: 'fix it', where: 'say it in the same chat', href: 'use/save-tokens/#let-your-agent-fix-it' },
+			{ q: 'Did my fix work?', a: '/sessioncost', where: 'at the end of your next chat', href: 'use/save-tokens/#see-that-it-worked' },
+			{ q: 'The chat has grown long', a: 'continue from handover', where: 'in a new chat, after your agent wrote it', href: 'use/long-chats/' },
+			{ q: "Yesterday's chat, or another project's", a: 'sessioncost list', where: 'in a terminal', href: 'use/save-tokens/#an-older-chat-or-another-project' },
+		],
+	},
+	{
+		name: 'Safety',
+		rows: [
+			{ q: 'Stop the agent before it does something risky', a: '/livesession', where: 'once, in any chat', href: 'use/stay-safe/' },
+			{ q: 'The guard asks about a step that is normal here', a: '/livesession allow …', where: 'the exact line is in its question', href: 'use/stay-safe/#it-asks-about-a-normal-step' },
+			{ q: 'What did the agent do, and what was stopped?', a: '/sessioncost', where: 'then open Trace & risk map', href: 'report/risk-map/' },
+			{ q: 'Turn the guard off', a: '/livesession off', where: 'in the chat', href: 'use/stay-safe/#turn-it-off' },
+		],
+	},
+	{
+		name: 'Everything else',
+		rows: [
+			{ q: 'The numbers in a spreadsheet or a security tool', a: 'Export Excel, --json, --sarif', where: 'in the report, or a terminal', href: 'reference/exports/' },
+			{ q: 'A new version', a: '/sessioncost update', where: 'then restart your agent', href: 'start/install/#stay-up-to-date' },
+			{ q: 'Something does not work', a: 'Fix a problem', where: 'the common ones and their fixes', href: 'help/fix-a-problem/', page: true },
+		],
+	},
+];
+---
+<div class="wtu" role="list" aria-label="When to use what: your situation, and what to type">
+	{groups.map((g) => (
+		<section role="listitem">
+			<p class="group">{g.name}</p>
+			<ul>
+				{g.rows.map((r) => (
+					<li>
+						<a href={b + r.href}>
+							<span class="q">{r.q}</span>
+							<span class="arrow" aria-hidden="true"></span>
+							<span class="a">
+								{r.page ? <b>{r.a}</b> : <code>{r.a}</code>}
+								<small>{r.where}</small>
+							</span>
+						</a>
+					</li>
+				))}
+			</ul>
+		</section>
+	))}
+</div>
+
+<style>
+	.wtu { margin-block: 1.5rem; }
+	.group {
+		font: 600 0.75rem var(--sl-font-mono);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--sl-color-accent);
+		margin: 1.4rem 0 0.4rem;
+	}
+	.wtu ul { list-style: none; padding: 0; margin: 0; }
+	.wtu li { margin: 0 0 0.5rem; padding: 0; }
+	.wtu a {
+		display: grid;
+		grid-template-columns: 1fr 2.5rem 1fr;
+		align-items: center;
+		text-decoration: none;
+		color: inherit;
+	}
+	.q, .a {
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 4px;
+		padding: 0.55rem 0.75rem;
+		min-height: 3.6rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+	.q { background: var(--sl-color-gray-6); font-weight: 500; }
+	.a { border-color: var(--sl-color-accent); }
+	.wtu .a code { background: none; border: 0; padding: 0; font-size: 0.95rem; font-weight: 600; color: var(--sl-color-accent-high); }
+	.a small { color: var(--sl-color-gray-3); font-size: 0.8rem; line-height: 1.35; }
+	.arrow { position: relative; height: 1px; background: var(--sl-color-gray-3); margin-inline: 0.35rem; }
+	.arrow::after {
+		content: '';
+		position: absolute;
+		right: -1px;
+		top: -4px;
+		border: 4.5px solid transparent;
+		border-left: 7px solid var(--sl-color-gray-3);
+		border-right: 0;
+	}
+	.wtu a:hover .a, .wtu a:focus-visible .a { background: var(--sl-color-accent-low); }
+	.wtu a:hover .q { border-color: var(--sl-color-accent); }
+	@media (max-width: 34rem) {
+		.wtu a { grid-template-columns: 1fr; }
+		.arrow { width: 1px; height: 0.9rem; margin: 0 0 0 1.2rem; }
+		.arrow::after { right: auto; left: -4px; top: auto; bottom: -1px; border: 4.5px solid transparent; border-top: 7px solid var(--sl-color-gray-3); border-bottom: 0; }
+		.q, .a { min-height: 0; }
+	}
+</style>

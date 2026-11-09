@@ -1,0 +1,30 @@
+---
+// Saving tokens: the report names the waste, your agent fixes it on your yes, the next report shows what it saved.
+const steps = [
+	{ x: 20, title: '/sessioncost', sub: 'names the top fix', code: true },
+	{ x: 200, title: '"fix it"', sub: 'shows the change first', code: true },
+	{ x: 380, title: 'You say yes', sub: 'applied, with a backup' },
+	{ x: 560, title: 'Your next chat', sub: 'report shows the saving' },
+];
+---
+<figure class="diagram" aria-label="Type /sessioncost: the report names the top fix. Say fix it: your agent shows the change. Say yes: it is applied with a backup. Your next chat's report shows what the fix saved, or says the waste came back.">
+	<svg viewBox="0 0 740 224" role="img">
+		<text class="kicker" x="370" y="20" text-anchor="middle">Find it, fix it, see it worked</text>
+		{steps.map((s, i) => (
+			<g>
+				<rect class={i === 3 ? 'hot' : 'box'} x={s.x} y="44" width="160" height="70" rx="4" />
+				<text class={s.code ? 'code' : 'label'} x={s.x + 80} y="76" text-anchor="middle">{s.title}</text>
+				<text class="small" x={s.x + 80} y="98" text-anchor="middle">{s.sub}</text>
+				{i < steps.length - 1 && <path class="line" d={`M${s.x + 162} 79 H${s.x + 196}`} marker-end="url(#slarrow)" />}
+			</g>
+		))}
+		<path class="line accent" stroke-dasharray="5 5" d="M640 116 C640 180, 100 180, 100 118" marker-end="url(#slarrow)" />
+		<text class="small" x="370" y="188" text-anchor="middle">waste came back? the report says so, and the loop starts again</text>
+		<text class="foot" x="370" y="216" text-anchor="middle">measured from your own chats, on your computer</text>
+		<defs>
+			<marker id="slarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+				<path d="M0 0 L10 5 L0 10 z" fill="currentColor" />
+			</marker>
+		</defs>
+	</svg>
+</figure>

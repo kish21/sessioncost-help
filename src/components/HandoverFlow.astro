@@ -1,0 +1,45 @@
+---
+// A long chat ends in a handover: the agent writes where things stand, a new chat starts small and reads it.
+const now = [
+	{ x: 20, title: 'The chat grows', sub: 'every turn re-sends it all' },
+	{ x: 270, title: 'Passes 100k tokens', sub: 'or the limit you set' },
+	{ x: 520, title: 'Your agent writes', sub: 'the handover' },
+];
+const next = [
+	{ x: 520, title: '"continue from handover"', sub: 'your first message', code: true },
+	{ x: 270, title: 'The agent reads it', sub: 'goal, done, files, next' },
+	{ x: 20, title: 'It carries on', sub: 'from a small chat' },
+];
+---
+<figure class="diagram" aria-label="This chat grows past 100k tokens, or the limit you set. SessionCost offers a handover and your agent writes it: the goal, what is done, files, what is next. In a new chat you say continue from handover; the agent reads the file and carries on from a small chat.">
+	<svg viewBox="0 0 740 300" role="img">
+		<text class="kicker" x="20" y="20">This chat</text>
+		{now.map((s, i) => (
+			<g>
+				<rect class={i === 2 ? 'hot' : 'box'} x={s.x} y="32" width="200" height="64" rx="4" />
+				<text class="label" x={s.x + 100} y="60" text-anchor="middle">{s.title}</text>
+				<text class="small" x={s.x + 100} y="81" text-anchor="middle">{s.sub}</text>
+				{i < 2 && <path class="line" d={`M${s.x + 202} 64 H${s.x + 246}`} marker-end="url(#hfarrow)" />}
+			</g>
+		))}
+		<path class="line accent" d="M620 98 V180" marker-end="url(#hfarrow)" />
+		<rect class="box" x="300" y="122" width="300" height="30" rx="3" />
+		<text class="small" x="450" y="142" text-anchor="middle">~/.sessioncost/handover/&lt;project&gt;.md</text>
+		<path class="line" stroke-dasharray="3 3" d="M602 137 H618" />
+		<text class="kicker" x="20" y="176">A new chat</text>
+		{next.map((s, i) => (
+			<g>
+				<rect class="box" x={s.x} y="186" width="200" height="64" rx="4" />
+				<text class={s.code ? 'code' : 'label'} x={s.x + 100} y="214" text-anchor="middle" style={s.code ? 'font-size:0.8rem' : ''}>{s.title}</text>
+				<text class="small" x={s.x + 100} y="235" text-anchor="middle">{s.sub}</text>
+				{i < 2 && <path class="line" d={`M${s.x - 2} 218 H${s.x - 46}`} marker-end="url(#hfarrow)" />}
+			</g>
+		))}
+		<text class="foot" x="370" y="290" text-anchor="middle">SessionCost calls no AI: your own agent writes the words</text>
+		<defs>
+			<marker id="hfarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+				<path d="M0 0 L10 5 L0 10 z" fill="currentColor" />
+			</marker>
+		</defs>
+	</svg>
+</figure>

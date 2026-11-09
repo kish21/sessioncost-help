@@ -1,0 +1,89 @@
+---
+title: Save tokens
+description: Find where the tokens went, let your agent fix the waste on your yes, and see in the next report what it saved.
+audience: everyone
+---
+import SaveLoop from '../../../components/SaveLoop.astro';
+
+<SaveLoop />
+
+## Find the waste
+
+In the chat, type `/sessioncost`. The report opens with the answer: tokens sent, tokens with the fixes, and the
+biggest fixes. On **the path**, the redder the tile, the heavier the turn; tap the heaviest to see inside it.
+
+**What you usually find:** the cost is in the re-sending, not in what you typed. One of four causes leads:
+
+| Cause | What it looks like | Where to read more |
+|---|---|---|
+| **Step 0** | The chat was expensive before you typed anything: rules, tools and skills sent with every message | [Step 0](/sessioncost-help/report/step-0/) |
+| **A long chat** | Late turns cost far more than early ones, because the whole history is sent each time | [Long chats and handover](/sessioncost-help/use/long-chats/) |
+| **Many tool calls in one turn** | One turn with dozens of model calls | [The turn panel](/sessioncost-help/report/turn-panel/) |
+| **A big file or output that stays** | One step pulled in a large file or command output, and every later call carries it | [The turn panel](/sessioncost-help/report/turn-panel/) |
+
+## Let your agent fix it
+
+Say **fix it** in the same chat, or type `/sessioncost fix`.
+
+1. Your agent shows the to-do list: each waste, how many tokens it cost in this chat, and the change that prevents it.
+2. It asks **"Shall I apply these?"**. You can say yes to all, or name the ones you want.
+3. On your yes, each changed file is backed up first, then changed. `/sessioncost fix --undo` puts the newest fix
+   back (unless you changed the file since).
+
+What a fix changes:
+
+| Kind | Where it goes |
+|---|---|
+| A rule for your agent | Its rules file in the project: `CLAUDE.md` (Claude Code), `AGENTS.md` (Codex), `GEMINI.md` (Antigravity), `.cursor/rules/sessioncost.mdc` (Cursor), `.github/copilot-instructions.md` (Copilot) |
+| A setting | Claude Code's personal project settings, `.claude/settings.local.json` (never committed) |
+| A step only you can take | Listed with what to do, for example turning off an MCP server this project does not use |
+
+Fixes are about tokens only. Safety is the guard's job: no fix writes a permission or a safety rule.
+
+## See that it worked
+
+At the end of your next chat, type `/sessioncost` again. The report, and the next fix list, say for each fix:
+
+| It says | What it means |
+|---|---|
+| no new chat since the fix yet | Nothing to measure yet. |
+| **~N fewer tokens sent in 3 chats since** | What the fix saved, measured from your own chats. |
+| no waste of this kind in 3 chats since | A rule that prevents a waste: the waste did not happen. |
+| **it came back** | The waste is back, with how much. The fix is still in place. |
+| the agent did not follow the rule | The rule is in the file but the agent ignored it: remind it, or word the rule more plainly. |
+
+## A list after every answer
+
+`/sessioncost fix auto on` puts any new waste on a short to-do list at your next message, and your agent asks before
+fixing anything. One list per chat unless something big turns up; an item you skip stays quiet in that project for a
+week. `/sessioncost fix auto off` stops it.
+
+## An older chat, or another project
+
+In a terminal, from the project folder:
+
+```sh
+sessioncost list                     # recent chats here: when, agent, id, cost, turns, first message
+sessioncost 3f2a9c1e                 # one chat, by the first characters of its id
+sessioncost --project ~/code/api     # the newest chat of another project folder
+```
+
+`sessioncost list --limit 20` shows more. SessionCost finds the logs of all five agents.
+
+## Were the helper agents worth it?
+
+Helper agents (subagents) each send their own Step 0 and their own chat. In the report, open **Agent flow**: each
+agent's calls, tokens and cost, and what it handed back. A helper that read a lot and returned little may have been
+better done in the main chat.
+
+## Exact numbers in Cursor
+
+Cursor's local log keeps no token counts, so a Cursor report is estimated and shows the cost as a range. Export your
+usage as CSV from Cursor's usage page and leave it in Downloads: SessionCost finds it by itself. Or pass it:
+`sessioncost --cursor-usage usage.csv`.
+
+## A subscription, or your own rates
+
+- **On a monthly plan** (Claude Pro or Max, ChatGPT): `sessioncost --subscription` labels the money as what the chat
+  would cost at API prices. Good for comparing chats; it is not your bill.
+- **Your own rates:** see [How the money is counted](/sessioncost-help/reference/money/#your-own-prices).

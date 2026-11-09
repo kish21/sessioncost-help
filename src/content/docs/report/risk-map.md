@@ -1,6 +1,7 @@
 ---
 title: Trace & risk map, agent flow
 description: Every step the agent took, the risky ones lit up, and which agents did what.
+audience: everyone
 ---
 ## Trace & risk map
 
@@ -13,12 +14,12 @@ the chat, so you can follow what the agent actually did.
 
 ![The Trace & risk map: each turn as a star of its calls, the risky steps as red stars, and the kinds of risk found at the top](/sessioncost-help/img/risk-map.png)
 
-Risky steps are marked. When the [guard](/sessioncost-help/guard/what-it-does/) was on, its decisions (blocked, asked) show here
+Risky steps are marked. When the [guard](/sessioncost-help/use/stay-safe/) was on, its decisions (blocked, asked) show here
 too.
 
 :::tip
 The map shows what already happened. To stop a risky step **before** it runs, turn on
-[the guard](/sessioncost-help/guard/what-it-does/).
+[the guard](/sessioncost-help/use/stay-safe/).
 :::
 
 ## Agent flow

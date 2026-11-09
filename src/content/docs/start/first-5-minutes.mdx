@@ -1,0 +1,54 @@
+---
+title: Your first 5 minutes
+description: Install, see your first report, let your agent fix the waste, and turn the guard on. Four steps, any agent.
+audience: everyone
+---
+import FirstFive from '../../../components/FirstFive.astro';
+
+<FirstFive />
+
+## Minute 1: install
+
+Paste the one line from [Install](/sessioncost-help/start/install/) into a terminal and restart your agent. That is
+the only time you need a terminal.
+
+## Minute 2: `/sessioncost`
+
+In the chat you want to look at, type `/sessioncost`. The agent answers with **one line: the report's link**, and the
+report opens in your browser.
+
+![/sessioncost in a Claude Code chat: one command runs, and the agent answers with only the report's link](/sessioncost-help/img/chat.png)
+
+Why only one line? Anything written into the chat is sent again with every later message, so a summary there would
+cost you on every turn. All the numbers are in the report.
+
+**Read the top first.** How much this chat sent, how much it would have sent with the fixes, and the biggest fixes.
+
+![9.9M tokens sent, 5.4M with the fixes, and the three biggest fixes](/sessioncost-help/img/answer.png)
+
+**Then the path.** One tile per turn; the redder, the heavier. Tap the heaviest to see what happened inside it.
+
+![The path: twelve turns as tiles; turns 5, 6 and 9 are outlined in red as the three heaviest](/sessioncost-help/img/path.png)
+
+**Tokens are exact**, from your agent's own log. **Money is an estimate** at list prices. Want every part explained?
+[Take the report tour](/sessioncost-help/report/tour/).
+
+## Minute 3: "fix it"
+
+Say **fix it** in the same chat (or type `/sessioncost fix`). Your agent shows each change first: a rule for its
+rules file, a setting. Nothing changes until you say yes. Each change is backed up, and `/sessioncost fix --undo` puts
+it back.
+
+At the end of your next chat, type `/sessioncost` again: the report says what each fix saved.
+More: [Save tokens](/sessioncost-help/use/save-tokens/).
+
+## Minute 4: `/livesession`
+
+Type `/livesession` once. From now on every chat, in every agent, is guarded: ordinary work goes ahead, risky steps
+ask you first, dangerous ones are stopped. It stays on until you type `/livesession off`.
+More: [Stay safe](/sessioncost-help/use/stay-safe/).
+
+## That is all
+
+Two commands are all you need: `/sessioncost` and `/livesession`. For anything else,
+[When to use what](/sessioncost-help/use/when-to-use-what/) has a map from what you want to what you type.

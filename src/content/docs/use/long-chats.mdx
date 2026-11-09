@@ -1,0 +1,53 @@
+---
+title: Long chats and handover
+description: Why long chats get expensive, and how a handover lets a new chat carry on where the old one stopped.
+audience: everyone
+---
+import ChatGrowth from '../../../components/ChatGrowth.astro';
+import HandoverFlow from '../../../components/HandoverFlow.astro';
+
+## Why a long chat costs more with every message
+
+Every message makes the agent send the whole chat again: its instructions, its tools, and every earlier turn.
+
+<ChatGrowth />
+
+Two things make it worse:
+
+- **Breaks.** The provider keeps the chat in a cache for a few minutes, where re-reading it is cheap. After a longer
+  break the cache has expired, and the whole history is sent again at full price.
+- **Old work that no longer matters.** Files read an hour ago, a test run that failed and was fixed: all of it rides
+  along with every later message.
+
+A new chat starts small. The handover is how you start one without losing your place.
+
+## The handover
+
+<HandoverFlow />
+
+1. **SessionCost offers it.** When a chat passes **100k tokens**, the fix list (say "fix it", or
+   `/sessioncost fix`) offers a handover. With `/sessioncost fix auto on`, the offer comes by itself with your next
+   message.
+2. **Your agent writes it**: the goal, what is done, files changed, tests run, what is next,
+   and a short "other token waste in this chat" section. SessionCost calls no AI model; your own agent writes the
+   words. It shows you the handover in its reply.
+3. **Start a new chat** in the same project and say **"continue from handover"**. The agent reads the file and carries
+   on from "what is next".
+
+For a week after a handover, a new chat in that project is told one exists; the agent reads it only when you ask.
+There is one handover per project, replaced by the next one.
+
+## Choose when a chat counts as long
+
+| Type | What it does |
+|---|---|
+| `/sessioncost fix long-chat 150k` | The handover is offered from 150k tokens instead of 100k (10k or more). |
+| `sessioncost fix budget 5` | In a terminal: also offer it once a chat passes $5. `sessioncost fix budget off` clears the dollar budget. |
+| `sessioncost fix --handover` | In a terminal: where this project's handover file is. |
+
+## Without a handover
+
+- **Start a new chat for a new task.** The cheapest habit there is.
+- **Compact before a break.** In Claude Code, `/compact` replaces the history with a summary.
+- **Check the report.** In **Cost breakdown**, the tab for **breaks and compactions** shows each cache miss and why;
+  **How to save** shows what a fresh start would have saved.

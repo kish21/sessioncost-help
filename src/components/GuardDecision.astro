@@ -1,0 +1,47 @@
+---
+// The guard's questions for one step, in the order sessioncost/guard_decide.py asks them. The first "yes" decides.
+const qs = [
+	{ q: 'Would it change or switch off the guard?', ex: "its settings, its log, the agents' hook files", cls: 'stop', a: 'BLOCKED', note: 'no allow rule can excuse it' },
+	{ q: 'A tool of a poisoned MCP server?', ex: 'its tool descriptions showed injection signs', cls: 'stop', a: 'BLOCKED', note: 'for the whole chat' },
+	{ q: 'Risky, right after content with injection signs?', ex: 'a push, sending data out, a secret, a rule change', cls: 'stop', a: 'BLOCKED', note: 'until your next message' },
+	{ q: 'On the never list?', ex: 'a secret, curl … | sh, force push, wiping a disk', cls: 'stop', a: 'BLOCKED', note: 'the agent is told the safer way' },
+	{ q: 'Risky?', ex: 'a push, an install, the web, deleting, outside the project', cls: 'ask', a: 'ASKS YOU', note: 'said yes earlier this chat? goes ahead' },
+	{ q: 'Allow-list mode on, and the step changes something?', ex: 'and .sessioncost-allow does not list it', cls: 'ask', a: 'ASKS YOU', note: 'off unless you turn it on' },
+];
+const top = 112;
+const gap = 66;
+---
+<figure class="diagram" aria-label="The guard asks, in order: would the step change the guard (blocked); is it a tool of a poisoned MCP server (blocked); is it risky right after content with injection signs (blocked); is it on the never list (blocked, with the safer way); is it risky (asks you, unless you said yes earlier in this chat); is allow-list mode on and the step changes something not listed (asks you). Otherwise it goes ahead and is logged.">
+	<svg viewBox="0 0 740 576" role="img">
+		<text class="kicker" x="20" y="20">One step, in this order: the first yes decides</text>
+		<rect class="hot" x="20" y="32" width="460" height="36" rx="4" />
+		<text class="label" x="36" y="56">The agent is about to take a step</text>
+		<path class="line" d={`M60 70 V${top - 2}`} marker-end="url(#gdarrow)" />
+		<text class="small" x="74" y="94">your project's allow rules first take out the checks they cover</text>
+		{qs.map((s, i) => {
+			const y = top + i * gap;
+			return (
+				<g>
+					<rect class="box" x="20" y={y} width="460" height="46" rx="4" />
+					<text class="label" x="36" y={y + 20}>{s.q}</text>
+					<text class="small" x="36" y={y + 38}>{s.ex}</text>
+					<path class="line" d={`M482 ${y + 23} H536`} marker-end="url(#gdarrow)" />
+					<text class="small" x="496" y={y + 16}>yes</text>
+					<rect class={s.cls} x="540" y={y + 9} width="180" height="26" rx="3" />
+					<text class="on-mark" x="630" y={y + 27} text-anchor="middle">{s.a}</text>
+					<text class="small" x="630" y={y + 52} text-anchor="middle" style="font-size:0.7rem">{s.note}</text>
+					<path class="line" d={`M60 ${y + 48} V${y + gap - 2}`} marker-end="url(#gdarrow)" />
+					<text class="small" x="70" y={y + 61}>no</text>
+				</g>
+			);
+		})}
+		<rect class="go" x="20" y={top + qs.length * gap} width="460" height="34" rx="4" />
+		<text class="on-mark" x="250" y={top + qs.length * gap + 22} text-anchor="middle">GOES AHEAD, WRITTEN TO THE LOG</text>
+		<text class="foot" x="370" y="570" text-anchor="middle">rules on your computer · no AI model</text>
+		<defs>
+			<marker id="gdarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+				<path d="M0 0 L10 5 L0 10 z" fill="currentColor" />
+			</marker>
+		</defs>
+	</svg>
+</figure>

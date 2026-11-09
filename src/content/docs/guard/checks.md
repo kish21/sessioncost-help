@@ -1,10 +1,12 @@
 ---
 title: What the guard checks
 description: Every check the guard makes, its answer (blocked, asked, logged), when it runs, how each agent's hooks change it, and the OWASP tags.
+audience: technical
 ---
 The guard runs in the agent's own hooks, on your computer, with no AI model. It sees each tool step as the agent is
 about to run it, and each result as it comes back. This page is the complete list. For a gentler start, see
-[Why you need the guard](/sessioncost-help/guard/what-it-does/).
+[Stay safe](/sessioncost-help/use/stay-safe/); for the order of the questions,
+[The guard's decision flow](/sessioncost-help/how/guard-decisions/).
 
 ## How it decides
 
@@ -87,16 +89,16 @@ others.
 
 | | Claude Code | Codex | Cursor | Antigravity | Copilot CLI / VS Code |
 |---|---|---|---|---|---|
-| How it is added | every install (or the plugin) | every install (or the plugin's `/livesession`) | every install (or the plugin's `/livesession`) | every install (or the plugin's `/livesession`) | every install |
+| How it is added | every install (or the plugin) | every install (or the plugin's `/liveguard`) | every install (or the plugin's `/liveguard`) | every install (or the plugin's `/liveguard`) | every install |
 | Steps checked before they run | all tools | all tools, patches included | shell commands, MCP calls, file reads (not file edits: Cursor has no hook before an edit) | all tools | all tools |
 | Asked steps | you are asked | blocked; the agent asks you in the chat, and your yes allows that step once | you are asked (a file read cannot ask, so it is blocked) | asked with `force_ask`, so Antigravity's "Always allow" cannot skip it | you are asked; in Autopilot mode, blocked |
 | Results scanned for injection and keys | yes | yes | shell, MCP and file reads | no (its hook carries no result; a page still counts as untrusted) | yes |
 | A line at once when a result shows injection signs | yes | sent (not tried yet) | no (in the log and report) | no | no (in the log and report) |
 | Third try of a failing command | yes | no | no | no | no |
 | Untrusted content lasts until | your next message | your next message | the end of the chat | the end of the chat, unless the build sends your message | your next message |
-| Turn on (every chat, until off) | `/livesession`, or `sessioncost guard on` | `/livesession` (added by `sessioncost setup`), or `sessioncost guard on` | same as Codex | same as Codex | `sessioncost guard on` |
-| Turn off | `/livesession off`, or `sessioncost guard off` | `sessioncost guard off` in a terminal | same | same | same |
-| Says it is on when a chat starts | a line, and **🛡 Guard on** beside the model name (terminal, desktop app) or under the message box (VS Code) | the agent says it | the agent says it | the agent says it after `/livesession` | the agent says it |
+| Turn on (every chat, until off) | `/liveguard`, or `sessioncost guard on` | `/liveguard` (added by `sessioncost setup`), or `sessioncost guard on` | same as Codex | same as Codex | `sessioncost guard on` |
+| Turn off | `/liveguard off`, or `sessioncost guard off` | `sessioncost guard off` in a terminal | same | same | same |
+| Says it is on when a chat starts | a line, and **🛡 Guard on** beside the model name (terminal, desktop app) or under the message box (VS Code) | the agent says it | the agent says it | the agent says it after `/liveguard` | the agent says it |
 
 **When the guard itself fails**, the never list still blocks and other steps go ahead, so work does not stop;
 `sessioncost guard fail-closed on` blocks everything instead, including a step whose message the guard cannot read
@@ -115,5 +117,5 @@ starting, and it cannot be hidden from our side.
 - A determined program running with your rights can get around text rules. The guard catches an agent being steered;
   it is not a boundary against malware already on the machine.
 
-How we test all this, and what has been tried in which agent: [How we test the guard](/sessioncost-help/guard/how-we-test/).
-How often it asks in real work: [Why you need the guard](/sessioncost-help/guard/what-it-does/#how-often-will-it-bother-me).
+How we test all this, and what has been tried in which agent: [Security model and how we test](/sessioncost-help/how/security/#how-we-test).
+How often it asks in real work: [Stay safe](/sessioncost-help/use/stay-safe/#how-often-will-it-bother-me).

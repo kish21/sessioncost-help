@@ -1,6 +1,7 @@
 ---
 title: The report at a glance
 description: Every part of the SessionCost report, top to bottom, and what its colours mean.
+audience: everyone
 ---
 The report is one page that reads top to bottom. A sidebar stays on the left with the chat, its key numbers and the
 sections. On a phone the sections move into a menu.

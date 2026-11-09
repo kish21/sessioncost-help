@@ -1,0 +1,31 @@
+---
+// Your first five minutes: install, /sessioncost, "fix it", /livesession. What you type, where, and what you see.
+const steps = [
+	{ x: 20, min: 'Minute 1', type: 'paste one line', where: 'in a terminal', see: ['"/sessioncost and', '/livesession added"'] },
+	{ x: 200, min: 'Minute 2', type: '/sessioncost', where: 'in any chat', see: ['the report opens:', 'heavy turns, top fix'] },
+	{ x: 380, min: 'Minute 3', type: '"fix it"', where: 'in the same chat', see: ['the changes first,', 'then your yes'] },
+	{ x: 560, min: 'Minute 4', type: '/livesession', where: 'once, in any chat', see: ['every chat guarded,', 'until /livesession off'] },
+];
+---
+<figure class="diagram" aria-label="Minute 1: paste one line in a terminal. Minute 2: type /sessioncost in any chat and the report opens. Minute 3: say fix it, see the changes, say yes. Minute 4: type /livesession once and every chat is guarded.">
+	<svg viewBox="0 0 740 214" role="img">
+		{steps.map((s, i) => (
+			<g>
+				<text class="kicker" x={s.x + 80} y="22" text-anchor="middle">{s.min}</text>
+				<rect class={i === 1 ? 'hot' : 'box'} x={s.x} y="34" width="160" height="66" rx="4" />
+				<text class="code" x={s.x + 80} y="64" text-anchor="middle">{s.type}</text>
+				<text class="small" x={s.x + 80} y="86" text-anchor="middle">{s.where}</text>
+				{i < steps.length - 1 && <path class="line" d={`M${s.x + 162} 67 H${s.x + 196}`} marker-end="url(#ffarrow)" />}
+				<text class="foot" x={s.x + 80} y="130" text-anchor="middle">you see</text>
+				<text class="label" x={s.x + 80} y="154" text-anchor="middle">{s.see[0]}</text>
+				<text class="label" x={s.x + 80} y="176" text-anchor="middle">{s.see[1]}</text>
+			</g>
+		))}
+		<text class="foot" x="370" y="208" text-anchor="middle">every agent, nothing leaves your computer</text>
+		<defs>
+			<marker id="ffarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+				<path d="M0 0 L10 5 L0 10 z" fill="currentColor" />
+			</marker>
+		</defs>
+	</svg>
+</figure>

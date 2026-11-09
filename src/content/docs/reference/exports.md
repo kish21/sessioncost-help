@@ -1,6 +1,7 @@
 ---
 title: Exports and integrations
 description: Excel, PDF, JSON and SARIF exports - what each contains and where to use it.
+audience: technical
 ---
 Every export is made on your computer from the agent's local log. Nothing is uploaded. Keys inside commands are shown
 as **[secret hidden]** in every format.

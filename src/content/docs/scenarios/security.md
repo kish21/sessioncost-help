@@ -1,6 +1,7 @@
 ---
-title: "Scenarios: security"
+title: For security teams
 description: Step-by-step answers for security engineers and developers who let coding agents run commands - audit, prevention, evidence.
+audience: technical
 ---
 Each scenario is a task, the steps, and what you should see. Two tools do the work:
 
@@ -41,13 +42,13 @@ scanning and most SARIF viewers read it. Details: [Exports and integrations](/se
 
 ## 3. Guard a chat while the agent works
 
-Type `/livesession` in any agent's chat (or `sessioncost guard on` in a terminal). It is one switch: every agent your
+Type `/liveguard` in any agent's chat (or `sessioncost guard on` in a terminal). It is one switch: every agent your
 install set up (Claude Code, Codex, Cursor, Antigravity, GitHub Copilot) is guarded, every chat, until
-`/livesession off`.
+`/liveguard off`.
 
 Check it: `sessioncost guard` prints whether it is on and how many chats are guarded. The setup keeps your other hooks
 and saves a copy of the old hooks file next to it. Try it safely first in a test folder:
-[Try the guard](/sessioncost-help/guard/try-it/).
+[Try it in five minutes](/sessioncost-help/use/stay-safe/#try-it-in-five-minutes).
 
 ## 4. Keep secrets out of the model and out of git
 
@@ -79,7 +80,7 @@ Prompt injection: text in a page, file or tool result written to steer the agent
 3. After any other untrusted content (a web page, an MCP or network result, a file from outside the project), pushes,
    sending data out, secrets and rule changes **ask**, even if you allowed them earlier. A file that addresses its
    reader as an agent ("whoever reads this, including an assistant…") counts as untrusted too.
-4. Your next message is the checkpoint: content read before it was seen by you. With `/livesession strict`, untrusted
+4. Your next message is the checkpoint: content read before it was seen by you. With `/liveguard strict`, untrusted
    content counts for the rest of the chat, and files from `node_modules`, `vendor` and `site-packages` count as
    untrusted.
 
@@ -148,7 +149,7 @@ git_push git push origin feature/*
 `step` lines are what allow-list mode lets through; the other marks (`git_push`, `installs`, `outside_project`…) mark a
 risky step as expected, so it is logged instead of asked. Reads and searches always go ahead. A never-list mark can
 be listed too, so keep those lines narrow and deliberate; changing the guard can never be listed. The agent cannot
-change this file. Details: [Guard settings](/sessioncost-help/guard/settings/).
+change this file. Details: [Files and settings](/sessioncost-help/how/files-and-settings/#allow-steps-in-a-project).
 
 ## 10. Prove what happened
 

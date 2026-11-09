@@ -1,12 +1,24 @@
 ---
 title: How the money is counted
-description: How SessionCost prices each kind of token.
+description: How exact the tokens are for each agent, and how SessionCost prices each kind of token.
+audience: technical
 ---
 **Tokens: exact**, from the agent's own log. **Money: an estimate** at list prices; your bill may differ (plan,
 contract rates, batch, cloud provider). Cursor and Copilot Chat keep no token counts, so for them tokens are estimated
 from the size of the text, and the money is shown as a range.
 
-Each kind of token is priced on its own:
+## How exact, by agent
+
+| Agent | Tokens |
+|---|---|
+| **Claude Code** | Exact, from its log. |
+| **Codex** | Exact, from its log. |
+| **GitHub Copilot CLI** | Exact, from its log. Money is API-equivalent: Copilot bills premium requests, not tokens. |
+| **GitHub Copilot Chat (VS Code)** | Estimated from text size: the log has few token counts and no cache, so the cost is shown as a range. |
+| **Antigravity** | Exact, from its log. |
+| **Cursor** | Estimated from text size. Exact with your usage export: `sessioncost --cursor-usage file.csv`. |
+
+## Each kind of token
 
 | Kind | What it is | Price |
 |---|---|---|
@@ -19,8 +31,19 @@ Prices are the providers' public API prices. The report shows the date of the pr
 
 ## Your own prices
 
+Write only what differs, in USD per million tokens; the rest stays built in. Price classes are `input`, `output`,
+`cache_read`, `cache_write_5m` and `cache_write_1h`.
+
+```json
+{
+  "models": {
+    "claude-sonnet-5-5": { "input": 1.6, "output": 8.0 }
+  }
+}
+```
+
 - For one report: `sessioncost --prices my-prices.json`.
-- Every time: put them in `~/.sessioncost/prices.json`.
+- Every time: save it as `~/.sessioncost/prices.json`.
 
 ## On a subscription
 

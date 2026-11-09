@@ -1,13 +1,14 @@
 ---
 title: Install SessionCost
-description: One line puts SessionCost and its live guard into every AI coding agent on your computer. Other ways are below.
+description: One line puts SessionCost and its guard into every AI coding agent on your computer. Or install for one agent, with a tab for each.
+audience: everyone
 ---
-import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 One install gives every agent on your computer both commands:
 
-- **`/sessioncost`**: the report of where your chat's tokens went.
-- **`/livesession`**: the live guard. Type it in any agent and every agent is guarded, until `/livesession off`.
+- **`/sessioncost`**: the report of where your chat's tokens went, and the fix.
+- **`/liveguard`**: the guard. Type it in any agent and every agent is guarded, until `/liveguard off`.
 
 ## Install in one line
 
@@ -26,40 +27,154 @@ Nothing else needed: no Python, no Node, no Git. It fetches what it needs by its
    curl -fsSL https://raw.githubusercontent.com/kish21/sessioncost/main/install.sh | sh
    ```
 3. Wait about a minute. For each agent it finds (Claude Code, Codex, Cursor, Antigravity, GitHub Copilot in VS Code
-   or its CLI) it prints
-   `/sessioncost and /livesession added` and `live guard ready`.
+   or its CLI) it prints `/sessioncost and /liveguard added` and `live guard ready`.
 4. Restart your agents. In a chat, type **`/sessioncost`**: the report opens in your browser.
 
 It says **no agent found**? Install your agent first (for example VS Code with GitHub Copilot), then paste the line
 again. The same goes for an agent you install later.
 
-## Other ways to install
+Next: [Your first 5 minutes](/sessioncost-help/start/first-5-minutes/).
 
-Pick one instead, if it suits you better. Each gives the same two commands.
+## Or install for one agent
 
-<CardGrid>
-	<LinkCard title="Node (npm)" description="npx sessioncost setup. Needs only Node.js." href="/sessioncost-help/start/install/npm/" />
-	<LinkCard title="Python (PyPI)" description="pip, pipx or uv tool. Needs Python 3.10 or newer." href="/sessioncost-help/start/install/python/" />
-</CardGrid>
+Pick your agent. Use one way per agent: a plugin and the one-line install in the same agent would give it two
+`/sessioncost`.
 
-Each agent, with its own plugin where it has one:
+<Tabs syncKey="agent">
+<TabItem label="Claude Code">
 
-<CardGrid>
-	<LinkCard title="Claude Code" href="/sessioncost-help/start/install/claude-code/" />
-	<LinkCard title="Codex" href="/sessioncost-help/start/install/codex/" />
-	<LinkCard title="Cursor" href="/sessioncost-help/start/install/cursor/" />
-	<LinkCard title="Antigravity" href="/sessioncost-help/start/install/antigravity/" />
-	<LinkCard title="GitHub Copilot" href="/sessioncost-help/start/install/copilot/" />
-</CardGrid>
+The plugin brings `/sessioncost`, `/liveguard` and the guard's hooks by itself, and needs Git. No Python? The first
+`/sessioncost` or `/liveguard` fetches one.
 
-Use one way per agent: a plugin and a terminal install in the same agent would give it two `/sessioncost`.
+**From Claude Code's plugin menu**
+
+1. Open **Manage Plugins** (in VS Code: the Claude Code panel's plugin menu; in the CLI: type `/plugin`).
+2. **Marketplaces** tab: paste `kish21/sessioncost` and click **Add**.
+3. **Plugins** tab: type `sessioncost` in **Search plugins…** (the list is sorted by installs, so it sits far down
+   without a search), then click **Install**. Where it asks where to install, choose **user** (every folder), not
+   **project** or **local**: those give SessionCost to one folder only.
+4. Reload VS Code (Ctrl+Shift+P → **Developer: Reload Window**) or restart the CLI, open a **new** chat and type
+   `/`: **/sessioncost** and **/liveguard** are in the list (they may show as `/sessioncost:sessioncost` and
+   `/sessioncost:liveguard`).
+
+**Or one command in a terminal**
+
+```sh
+claude plugin install sessioncost --marketplace kish21/sessioncost --scope user
+```
+
+It ends with `✔ Successfully installed plugin: sessioncost@sessioncost (scope: user)`. Reload VS Code or restart the
+CLI, then open a new chat. The CLI and VS Code share one install.
+
+| It does not show up? | What to do |
+|---|---|
+| `claude` is not recognized | Only the VS Code extension is installed. Use the one-line install above. |
+| `git` is not found | Install [Git](https://git-scm.com/downloads) and open a new terminal, or use the one-line install. |
+| Installed, but no `/sessioncost` | The chat was open before the install. Reload and open a **new** chat. |
+| Works in one folder only | It was installed for one folder. `claude plugin install sessioncost@sessioncost --scope user`, reload, new chat. |
+| Claude Code older than 2.1.275 | `claude plugin marketplace add kish21/sessioncost`, then `claude plugin install sessioncost@sessioncost --scope user`. |
+
+**New versions:** in the CLI, once: `/plugin` → **Marketplaces** → sessioncost → **Enable auto-update**. In VS Code:
+`claude plugin update sessioncost@sessioncost` in a terminal.
+
+</TabItem>
+<TabItem label="Codex">
+
+The plugin brings `/sessioncost` and `/liveguard`, and needs Git. No Python? The first `/sessioncost` or
+`/liveguard` fetches one.
+
+1. In a terminal: `codex plugin marketplace add kish21/sessioncost`.
+2. **Codex app:** open **Customize → Plugins**, choose **sessioncost**, click **Install plugin**.
+   **Codex CLI:** type `/plugins`, pick **sessioncost**, install it.
+3. Start a new chat and type **`/sessioncost`**.
+
+**The guard:** type `/liveguard`. The first time, it puts the guard into Codex and asks you to restart Codex once
+and type `/hooks` to trust SessionCost's hooks (Codex asks this for every new hook).
+
+**New versions:** Codex looks for one when it starts. To be sure: `codex plugin marketplace upgrade`.
+
+</TabItem>
+<TabItem label="Cursor">
+
+The plugin brings `/sessioncost` and `/liveguard`, and needs Git. No Python? The first `/sessioncost` or
+`/liveguard` fetches one.
+
+1. Open **Customize → Plugins**, choose **From GitHub Repository** (or **Add Marketplace**).
+2. Paste `https://github.com/kish21/sessioncost` and install **sessioncost**.
+3. Restart Cursor and type **`/sessioncost`** in a chat.
+
+If no plugin shows up, use the one-line install instead.
+
+**The guard:** type `/liveguard`. The first time, it puts the guard into Cursor and asks you to restart Cursor once.
+Cursor's hooks cannot read the chat, so to switch the guard off type `/liveguard off` in another agent, or
+`sessioncost guard off` in a terminal.
+
+**New versions:** **Customize** → the marketplace with SessionCost → **Refresh**.
+
+</TabItem>
+<TabItem label="Antigravity">
+
+The one-line install covers Antigravity, the app and the command line.
+
+**Command-line plugin** (the other way): `agy plugin install https://github.com/kish21/sessioncost`, then start a new
+chat. It brings `/sessioncost` and `/liveguard`, and needs Git. No Python? The first `/sessioncost` or
+`/liveguard` fetches one.
+
+**The guard:** type `/liveguard`. The first time, it puts the guard into Antigravity and asks you to restart it
+once. You can see the guard's hooks under **Customizations → Hooks**.
+
+**New versions:** `/sessioncost update` in a chat, or install again the same way.
+
+</TabItem>
+<TabItem label="Copilot">
+
+Use the one-line install above, or Node or Python (next tab). It finds Copilot Chat in VS Code and Copilot CLI, even
+when Copilot is your only agent, and prints `Copilot  /sessioncost and /liveguard added` and `live guard ready`.
+
+1. Restart VS Code (or Copilot CLI).
+2. In Copilot Chat, type `/`: **/sessioncost** and **/liveguard** are in the list.
+3. `/sessioncost` opens the report of your Copilot chat. `/liveguard` turns the guard on, for Copilot and every other
+   agent on this computer.
+
+Both read the same folder, `~/.copilot`: the commands are in `~/.copilot/skills`, the guard in
+`~/.copilot/hooks/sessioncost-guard.json`.
+
+</TabItem>
+<TabItem label="Node or Python">
+
+**Node (npm).** Needs only [Node.js](https://nodejs.org) (the LTS version). No Python needed.
+
+```sh
+npx sessioncost setup
+```
+
+Answer `y` if npx asks to install the package. The first run installs SessionCost once into its own folder,
+`~/.sessioncost/npm/venv`, using [uv](https://docs.astral.sh/uv/) when you have it, otherwise your Python 3.10 or
+newer; with neither, it installs uv first. Your own Python is left as it is. From then on, type `npx sessioncost …`
+for every terminal command.
+
+**Python (PyPI).** Needs Python 3.10 or newer.
+
+```sh
+python -m pip install -U sessioncost     # -U also updates an older copy
+python -m sessioncost setup              # adds /sessioncost and /liveguard to your agents
+```
+
+On Mac or Linux, use `python3` if `python` is not found. Prefer isolated tools? `pipx install sessioncost` or
+`uv tool install sessioncost`, then `sessioncost setup`.
+
+Either way: for each agent it finds, setup prints `/sessioncost and /liveguard added` and `live guard ready`.
+Restart your agents. Installed an agent later? Run `setup` again.
+
+</TabItem>
+</Tabs>
 
 ## Where you type
 
 | | **Your agent's chat** | **A terminal** |
 |---|---|---|
 | What it is | Where you talk to Claude Code, Codex, Cursor, Antigravity or Copilot | Your computer's command line: what you type runs exactly as typed |
-| What goes there | Lines that start with `/`, such as `/sessioncost` and `/livesession` | Lines that start with `irm`, `curl`, `npx`, `python`, `sessioncost` or `claude plugin` |
+| What goes there | Lines that start with `/`, such as `/sessioncost` and `/liveguard` | Lines that start with `irm`, `curl`, `npx`, `python`, `sessioncost` or `claude plugin` |
 
 If a terminal shows an agent's chat (for example Claude Code's `>` box), type `/exit` or open a new terminal first.
 
@@ -73,12 +188,10 @@ The help pages write terminal commands as `sessioncost …`. Type them the way t
 | Python (`pip`) | `python -m sessioncost` | `python -m sessioncost <command>` |
 | Node (npm) | `npx sessioncost` | `npx sessioncost <command>` |
 
-In a chat the commands are the same for everyone: `/sessioncost`, `/livesession`, `/sessioncost update`.
+In a chat the commands are the same for everyone: `/sessioncost`, `/liveguard`, `/sessioncost update`.
 
 ## Stay up to date
 
 Type `/sessioncost update` in a chat, or `update` in a terminal (`sessioncost update`, `python -m sessioncost update`
 or `npx sessioncost update`). It updates every copy of SessionCost on the computer, each the right way. Then restart
-your agent. Plugin users: see your agent's page above.
-
-Next: [Your first report](/sessioncost-help/start/first-report/).
+your agent. Plugin users: see your agent's tab above.

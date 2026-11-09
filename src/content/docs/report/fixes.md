@@ -1,6 +1,7 @@
 ---
 title: Fixes and safety rules
 description: Every fix with its saving, and the rule to paste to your agent.
+audience: everyone
 ---
 ## How to save
 
@@ -52,4 +53,4 @@ Each comes with a link to that agent's own docs. Every agent also gets the same 
 file (`CLAUDE.md`, `AGENTS.md`, Cursor rules). For Codex, Cursor and Antigravity, the section also shows how to turn the
 SessionCost guard on there: `sessioncost guard setup codex` (or `cursor`, `antigravity`), then `sessioncost guard on`.
 
-For a check **while** the agent works, rather than after, see [the guard](/sessioncost-help/guard/what-it-does/).
+For a check **while** the agent works, rather than after, see [the guard](/sessioncost-help/use/stay-safe/).

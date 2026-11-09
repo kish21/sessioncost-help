@@ -1,6 +1,7 @@
 ---
-title: Commands
+title: Commands and options
 description: Every SessionCost command and option, what it does and what you should see.
+audience: technical
 ---
 On Windows, if `sessioncost` is not found, type `python -m sessioncost` instead (for example
 `python -m sessioncost list`).
@@ -15,7 +16,7 @@ Claude Code with the plugin they may show as `/sessioncost:sessioncost`.
 | Type | What it does |
 |---|---|
 | `/sessioncost` | Builds the report of this chat, gives you its link and names the top fix. Say "fix it" and your agent fixes the waste, after your yes. |
-| `/livesession` | Turns the [guard](/sessioncost-help/guard/what-it-does/) on for every chat in every agent, this one included, until `/livesession off`. Only your own message turns it off: the agent cannot. |
+| `/liveguard` | Turns the [guard](/sessioncost-help/use/stay-safe/) on for every chat in every agent, this one included, until `/liveguard off`. Only your own message turns it off: the agent cannot. |
 
 You can also ask in your own words ("where did the tokens go?", "fix the waste"): the agent knows what to run.
 
@@ -26,8 +27,8 @@ You can also ask in your own words ("where did the tokens go?", "fix the waste")
 | `/sessioncost fix` | This project's token waste as a to-do list, with the change for each. Your agent applies it on your yes, after a backup. |
 | `/sessioncost fix --undo` | Puts back the newest fix, unless you changed the file since. |
 | `/sessioncost fix auto on` | After each answer, new waste is listed at your next message and your agent asks before fixing. `off` stops it. |
-| `/livesession strict` | The guard, stricter: outside content stays untrusted for the whole chat. |
-| `/livesession allow <mark> <pattern>` | Stops one expected step asking in this project. You do not need to remember it: when the guard asks about a step, its message gives you the exact line. Secrets and never-list steps cannot be allowed. |
+| `/liveguard strict` | The guard, stricter: outside content stays untrusted for the whole chat. |
+| `/liveguard allow <mark> <pattern>` | Stops one expected step asking in this project. You do not need to remember it: when the guard asks about a step, its message gives you the exact line. Secrets and never-list steps cannot be allowed. |
 | `/sessioncost update` | Updates every copy of SessionCost on this computer. Restart your agent afterwards. |
 | `/sessioncost version` | Shows which SessionCost version this agent uses, and how many other copies are on this computer. |
 | `/sessioncost clean` | Deletes the reports of older chats and keeps the latest. |
@@ -77,4 +78,6 @@ Add any of these after `sessioncost` or after a chat id. They combine, for examp
 
 ## The guard
 
-The guard's terminal commands are on [Guard settings](/sessioncost-help/guard/settings/).
+The guard's terminal commands are on [Files and settings](/sessioncost-help/how/files-and-settings/#the-guards-switches).
+The fix commands for long chats (`fix long-chat`, `fix budget`, `fix --handover`) are on
+[Long chats and handover](/sessioncost-help/use/long-chats/#choose-when-a-chat-counts-as-long).

@@ -1,0 +1,60 @@
+---
+title: How it works
+description: The two parts of SessionCost, the report and the guard, what each reads, where it runs, and what it never does.
+audience: technical
+---
+import HowItWorks from '../../../components/HowItWorks.astro';
+
+SessionCost has two parts. The **report** reads your agent's log after the fact. The **guard** sits in your agent's
+hooks and sees each step before it runs. Both are a local Python program: no AI model, no server, nothing sent.
+
+<HowItWorks />
+
+## The report
+
+1. **Setup** puts two skills into each agent it finds (`/sessioncost` and `/livesession`), in that agent's own
+   skills folder, plus the hooks below. A plugin install does the same through the agent's plugin system.
+2. **`/sessioncost`** makes the agent run SessionCost on the current project. SessionCost finds the newest chat of
+   that project in the agent's own log files and reads every turn, model call and tool step.
+3. **Tokens** come from the log where the agent records them (Claude Code, Codex, Copilot CLI, Antigravity). Where it
+   does not (Cursor, Copilot Chat in VS Code), they are estimated from the size of the text and the money is shown as
+   a range. [How the money is counted](/sessioncost-help/reference/money/).
+4. **Detectors** look for known kinds of waste (Step 0 tools never used, a long chat carried past a break, a big
+   output kept in the chat, and others) and measure each one in tokens from this chat.
+5. **The report** is one HTML file in `~/.sessioncost/reports/`, opened in your browser. The agent replies with only
+   its link, so the chat itself does not grow.
+
+**It keeps itself current.** A hook at the end of each answer rebuilds that chat's report, at most once a minute.
+This is on by default and does not turn the guard on. `sessioncost auto off` stops it.
+
+## The fix loop
+
+`/sessioncost fix` turns the detectors' findings into changes: a rule in the agent's rules file, or a setting. Your
+agent shows the list and applies it only after your yes, with a backup of each file first. Later chats are checked for
+the same waste, so the report can say what each fix saved, or that the waste came back.
+[Save tokens](/sessioncost-help/use/save-tokens/).
+
+## The guard
+
+The guard is the same program, started by the agent's hooks:
+
+| When | What the guard does |
+|---|---|
+| A chat starts | Reads what the chat loads into the model: rules files, the agent's memory, skill descriptions, MCP tool descriptions. Signs of an injection stop risky steps for the whole chat. |
+| Before each step | Decides: goes ahead, asks you, or blocked. [The decision flow](/sessioncost-help/how/guard-decisions/). |
+| After each result | Looks for signs of a prompt injection and for key-shaped values; either raises the bar for the next steps. |
+| Your message | `/livesession off` and `/livesession allow …` are read from your own message, never from the agent. |
+
+Every decision is written to a log, one file per chat, each line chained to the one before by a SHA-256 hash. The
+report's **Trace & risk map** and `sessioncost guard report` read it back.
+
+How much each agent's hooks show the guard differs: Cursor has no hook before a file edit, Codex cannot ask so an
+"ask" becomes a block plus a question in the chat. [By agent](/sessioncost-help/guard/checks/#by-agent).
+
+## What it never does
+
+- It calls **no AI model** and sends **nothing** anywhere. The report is a file; the guard's log is a file.
+- It does not change your project unless you said yes to a fix.
+- The agent cannot switch the guard off, change its settings or its allow rules: those steps are blocked.
+
+Where every file lives: [Files and settings](/sessioncost-help/how/files-and-settings/).

@@ -1,0 +1,62 @@
+---
+// The two parts of SessionCost: the report (reads the agent's log afterwards) and the guard (sits in the agent's
+// hooks, before each step). Both run on the user's computer with no AI model.
+const report = [
+	{ x: 30, title: 'Your agent', sub: 'chats as usual' },
+	{ x: 210, title: 'Its own log', sub: 'on your computer' },
+	{ x: 390, title: 'SessionCost reads it', sub: 'counts, no AI model' },
+	{ x: 570, title: 'The report', sub: 'one file, your browser', hot: true },
+];
+const guard = [
+	{ x: 30, title: 'A step is next', sub: 'command, edit, fetch' },
+	{ x: 210, title: "The agent's hook", sub: 'runs before the step' },
+	{ x: 390, title: 'The guard decides', sub: 'rules, no AI model', hot: true },
+];
+const outcomes = [
+	{ y: 194, cls: 'go', t: 'GOES AHEAD' },
+	{ y: 222, cls: 'ask', t: 'ASKS YOU' },
+	{ y: 250, cls: 'stop', t: 'BLOCKED' },
+];
+---
+<figure class="diagram" aria-label="The report: your agent writes its own log on your computer; SessionCost reads it with no AI model and writes the report, one file in your browser. The guard: before each step the agent's hook hands the step to the guard, which decides goes ahead, asks you, or blocked, and writes the decision to a chained log that the report shows.">
+	<svg viewBox="0 0 740 340" role="img">
+		<text class="kicker" x="20" y="20">The report: after the chat</text>
+		<rect class="lane" x="10" y="30" width="720" height="104" rx="6" />
+		{report.map((s, i) => (
+			<g>
+				<rect class={s.hot ? 'hot' : 'box'} x={s.x} y="52" width="150" height="60" rx="4" />
+				<text class="label" x={s.x + 75} y="78" text-anchor="middle" style="font-size:0.88rem">{s.title}</text>
+				<text class="small" x={s.x + 75} y="98" text-anchor="middle">{s.sub}</text>
+				{i < report.length - 1 && <path class="line" d={`M${s.x + 152} 82 H${s.x + 176}`} marker-end="url(#hwarrow)" />}
+			</g>
+		))}
+		<text class="kicker" x="20" y="166">The guard: before each step (after /livesession)</text>
+		<rect class="lane" x="10" y="176" width="720" height="136" rx="6" />
+		{guard.map((s, i) => (
+			<g>
+				<rect class={s.hot ? 'hot' : 'box'} x={s.x} y="196" width="150" height="60" rx="4" />
+				<text class="label" x={s.x + 75} y="222" text-anchor="middle" style="font-size:0.85rem">{s.title}</text>
+				<text class="small" x={s.x + 75} y="242" text-anchor="middle">{s.sub}</text>
+				{i < guard.length - 1 && <path class="line" d={`M${s.x + 152} 226 H${s.x + 176}`} marker-end="url(#hwarrow)" />}
+			</g>
+		))}
+		<path class="line" d="M542 226 H566" marker-end="url(#hwarrow)" />
+		{outcomes.map((o) => (
+			<g>
+				<rect class={o.cls} x="570" y={o.y} width="150" height="22" rx="3" />
+				<text class="on-mark" x="645" y={o.y + 15} text-anchor="middle">{o.t}</text>
+			</g>
+		))}
+		<path class="line" d="M465 258 V268" marker-end="url(#hwarrow)" />
+		<rect class="box" x="390" y="270" width="150" height="26" rx="3" />
+		<text class="small" x="465" y="288" text-anchor="middle">chained log → report</text>
+		<path class="line" stroke-dasharray="3 3" d="M645 274 V304 H105 V262" marker-end="url(#hwarrow)" />
+		<text class="small" x="120" y="298">the answer goes back to the agent</text>
+		<text class="foot" x="370" y="334" text-anchor="middle">on your computer · no AI model · nothing sent anywhere</text>
+		<defs>
+			<marker id="hwarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+				<path d="M0 0 L10 5 L0 10 z" fill="currentColor" />
+			</marker>
+		</defs>
+	</svg>
+</figure>
