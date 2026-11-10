@@ -12,8 +12,8 @@ them can carry instructions aimed at the agent (a **prompt injection**). The gua
 
 ## Turn it on
 
-Type `/livesession` in any chat. Every chat in every agent is now guarded, this one included, until you type
-`/livesession off`. Claude Code shows **🛡 Guard on** while it is on; other agents say "SessionCost guard is on" when a
+Type `/liveguard` in any chat. Every chat in every agent is now guarded, this one included, until you type
+`/liveguard off`. Claude Code shows **🛡 Guard on** while it is on; other agents say "SessionCost guard is on" when a
 chat starts.
 
 ## The three answers, and what you do
@@ -32,11 +32,11 @@ Some steps are risky in general but normal in your project, such as pushing to y
 about one, its question ends with the exact line that stops it asking, for example:
 
 ```
-/livesession allow git_push git push origin main
+/liveguard allow git_push git push origin main
 ```
 
-Send that line as your own message. That step no longer asks in this project. `/livesession allow` alone lists the
-project's rules; `/livesession allow --clear` removes them. The agent cannot add rules, and secrets can never be
+Send that line as your own message. That step no longer asks in this project. `/liveguard allow` alone lists the
+project's rules; `/liveguard allow --clear` removes them. The agent cannot add rules, and secrets can never be
 allowed. More: [Files and settings](/sessioncost-help/how/files-and-settings/#allow-steps-in-a-project).
 
 ## When a step is blocked
@@ -69,7 +69,7 @@ The agent almost never needs the **values** of your keys, only their **names**.
 ## Try it in five minutes
 
 Use a **test folder**, not a real project. In Claude Code, start it with `claude --permission-mode default` so its own
-auto mode does not answer before the guard does. Type `/livesession`, then send these one at a time:
+auto mode does not answer before the guard does. Type `/liveguard`, then send these one at a time:
 
 | Ask the agent | The guard |
 |---|---|
@@ -83,15 +83,15 @@ Then type `/sessioncost` and open **Trace & risk map**: the asked and blocked st
 
 ## Stricter
 
-`/livesession strict` keeps outside content (a web page, a downloaded file) untrusted for the rest of the chat, not
+`/liveguard strict` keeps outside content (a web page, a downloaded file) untrusted for the rest of the chat, not
 only until your next message, and treats files from `node_modules`, `vendor` and `site-packages` as outside content
-too. To leave strict mode, type `/livesession off`, then `/livesession`.
+too. To leave strict mode, type `/liveguard off`, then `/liveguard`.
 
 ## Turn it off
 
-Type `/livesession off`. The guard reads your own message and switches off for every chat. In a terminal:
+Type `/liveguard off`. The guard reads your own message and switches off for every chat. In a terminal:
 `sessioncost guard off`. **The agent itself cannot turn the guard off**, on purpose: if a web page or a file tells it
-to, that step is blocked. Cursor's hooks cannot read the chat: there, type `/livesession off` in another agent or use
+to, that step is blocked. Cursor's hooks cannot read the chat: there, type `/liveguard off` in another agent or use
 the terminal.
 
 ## How often will it bother me?

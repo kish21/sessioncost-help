@@ -12,7 +12,7 @@ hooks and sees each step before it runs. Both are a local Python program: no AI 
 
 ## The report
 
-1. **Setup** puts two skills into each agent it finds (`/sessioncost` and `/livesession`), in that agent's own
+1. **Setup** puts two skills into each agent it finds (`/sessioncost` and `/liveguard`), in that agent's own
    skills folder, plus the hooks below. A plugin install does the same through the agent's plugin system.
 2. **`/sessioncost`** makes the agent run SessionCost on the current project. SessionCost finds the newest chat of
    that project in the agent's own log files and reads every turn, model call and tool step.
@@ -43,7 +43,7 @@ The guard is the same program, started by the agent's hooks:
 | A chat starts | Reads what the chat loads into the model: rules files, the agent's memory, skill descriptions, MCP tool descriptions. Signs of an injection stop risky steps for the whole chat. |
 | Before each step | Decides: goes ahead, asks you, or blocked. [The decision flow](/sessioncost-help/how/guard-decisions/). |
 | After each result | Looks for signs of a prompt injection and for key-shaped values; either raises the bar for the next steps. |
-| Your message | `/livesession off` and `/livesession allow …` are read from your own message, never from the agent. |
+| Your message | `/liveguard off` and `/liveguard allow …` are read from your own message, never from the agent. |
 
 Every decision is written to a log, one file per chat, each line chained to the one before by a SHA-256 hash. The
 report's **Trace & risk map** and `sessioncost guard report` read it back.

@@ -30,14 +30,14 @@ decides. It runs on your computer, with rules, not an AI model.
 - **Outside content raises the bar.** After the agent reads a web page, an MCP or network result, or a file from
   outside the project, pushes, sending data out, secrets and rule changes ask again even if you allowed them. If that
   content showed **signs of an injection**, those steps are blocked instead. Your next message resets this; with
-  `/livesession strict` it lasts for the whole chat.
+  `/liveguard strict` it lasts for the whole chat.
 - **Files the agent made in this chat** can be deleted without asking.
 
 ## The answer the agent gets
 
 - **Blocked:** the step does not run. The agent is told why, the safer way, and not to try another way to do the same
   thing.
-- **Asks you:** the agent's own permission prompt opens. The message ends with the exact `/livesession allow …` line
+- **Asks you:** the agent's own permission prompt opens. The message ends with the exact `/liveguard allow …` line
   for a step that is normal in your project.
 - **Goes ahead:** the step runs and is written to the log.
 

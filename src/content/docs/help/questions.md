@@ -42,7 +42,7 @@ project can be allowed with the one line the guard gives you.
 
 ## Can the agent turn the guard off?
 
-No. Only your own message (`/livesession off`) or a terminal command turns it off. If a page or file tells the agent
+No. Only your own message (`/liveguard off`) or a terminal command turns it off. If a page or file tells the agent
 to switch it off, that step is blocked.
 
 ## What is Step 0?
