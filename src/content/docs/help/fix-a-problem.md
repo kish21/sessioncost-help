@@ -38,8 +38,8 @@ Some Cursor versions import a repository without listing its plugins. Use
 
 ## The guard asked or blocked something it should not have
 
-Say no (or let it stay blocked) and carry on. If a step your project needs keeps being asked, send the
-`/liveguard allow …` line at the end of the guard's question as your own message: that step stops asking in this
+Say no (or let it stay blocked) and carry on. If a step your project needs keeps being asked, say "allow it" right
+after the guard's question (or send the `/liveguard allow …` line it ends with): that step stops asking in this
 project. See [Stay safe](/sessioncost-help/use/stay-safe/#it-asks-about-a-normal-step).
 
 ## `/sessioncost` shows up twice in the list

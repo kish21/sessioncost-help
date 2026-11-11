@@ -20,7 +20,9 @@ Commands on this page run in a terminal. Type them the way that matches
 | `fixes/` | What was fixed in each project and when, and what later chats showed (to tell you what a fix saved). |
 | `backups/<project>/` | Each file as it was before a fix, for `sessioncost fix --undo`. |
 | `handover/<project>.md` | The newest handover your agent wrote for that project. |
-| `prices.json` | Your own prices, if you made one. |
+| `prices.json` | Your own prices, from `sessioncost prices set` or `import`. |
+| `prices-team.json` | Where your team's price file is, from `sessioncost prices team`. |
+| `prices-update.json` | The newer price list, from `sessioncost prices update`. Delete it to go back to the built-in list. |
 | `npm/venv/` | The program itself, when installed with npm. |
 
 **In each agent's folder** (added by setup or the plugin)
@@ -44,8 +46,8 @@ hooks live in the agent's plugin folder instead.
 | Command | What it does |
 |---|---|
 | `sessioncost guard` | Is it on? |
-| `sessioncost guard on` | Guards every chat, open ones from their next step, until you turn it off. The same switch as `/liveguard`. Add `strict` for the stricter mode. |
-| `sessioncost guard off` | Off for every chat, as `/liveguard off` does. The logs are kept. |
+| `sessioncost guard on` | Guards every chat, open ones from their next step, until you turn it off. The same switch as "turn the guard on" (`/liveguard`) in a chat. Add `strict` for the stricter mode. |
+| `sessioncost guard off` | Off for every chat, as "turn the guard off" (`/liveguard off`) does in a chat. The logs are kept. |
 | `sessioncost guard allow-list on` | Every step that changes something asks you, unless `.sessioncost-allow` lists it. Reads and searches still go ahead. `off` goes back to asking only for risky steps. |
 | `sessioncost guard fail-closed on` | If the guard itself breaks, or gets a step it cannot read, every step is blocked until it is fixed. `off` lets ordinary steps pass; the never list stays blocked. |
 | `sessioncost guard auto on` | Guards every chat and builds its report after each answer. |
@@ -54,10 +56,10 @@ hooks live in the agent's plugin folder instead.
 
 ## Allow steps in a project
 
-**From the chat.** When the guard asks about a step that is normal for your project, its question ends with the exact
-line to send, for example `/liveguard allow git_push git push origin main`. Send it as your own message. The rule is
-saved outside your repository, in `~/.sessioncost/guard/projects/`. `/liveguard allow` lists the project's rules;
-`/liveguard allow --clear` removes them.
+**From the chat.** When the guard asks about a step that is normal for your project, say "allow it" as your next
+message. Or send the exact line its question ends with, for example `/liveguard allow git_push git push origin main`.
+The rule is saved outside your repository, in `~/.sessioncost/guard/projects/`. "Show my allowed steps"
+(`/liveguard allow`) lists the project's rules; "clear my allowed steps" (`/liveguard allow --clear`) removes them.
 
 **In a file.** A project can list the steps it expects in `.sessioncost-allow` in its folder. Steps it lists are only
 written to the log, not asked. One step per line: a mark, spaces, then a pattern for the command, the file or the

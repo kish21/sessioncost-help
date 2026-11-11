@@ -2,12 +2,12 @@
 // Your first five minutes: install, /sessioncost, "fix it", /liveguard. What you type, where, and what you see.
 const steps = [
 	{ x: 20, min: 'Minute 1', type: 'paste one line', where: 'in a terminal', see: ['"/sessioncost and', '/liveguard added"'] },
-	{ x: 200, min: 'Minute 2', type: '/sessioncost', where: 'in any chat', see: ['the report opens:', 'heavy turns, top fix'] },
-	{ x: 380, min: 'Minute 3', type: '"fix it"', where: 'in the same chat', see: ['the changes first,', 'then your yes'] },
-	{ x: 560, min: 'Minute 4', type: '/liveguard', where: 'once, in any chat', see: ['every chat guarded,', 'until /liveguard off'] },
+	{ x: 200, min: 'Minute 2', type: '"show my report"', where: 'in any chat', see: ['the report opens:', 'heavy turns, top fix'] },
+	{ x: 380, min: 'Minute 3', type: '"fix it"', where: 'in the same chat', see: ['the changes first,', 'then "fix it" again'] },
+	{ x: 560, min: 'Minute 4', type: 'nothing', where: 'the guard is on', see: ['every chat guarded,', 'until "guard off"'] },
 ];
 ---
-<figure class="diagram" aria-label="Minute 1: paste one line in a terminal. Minute 2: type /sessioncost in any chat and the report opens. Minute 3: say fix it, see the changes, say yes. Minute 4: type /liveguard once and every chat is guarded.">
+<figure class="diagram" aria-label="Minute 1: paste one line in a terminal. Minute 2: say show my report (or type /sessioncost) in any chat and the report opens. Minute 3: say fix it, see the changes, say fix it again. Minute 4: nothing to type, every chat is already guarded.">
 	<svg viewBox="0 0 740 214" role="img">
 		{steps.map((s, i) => (
 			<g>

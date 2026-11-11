@@ -8,31 +8,42 @@ On Windows, if `sessioncost` is not found, type `python -m sessioncost` instead 
 
 ## In a chat
 
-Type these to your agent, in any agent SessionCost set up (Claude Code, Codex, Cursor, Antigravity, Copilot). In
-Claude Code with the plugin they may show as `/sessioncost:sessioncost`.
+You never have to type a command. **Say the words** in the first column (typed or spoken) to your agent, in any
+agent SessionCost set up (Claude Code, Codex, Cursor, Antigravity, Copilot). If you prefer typing, the command in
+the second column does the same. In Claude Code with the plugin they may show as `/sessioncost:sessioncost`.
 
-### The two you need
+Every line SessionCost shows in the chat names its words too, for example the tip at the end of a reply:
+*💡 SessionCost: … Say "fix it" (or type /sessioncost fix) to fix these.* A bare "yes" never runs a fix: it answers
+your agent's own question.
 
-| Type | What it does |
-|---|---|
-| `/sessioncost` | Builds the report of this chat, gives you its link and names the top fix. Say "fix it" and your agent fixes the waste, after your yes. |
-| `/liveguard` | Turns the [guard](/sessioncost-help/use/stay-safe/) on for every chat in every agent, this one included, until `/liveguard off`. Only your own message turns it off: the agent cannot. |
+### The ones you need
 
-You can also ask in your own words ("where did the tokens go?", "fix the waste"): the agent knows what to run.
+| Say | Or type | What it does |
+|---|---|---|
+| "Show my report" or "where did my tokens go?" | `/sessioncost` | Builds the report of this chat, gives you its link and names the top fix. |
+| "Fix it" | `/sessioncost fix` | After a 💡 tip: applies the fixes it named, after a backup. |
+| "Allow it" | `/liveguard allow …` | After the guard asked about a step that is normal here: it stops asking about that step in this project. Secrets and never-list steps cannot be allowed. |
+| "Turn the guard off" | `/liveguard off` | The [guard](/sessioncost-help/use/stay-safe/) is on from install, in every chat and every agent. This turns it off. Only your own message turns it off, and only when these words are the whole message: the agent cannot. |
+| "Turn the guard on" | `/liveguard` | Turns the guard back on. |
 
 ### Optional
 
-| Type | What it does |
-|---|---|
-| `/sessioncost fix` | This project's token waste as a to-do list, with the change for each. Your agent applies it on your yes, after a backup. |
-| `/sessioncost fix --undo` | Puts back the newest fix, unless you changed the file since. |
-| `/sessioncost fix auto on` | After each answer, new waste is listed at your next message and your agent asks before fixing. `off` stops it. |
-| `/liveguard strict` | The guard, stricter: outside content stays untrusted for the whole chat. |
-| `/liveguard allow <mark> <pattern>` | Stops one expected step asking in this project. You do not need to remember it: when the guard asks about a step, its message gives you the exact line. Secrets and never-list steps cannot be allowed. |
-| `/sessioncost update` | Updates every copy of SessionCost on this computer. Restart your agent afterwards. |
-| `/sessioncost version` | Shows which SessionCost version this agent uses, and how many other copies are on this computer. |
-| `/sessioncost clean` | Deletes the reports of older chats and keeps the latest. |
-| `/sessioncost auto off` | Stops rebuilding the report after each answer. `/sessioncost auto on` starts it again. |
+| Say | Or type | What it does |
+|---|---|---|
+| "Fix my token waste" | `/sessioncost fix` | This project's token waste as a to-do list, with the change for each. Say "fix it" (or "fix 1 and 3") to apply, after a backup. |
+| "Undo the fix" | `/sessioncost fix --undo` | Puts back the newest fix, unless you changed the file since. |
+| "Write a handover" | `/sessioncost fix` | After the long-chat tip: your agent writes a handover so you can start a fresh chat. There, say "continue from handover". |
+| "Turn token tips off" / "on" | `/sessioncost fix auto off` / `on` | The live tips. They are on from install: after each answer that wasted tokens, the last line of the next reply names it. |
+| "Warn me at 150k tokens" | `/sessioncost fix long-chat 150k` | When a chat counts as long (100k by default). |
+| "Set my budget to $5" / "clear my budget" | `/sessioncost fix budget 5` / `off` | A dollar ceiling per chat for the handover tip. |
+| "Guard strict" | `/liveguard strict` | The guard, stricter: outside content stays untrusted for the whole chat. |
+| "Show my allowed steps" / "clear my allowed steps" | `/liveguard allow --list` / `--clear` | This project's allow rules. |
+| "Show my prices" | `/sessioncost prices` | The prices in use, where each one came from and the day the list was checked. You can also give your own prices in your own words ("Opus: 4 input, 20 output"). See [your own prices](/sessioncost-help/reference/money/#your-own-prices). |
+| "Update the prices" | `/sessioncost prices update` | Fetches SessionCost's newest checked price list. This is the only command that goes online, and it runs only when you ask for it. |
+| "Update SessionCost" | `/sessioncost update` | Updates every copy of SessionCost on this computer. Restart your agent afterwards. |
+| "Which version do I have?" | `/sessioncost version` | Shows which SessionCost version this agent uses, and how many other copies are on this computer. |
+| "Delete my old reports" | `/sessioncost clean` | Deletes the reports of older chats and keeps the latest. |
+| "Turn the report after each answer off" | `/sessioncost auto off` | Stops rebuilding the report after each answer. `on` starts it again. |
 
 ## In a terminal
 
@@ -50,6 +61,11 @@ installed with pip, or `npx sessioncost` with npm: see
 | `sessioncost update` | Updates every copy. `--dry-run` shows the steps without running them. |
 | `sessioncost version` | This copy's version, and how many other copies are on this computer. `--all` lists every copy (terminal, each agent's plugin, each `/sessioncost` from setup) with its version and names the ones that differ. |
 | `sessioncost auto off` | Stops rebuilding each chat's report after each answer. `sessioncost auto on` starts it again. |
+| `sessioncost prices` | The prices in use, where each one came from and the day the list was checked. |
+| `sessioncost prices set <model> --input X --output Y` | Sets your own price for one model, in US dollars per million tokens. `--cache-read` and `--cache-write` are optional. |
+| `sessioncost prices import <file>` | Imports your prices from a `.csv` (columns `model, input, output, cache_read, cache_write`) or a `.json` file. |
+| `sessioncost prices team <file>` | Uses a price file your team shares. It is read again for every report. `team off` stops using it. |
+| `sessioncost prices update` | Fetches SessionCost's newest checked price list. This is the only command that goes online. |
 
 ## The report keeps itself up to date
 

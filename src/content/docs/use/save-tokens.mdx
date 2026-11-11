@@ -23,12 +23,13 @@ biggest fixes. On **the path**, the redder the tile, the heavier the turn; tap t
 
 ## Let your agent fix it
 
-Say **fix it** in the same chat, or type `/sessioncost fix`.
+Say **fix my token waste** in the same chat, or type `/sessioncost fix`.
 
 1. Your agent shows the to-do list: each waste, how many tokens it cost in this chat, and the change that prevents it.
-2. It asks **"Shall I apply these?"**. You can say yes to all, or name the ones you want.
-3. On your yes, each changed file is backed up first, then changed. `/sessioncost fix --undo` puts the newest fix
-   back (unless you changed the file since).
+2. It ends with **Say "fix it" (or "fix 1 and 3") to apply these.** Say it for all, or name the ones you want. A bare
+   "yes" is not enough, so it is never mixed up with a question of the agent's own.
+3. Then each changed file is backed up first, then changed. Say **undo the fix** (or type `/sessioncost fix --undo`)
+   to put the newest fix back (unless you changed the file since).
 
 What a fix changes:
 
@@ -42,7 +43,7 @@ Fixes are about tokens only. Safety is the guard's job: no fix writes a permissi
 
 ## See that it worked
 
-At the end of your next chat, type `/sessioncost` again. The report, and the next fix list, say for each fix:
+At the end of your next chat, say **show my report** (or type `/sessioncost`) again. The report, and the next fix list, say for each fix:
 
 | It says | What it means |
 |---|---|
@@ -54,9 +55,13 @@ At the end of your next chat, type `/sessioncost` again. The report, and the nex
 
 ## A list after every answer
 
-`/sessioncost fix auto on` puts any new waste on a short to-do list at your next message, and your agent asks before
-fixing anything. One list per chat unless something big turns up; an item you skip stays quiet in that project for a
-week. `/sessioncost fix auto off` stops it.
+From install, any new waste is named in the last line of your agent's next reply, for example:
+
+> 💡 SessionCost: token waste in this chat: Re-read the same file (~6k tokens). Say "fix it" (or type /sessioncost fix) to fix these.
+
+Nothing changes until you say **fix it**. One tip per chat unless something big turns up; an item you skip stays
+quiet in that project for a week. Say **turn token tips off** (or type `/sessioncost fix auto off`) to stop them,
+**turn token tips on** to start them again.
 
 ## An older chat, or another project
 

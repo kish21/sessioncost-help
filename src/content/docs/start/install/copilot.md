@@ -10,8 +10,8 @@ Copilot is your only agent, and prints `Copilot  /sessioncost and /liveguard add
 
 1. Restart VS Code (or Copilot CLI).
 2. In Copilot Chat, switch to **Agent** mode and type `/`: **/sessioncost** and **/liveguard** are in the list.
-3. `/sessioncost` opens the report of your Copilot chat. `/liveguard` turns the guard on, for Copilot and every other
-   agent on this computer.
+3. Say "show my report" (or type `/sessioncost`): it opens the report of your Copilot chat. The guard is already on,
+   for Copilot and every other agent on this computer; "turn the guard off" (`/liveguard off`) turns it off.
 
 Both read the same folder, `~/.copilot`: the commands are in `~/.copilot/skills`, the guard in
 `~/.copilot/hooks/sessioncost-guard.json`.

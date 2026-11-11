@@ -17,7 +17,9 @@ computer with no AI model, so the numbers cost nothing.
 
 No, an estimate at public list prices. **Tokens are exact** where the agent's log records them. Your bill can differ
 (plan, contract rates, batch, cloud provider). On a monthly plan, `sessioncost --subscription` labels the money as what
-the chat would cost at API prices. [How the money is counted](/sessioncost-help/reference/money/).
+the chat would cost at API prices. To use your own rates, tell your agent, for example "Opus: 4 input, 20
+output". `/sessioncost prices` shows the prices in use and the day they were checked.
+[How the money is counted](/sessioncost-help/reference/money/).
 
 ## Which agents does it work with?
 
@@ -26,8 +28,8 @@ Claude Code, Codex, Cursor, Antigravity and GitHub Copilot (CLI and Chat in VS C
 
 ## Will the fix change my project without asking?
 
-No. Your agent shows each change and applies it only after your yes, with a backup first. `/sessioncost fix --undo`
-puts the newest fix back. [Save tokens](/sessioncost-help/use/save-tokens/).
+No. Your agent shows each change and applies it only after you say "fix it", with a backup first. "Undo the fix"
+(or `/sessioncost fix --undo`) puts the newest fix back. [Save tokens](/sessioncost-help/use/save-tokens/).
 
 ## Do I need the guard?
 
@@ -38,11 +40,11 @@ or pushes code, the guard stops the steps that could leak a secret or send your 
 ## Will the guard keep interrupting me?
 
 Rarely. Replayed over 48,835 real tool steps, it asked about 3.8% and blocked 0.53%. A step that is normal in your
-project can be allowed with the one line the guard gives you.
+project can be allowed: say "allow it" right after the guard asks.
 
 ## Can the agent turn the guard off?
 
-No. Only your own message (`/liveguard off`) or a terminal command turns it off. If a page or file tells the agent
+No. Only your own message ("turn the guard off", or `/liveguard off`) or a terminal command turns it off. If a page or file tells the agent
 to switch it off, that step is blocked.
 
 ## What is Step 0?

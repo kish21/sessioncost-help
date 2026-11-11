@@ -43,7 +43,7 @@ The guard is the same program, started by the agent's hooks:
 | A chat starts | Reads what the chat loads into the model: rules files, the agent's memory, skill descriptions, MCP tool descriptions. Signs of an injection stop risky steps for the whole chat. |
 | Before each step | Decides: goes ahead, asks you, or blocked. [The decision flow](/sessioncost-help/how/guard-decisions/). |
 | After each result | Looks for signs of a prompt injection and for key-shaped values; either raises the bar for the next steps. |
-| Your message | `/liveguard off` and `/liveguard allow …` are read from your own message, never from the agent. |
+| Your message | "Turn the guard off", "allow it" and their commands (`/liveguard off`, `/liveguard allow …`) are read from your own message, never from the agent. Plain words switch the guard only when they are the whole message. |
 
 Every decision is written to a log, one file per chat, each line chained to the one before by a SHA-256 hash. The
 report's **Trace & risk map** and `sessioncost guard report` read it back.

@@ -25,9 +25,10 @@ A new chat starts small. The handover is how you start one without losing your p
 
 <HandoverFlow />
 
-1. **SessionCost offers it.** When a chat passes **100k tokens**, the fix list (say "fix it", or
-   `/sessioncost fix`) offers a handover. With `/sessioncost fix auto on`, the offer comes by itself with your next
-   message.
+1. **SessionCost offers it.** When a chat passes **100k tokens**, the last line of your agent's next reply says so
+   (with the live tips, on unless you turned them off), for example:
+   *💡 SessionCost: This chat is at 114k tokens: every message re-sends all of it. Say "write a handover" (or type
+   /sessioncost fix) so you can start a fresh chat.* Say **write a handover**.
 2. **Your agent writes it**: the goal, what is done, files changed, tests run, what is next,
    and a short "other token waste in this chat" section. SessionCost calls no AI model; your own agent writes the
    words. It shows you the handover in its reply.
@@ -39,10 +40,15 @@ There is one handover per project, replaced by the next one.
 
 ## Choose when a chat counts as long
 
-| Type | What it does |
+| Say | Or type | What it does |
+|---|---|---|
+| "Warn me at 150k tokens" | `/sessioncost fix long-chat 150k` | The handover is offered from 150k tokens instead of 100k (10k or more). |
+| "Set my budget to $5" | `/sessioncost fix budget 5` | Also offer it once a chat passes $5. "Clear my budget" (`fix budget off`) removes the dollar budget. |
+
+In a terminal:
+
+| Command | What it does |
 |---|---|
-| `/sessioncost fix long-chat 150k` | The handover is offered from 150k tokens instead of 100k (10k or more). |
-| `sessioncost fix budget 5` | In a terminal: also offer it once a chat passes $5. `sessioncost fix budget off` clears the dollar budget. |
 | `sessioncost fix --handover` | In a terminal: where this project's handover file is. |
 
 ## Without a handover

@@ -42,9 +42,10 @@ scanning and most SARIF viewers read it. Details: [Exports and integrations](/se
 
 ## 3. Guard a chat while the agent works
 
-Type `/liveguard` in any agent's chat (or `sessioncost guard on` in a terminal). It is one switch: every agent your
-install set up (Claude Code, Codex, Cursor, Antigravity, GitHub Copilot) is guarded, every chat, until
-`/liveguard off`.
+The guard is on from install. It is one switch: every agent your install set up (Claude Code, Codex, Cursor,
+Antigravity, GitHub Copilot) is guarded, every chat, until the developer says "turn the guard off" (or types
+`/liveguard off`, or `sessioncost guard off` in a terminal). "Turn the guard on" (`/liveguard`, `sessioncost guard
+on`) turns it back on. The agent itself cannot switch it off.
 
 Check it: `sessioncost guard` prints whether it is on and how many chats are guarded. The setup keeps your other hooks
 and saves a copy of the old hooks file next to it. Try it safely first in a test folder:

@@ -96,8 +96,8 @@ others.
 | A line at once when a result shows injection signs | yes | sent (not tried yet) | no (in the log and report) | no | no (in the log and report) |
 | Third try of a failing command | yes | no | no | no | no |
 | Untrusted content lasts until | your next message | your next message | the end of the chat | the end of the chat, unless the build sends your message | your next message |
-| Turn on (every chat, until off) | `/liveguard`, or `sessioncost guard on` | `/liveguard` (added by `sessioncost setup`), or `sessioncost guard on` | same as Codex | same as Codex | `sessioncost guard on` |
-| Turn off | `/liveguard off`, or `sessioncost guard off` | `sessioncost guard off` in a terminal | same | same | same |
+| Turn on (every chat, until off) | On from install; again: `/liveguard`, or `sessioncost guard on` | On from `sessioncost setup`; plugin: `/liveguard` once. Again: `/liveguard`, or `sessioncost guard on` | same as Codex | same as Codex | On from setup; again: `sessioncost guard on` |
+| Turn off | "turn the guard off" or `/liveguard off`, or `sessioncost guard off` | `sessioncost guard off` in a terminal | same | same | same |
 | Says it is on when a chat starts | a line, and **🛡 Guard on** beside the model name (terminal, desktop app) or under the message box (VS Code) | the agent says it | the agent says it | the agent says it after `/liveguard` | the agent says it |
 
 **When the guard itself fails**, the never list still blocks and other steps go ahead, so work does not stop;

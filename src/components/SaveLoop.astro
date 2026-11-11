@@ -1,13 +1,13 @@
 ---
 // Saving tokens: the report names the waste, your agent fixes it on your yes, the next report shows what it saved.
 const steps = [
-	{ x: 20, title: '/sessioncost', sub: 'names the top fix', code: true },
-	{ x: 200, title: '"fix it"', sub: 'shows the change first', code: true },
-	{ x: 380, title: 'You say yes', sub: 'applied, with a backup' },
+	{ x: 20, title: '"show my report"', sub: 'names the top fix', code: true },
+	{ x: 200, title: '"fix my token waste"', sub: 'shows the change first', code: true },
+	{ x: 380, title: '"fix it"', sub: 'applied, with a backup', code: true },
 	{ x: 560, title: 'Your next chat', sub: 'report shows the saving' },
 ];
 ---
-<figure class="diagram" aria-label="Type /sessioncost: the report names the top fix. Say fix it: your agent shows the change. Say yes: it is applied with a backup. Your next chat's report shows what the fix saved, or says the waste came back.">
+<figure class="diagram" aria-label="Say show my report: the report names the top fix. Say fix my token waste: your agent shows the change. Say fix it: it is applied with a backup. Your next chat's report shows what the fix saved, or says the waste came back.">
 	<svg viewBox="0 0 740 224" role="img">
 		<text class="kicker" x="370" y="20" text-anchor="middle">Find it, fix it, see it worked</text>
 		{steps.map((s, i) => (

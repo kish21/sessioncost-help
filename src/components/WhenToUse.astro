@@ -5,27 +5,27 @@ const groups = [
 	{
 		name: 'Tokens and cost',
 		rows: [
-			{ q: 'Why did this chat cost so much?', a: '/sessioncost', where: 'in the chat', href: 'use/save-tokens/' },
+			{ q: 'Why did this chat cost so much?', a: 'show my report', where: 'say it in the chat (or type /sessioncost)', href: 'use/save-tokens/' },
 			{ q: 'Cut the waste it found', a: 'fix it', where: 'say it in the same chat', href: 'use/save-tokens/#let-your-agent-fix-it' },
-			{ q: 'Did my fix work?', a: '/sessioncost', where: 'at the end of your next chat', href: 'use/save-tokens/#see-that-it-worked' },
-			{ q: 'The chat has grown long', a: 'continue from handover', where: 'in a new chat, after your agent wrote it', href: 'use/long-chats/' },
+			{ q: 'Did my fix work?', a: 'show my report', where: 'at the end of your next chat', href: 'use/save-tokens/#see-that-it-worked' },
+			{ q: 'The chat has grown long', a: 'write a handover', where: 'then, in a new chat: "continue from handover"', href: 'use/long-chats/' },
 			{ q: "Yesterday's chat, or another project's", a: 'sessioncost list', where: 'in a terminal', href: 'use/save-tokens/#an-older-chat-or-another-project' },
 		],
 	},
 	{
 		name: 'Safety',
 		rows: [
-			{ q: 'Stop the agent before it does something risky', a: '/liveguard', where: 'once, in any chat', href: 'use/stay-safe/' },
-			{ q: 'The guard asks about a step that is normal here', a: '/liveguard allow …', where: 'the exact line is in its question', href: 'use/stay-safe/#it-asks-about-a-normal-step' },
-			{ q: 'What did the agent do, and what was stopped?', a: '/sessioncost', where: 'then open Trace & risk map', href: 'report/risk-map/' },
-			{ q: 'Turn the guard off', a: '/liveguard off', where: 'in the chat', href: 'use/stay-safe/#turn-it-off' },
+			{ q: 'Stop the agent before it does something risky', a: 'nothing', where: 'the guard is on from install', href: 'use/stay-safe/' },
+			{ q: 'The guard asks about a step that is normal here', a: 'allow it', where: 'say it as your next message', href: 'use/stay-safe/#it-asks-about-a-normal-step' },
+			{ q: 'What did the agent do, and what was stopped?', a: 'show my report', where: 'then open Trace & risk map', href: 'report/risk-map/' },
+			{ q: 'Turn the guard off', a: 'turn the guard off', where: 'as your whole message (or type /liveguard off)', href: 'use/stay-safe/#turn-it-off' },
 		],
 	},
 	{
 		name: 'Everything else',
 		rows: [
 			{ q: 'The numbers in a spreadsheet or a security tool', a: 'Export Excel, --json, --sarif', where: 'in the report, or a terminal', href: 'reference/exports/' },
-			{ q: 'A new version', a: '/sessioncost update', where: 'then restart your agent', href: 'start/install/#stay-up-to-date' },
+			{ q: 'A new version', a: 'update SessionCost', where: 'say it, then restart your agent', href: 'start/install/#stay-up-to-date' },
 			{ q: 'Something does not work', a: 'Fix a problem', where: 'the common ones and their fixes', href: 'help/fix-a-problem/', page: true },
 		],
 	},

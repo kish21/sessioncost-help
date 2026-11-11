@@ -20,12 +20,12 @@ Tick **I did this** on a fix and the report stops repeating it in later chats.
 
 ### Let your agent fix it
 
-You do not have to copy anything. Say "fix it" after `/sessioncost`, or type `/sessioncost fix`: your agent shows
-each change first and makes it only after your yes, with a backup (`/sessioncost fix --undo` puts it back). The next
-reports say what each fix saved since.
+You do not have to copy anything. Say "fix my token waste" (or type `/sessioncost fix`): your agent shows each change
+first and makes it only after you say "fix it", with a backup ("undo the fix" puts it back). The next reports say
+what each fix saved since.
 
-To hear about new waste while you work, type `/sessioncost fix auto on` once: after an answer that wasted tokens,
-your agent lists it at your next message and asks before fixing.
+You also hear about new waste while you work (on from install; "turn token tips off" stops it): after an answer that
+wasted tokens, the last line of your agent's next reply names it and ends: Say "fix it" (or type /sessioncost fix).
 
 ### How the saving is counted
 
