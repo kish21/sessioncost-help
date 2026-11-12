@@ -1,0 +1,46 @@
+---
+// One topic on the Watch page: the video on the left, the click-through walkthrough playing beside it (same size).
+// The walkthrough is a full page drawn at 1280x720 and scaled down to fit; it loads (and starts) when scrolled to.
+interface Props { video: string; scene?: string; title: string }
+const { video, scene, title } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<div class:list={['wp', { solo: !scene }]}>
+  <figure>
+    <video controls preload="none" poster={`${base}/videos/${video}.png`} src={`${base}/videos/${video}.mp4`}></video>
+    <figcaption>&#9654; Video</figcaption>
+  </figure>
+  {scene && (
+    <figure>
+      <div class="wp-box">
+        <iframe src={`${base}/demo/${scene}.html`} title={`${title}: click through it`} loading="lazy" tabindex="-1"></iframe>
+      </div>
+      <figcaption>&#128433; Click through it: <a href={`${base}/demo/${scene}.html`} target="_blank">open full size</a>{' '}(pause, change speed, jump to a step)</figcaption>
+    </figure>
+  )}
+</div>
+
+<style is:global>
+  :root { --sl-content-width: 76rem; }
+</style>
+<style>
+  .wp { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0 .5rem; }
+  .wp.solo { grid-template-columns: 1fr; max-width: 50%; margin-inline: auto; }
+  figure { margin: 0; }
+  video, .wp-box { width: 100%; aspect-ratio: 16 / 9; border-radius: 8px; display: block; background: #111; }
+  .wp-box { position: relative; overflow: hidden; border: 1px solid var(--sl-color-gray-5); }
+  .wp-box iframe { position: absolute; left: 0; top: 0; width: 1280px; height: 720px; max-width: none; border: 0; transform-origin: 0 0; }
+  figcaption { font-size: var(--sl-text-sm); color: var(--sl-color-gray-3); margin-top: .35rem; }
+  @media (max-width: 50rem) { .wp, .wp.solo { grid-template-columns: 1fr; max-width: none; } }
+</style>
+
+<script>
+  // scale each 1280x720 walkthrough to its box
+  const fit = () => document.querySelectorAll<HTMLElement>('.wp-box').forEach((b) => {
+    const f = b.querySelector('iframe');
+    if (f) f.style.transform = `scale(${b.clientWidth / 1280})`;
+  });
+  addEventListener('resize', fit);
+  document.addEventListener('astro:page-load', fit);
+  fit();
+</script>
