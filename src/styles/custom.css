@@ -199,9 +199,22 @@ h1#_top {
 }
 
 /* Welcome hero: text and the report picture side by side, the picture big enough to read */
-@media (min-width: 50rem) {
+.hero > .hero-html {
+	width: 100%;
+}
+/* text over the video until there is room for both side by side */
+@media (min-width: 50rem) and (max-width: 72rem) {
 	.hero {
-		grid-template-columns: 6fr 5fr;
+		grid-template-columns: minmax(0, 1fr);
+	}
+	.hero > .hero-html {
+		order: 2;
+		max-width: 46rem;
+	}
+}
+@media (min-width: 72rem) {
+	.hero {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 		gap: 3rem;
 		padding-block: 2.5rem 3rem;
 	}
@@ -220,6 +233,47 @@ h1#_top {
 }
 .hero .hero-shot {
 	margin-bottom: 0;
+}
+/* Hero trailer: plays muted on a loop (browsers only autoplay muted); the button turns the sound on from the start */
+.hero-video {
+	position: relative;
+}
+.hero-sound {
+	position: absolute;
+	right: 0.75rem;
+	top: 0.75rem;
+	padding: 0.4rem 0.8rem;
+	font: 600 0.85rem var(--sl-font);
+	color: #fff;
+	background: rgba(15, 23, 30, 0.78);
+	border: 1px solid rgba(255, 255, 255, 0.35);
+	border-radius: 999px;
+	cursor: pointer;
+}
+.hero-sound:hover,
+.hero-sound:focus-visible {
+	background: rgba(15, 23, 30, 0.95);
+}
+/* Hero buttons: one row on a desktop, stacked full width on a phone */
+@media (min-width: 72rem) {
+	.hero .actions {
+		flex-wrap: nowrap;
+		gap: 0.5rem;
+	}
+	.hero .actions .sl-link-button {
+		padding: 0.55rem 0.95rem;
+		font-size: 0.9rem;
+		white-space: nowrap;
+	}
+}
+@media (max-width: 50rem) {
+	.hero .actions {
+		flex-direction: column;
+		align-items: stretch;
+	}
+	.hero .actions .sl-link-button {
+		justify-content: center;
+	}
 }
 
 /* Welcome: hero picture, the two jobs, the numbers strip, screenshots */
@@ -276,6 +330,33 @@ h1#_top {
 .duo a:hover {
 	border-color: var(--sl-color-accent-high);
 }
+/* Welcome tiles: the topic's video still with a play badge; the tile opens the topic page, which starts with it */
+.tile-vid {
+	position: relative;
+	display: block;
+	margin-bottom: 0.4rem;
+}
+.tile-vid img {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+	border-radius: 5px;
+}
+.tile-play {
+	position: absolute;
+	left: 0.5rem;
+	bottom: 0.5rem;
+	padding: 0.2rem 0.6rem;
+	font: 600 0.8rem var(--sl-font);
+	color: #fff;
+	background: rgba(15, 23, 30, 0.82);
+	border-radius: 999px;
+}
+.duo a:hover .tile-play {
+	background: var(--sl-color-accent);
+}
 .duo strong {
 	font-size: 1.4rem;
 	color: var(--sl-color-white);
@@ -310,6 +391,37 @@ h1#_top {
 }
 .shot {
 	margin: 1.25rem 0;
+	clear: both;
+}
+/* Welcome sections: the topic's video beside the text (plays in place); full width on a phone */
+.sl-markdown-content .watch-it {
+	float: right;
+	width: min(20rem, 42%);
+	margin: 0.3rem 0 1rem 1.5rem;
+}
+.watch-it video {
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	border-radius: 8px;
+	background: #111;
+	box-shadow: 0 10px 26px rgba(20, 33, 43, 0.22);
+}
+.watch-it figcaption {
+	margin-top: 0.4rem;
+	font-size: 0.85rem;
+	font-weight: 600;
+	color: var(--sl-color-gray-2);
+}
+.sl-markdown-content h2 {
+	clear: both;
+}
+@media (max-width: 40rem) {
+	.sl-markdown-content .watch-it {
+		float: none;
+		width: 100%;
+		margin: 1rem 0;
+	}
 }
 .shot img {
 	display: block;

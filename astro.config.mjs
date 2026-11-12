@@ -40,6 +40,7 @@ export default defineConfig({
 					label: 'Start',
 					items: [
 						{ label: 'Welcome', link: '/' },
+						{ label: '▶ Watch (8 videos)', slug: 'watch' },
 						{ label: 'Install SessionCost', slug: 'start/install' },
 						{
 							label: 'Other ways to install',
@@ -54,7 +55,6 @@ export default defineConfig({
 							],
 						},
 						{ label: 'Your first 5 minutes', slug: 'start/first-5-minutes' },
-						{ label: 'Watch and try', slug: 'watch' },
 					],
 				},
 				{

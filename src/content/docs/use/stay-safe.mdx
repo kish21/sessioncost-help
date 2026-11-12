@@ -5,14 +5,13 @@ audience: everyone
 ---
 import GuardDiagram from '../../../components/GuardDiagram.astro';
 import GuardStory from '../../../components/GuardStory.astro';
+import WatchPair from '../../../components/WatchPair.astro';
 
 Your agent does real things on your computer, with your access: it runs commands, reads and writes files, installs
 packages, pushes code. And it reads things **you did not write**: web pages, downloaded files, tool output. Any of
 them can carry instructions aimed at the agent (a **prompt injection**). The guard checks every step before it runs.
 
-Prefer to watch? [See the guard stop a secrets read and a hidden attack](/sessioncost-help/demo/scene2.html), then
-[how you control it](/sessioncost-help/demo/scene3.html). Both play by themselves. All of them:
-[Watch and try](/sessioncost-help/watch/).
+<WatchPair video="01-live-guard" scene="scene2" title="Live Guard" wide={false} />
 
 ## It is already on
 

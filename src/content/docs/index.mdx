@@ -6,14 +6,11 @@ hero:
   title: 'Your AI agent wastes tokens and takes risky steps. <span class="hero-live">SessionCost catches both while it works.</span>'
   tagline: 'It stops a .env read or a force-push before it runs, tells you when a chat starts re-sending what it doesn''t need, and your own agent fixes it on your yes.'
   image:
-    html: '<img class="hero-shot" src="/sessioncost-help/img/v11-overview.png" alt="A SessionCost report: 9.9M tokens sent, 3.6M with the fixes, and the three biggest fixes" width="1052" height="579" />'
+    html: '<div class="hero-video"><video class="hero-shot" src="/sessioncost-help/videos/00-trailer.mp4" poster="/sessioncost-help/videos/00-trailer.png" width="1920" height="1080" autoplay muted loop playsinline preload="auto" aria-label="1-minute video: SessionCost blocks a hidden attack, shows where the tokens went and fixes the waste"></video><button type="button" class="hero-sound" onclick="var v=this.parentNode.querySelector(`video`);v.muted=!v.muted;if(!v.muted){v.currentTime=0;v.controls=true;v.play();}this.textContent=v.muted?`🔊 Sound on`:`🔇 Sound off`;">🔊 Sound on</button></div>'
   actions:
     - text: Install in a minute
       link: /sessioncost-help/start/install/
       icon: right-arrow
-    - text: ▶ 1-minute video
-      link: /sessioncost-help/watch/#the-1-minute-trailer
-      variant: secondary
     - text: Click through it
       link: /sessioncost-help/demo/scene1.html
       variant: secondary
@@ -23,17 +20,20 @@ hero:
 ---
 
 <div class="duo trio">
-	<a href="#live-guard">
+	<a href="/sessioncost-help/use/stay-safe/">
+		<span class="tile-vid"><img src="/sessioncost-help/videos/01-live-guard.png" alt="" loading="lazy" width="1920" height="1080" /><span class="tile-play">▶ 2:37 video</span></span>
 		<span class="door-kicker">Before each step</span>
 		<strong>Live Guard</strong>
 		<span>Risky step? It asks you. Dangerous? It never runs. Ordinary work goes ahead.</span>
 	</a>
-	<a href="#or-let-it-tell-you-live">
+	<a href="/sessioncost-help/use/save-tokens/">
+		<span class="tile-vid"><img src="/sessioncost-help/videos/03-save-tokens.png" alt="" loading="lazy" width="1920" height="1080" /><span class="tile-play">▶ 4:04 video</span></span>
 		<span class="door-kicker">After each answer</span>
 		<strong>Live fix tips</strong>
 		<span>Unused tools, a broken cache, giant outputs re-sent every turn: your agent tells you at your next message and offers the fix.</span>
 	</a>
-	<a href="#see-every-token">
+	<a href="/sessioncost-help/report/overview/">
+		<span class="tile-vid"><img src="/sessioncost-help/videos/07-your-report.png" alt="" loading="lazy" width="1920" height="1080" /><span class="tile-play">▶ 3:07 video</span></span>
 		<span class="door-kicker">Any time · <code>/sessioncost</code></span>
 		<strong>The report</strong>
 		<span>Every turn: what it sent, what it cost, and the fixes that save the most.</span>
@@ -47,6 +47,11 @@ hero:
 </div>
 
 ## See every token
+
+<figure class="watch-it">
+	<video controls preload="none" poster="/sessioncost-help/videos/07-your-report.png" src="/sessioncost-help/videos/07-your-report.mp4"></video>
+	<figcaption>▶ Watch it · 3:07 · <a href="/sessioncost-help/report/overview/">the report</a></figcaption>
+</figure>
 
 Every message you send makes your agent send **the whole chat again**: its instructions, its tools and every turn
 before. Type `/sessioncost` and the report opens with the answer: what this chat sent, what it would have sent with the
@@ -63,6 +68,11 @@ the tile, the heavier the turn. Tap one to see inside it.
 [Read your report, part by part →](/sessioncost-help/report/overview/)
 
 ## Your agent fixes it
+
+<figure class="watch-it">
+	<video controls preload="none" poster="/sessioncost-help/videos/03-save-tokens.png" src="/sessioncost-help/videos/03-save-tokens.mp4"></video>
+	<figcaption>▶ Watch it · 4:04 · <a href="/sessioncost-help/use/save-tokens/">save tokens</a></figcaption>
+</figure>
 
 Say **fix it**. Your agent lists each waste with what it cost in this chat and the change that prevents it, then asks
 first. Rules go into your agent's own rules file, each file is backed up, and **undo the fix** puts it back.
@@ -86,6 +96,11 @@ without losing the thread.
 [Save tokens: the whole loop →](/sessioncost-help/use/save-tokens/)
 
 ## Live Guard
+
+<figure class="watch-it">
+	<video controls preload="none" poster="/sessioncost-help/videos/01-live-guard.png" src="/sessioncost-help/videos/01-live-guard.mp4"></video>
+	<figcaption>▶ Watch it · 2:37 · <a href="/sessioncost-help/use/stay-safe/">stay safe</a></figcaption>
+</figure>
 
 Your agent runs commands with your access, and it reads things you did not write: web pages, downloaded files, tool
 output. Any of them can hide orders meant for the agent. Live Guard is on from install: it checks **every step
@@ -143,4 +158,4 @@ shows up.
 </div>
 
 Not sure what to type when? [When to use what](/sessioncost-help/use/when-to-use-what/). Prefer to watch?
-[Watch and try](/sessioncost-help/watch/): every feature in a walkthrough that plays by itself.
+[All 8 videos](/sessioncost-help/watch/), each with a walkthrough you can click through.
