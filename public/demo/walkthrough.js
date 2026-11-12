@@ -14,7 +14,14 @@
   ];
 
   const HELP = '/sessioncost-help/watch/';     // the help page that lists every video and walkthrough
-  const VIDEOS = {};                           // scene number -> its YouTube link, e.g. 2: 'https://youtu.be/...'; none yet
+  const VIDEOS = {                             // scene number -> its YouTube video
+    1: 'https://youtu.be/vyKiwQlopiM',         // 06 install and update
+    2: 'https://youtu.be/G4r0EaK2tzg',         // 01 live guard
+    3: 'https://youtu.be/bs81o_PbUzM',         // 02 live guard commands
+    4: 'https://youtu.be/rwpqFBAVvR8',         // 07 your report
+    5: 'https://youtu.be/DvHuRcpH6-0',         // 03 save tokens
+    6: 'https://youtu.be/H350k7_cvGI',         // 05 your own prices
+  };
 
   window.initWalkthrough = function (config) {
     const sceneNum = config.sceneNum || 1;
