@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Scene 1: Every Way to Install SessionCost — SessionCost</title>
+<link rel="stylesheet" href="walkthrough.css" />
+</head>
+<body>
+<script src="walkthrough.js"></script>
+<script>
+  initWalkthrough({
+    sceneNum: 1,
+    initialBadge: 'Scene 1: Every Way to Install SessionCost Across All 5 Agents',
+    steps: [
+      {
+        stepLabel: '1. One-Line Install (Windows / Mac / Linux)',
+        badge: 'Method 1 of 4: One-Line Install (No Python, Node, or Git Needed)',
+        notify: {
+          kicker: 'INSTALL METHOD 1 OF 4',
+          title: 'One-Line Install (Windows, Mac & Linux)',
+          subtitle: 'Needs nothing else on your computer — no Python, no Node.js, no Git. Sets up every agent it finds.',
+          holdMs: 3400
+        },
+        run(api) {
+          api.showCustomFileInCanvas(
+            'INSTALL-METHODS.md',
+            '<span>sessioncost</span><span>›</span><span style="color:#38bdf8;">Method 1: One-Line Install (Windows PowerShell &amp; Mac/Linux Shell)</span>',
+            [
+              { html: '<span class="kw"># Method 1: One-Line Install (Fetches what it needs by itself)</span>' },
+              { html: '<span class="cmt"># 1. Windows (PowerShell):</span>' },
+              { html: '<span class="str">irm https://raw.githubusercontent.com/kish21/sessioncost/main/install.ps1 | iex</span>', added: true },
+              { html: '' },
+              { html: '<span class="cmt"># 2. Mac / Linux (Terminal):</span>' },
+              { html: '<span class="str">curl -fsSL https://raw.githubusercontent.com/kish21/sessioncost/main/install.sh | sh</span>', added: true }
+            ],
+            'Method 1 commands for Windows PowerShell (irm | iex) and Mac/Linux (curl | sh)'
+          );
+          api.appendTerminal(
+            'irm https://raw.githubusercontent.com/kish21/sessioncost/main/install.ps1 | iex',
+            'SessionCost 1.1 — checking AI coding agents on this computer...\n  ✔ Claude Code    : /sessioncost and /liveguard added · live guard ready\n  ✔ Codex          : /sessioncost and /liveguard added · live guard ready\n  ✔ Cursor         : /sessioncost and /liveguard added · live guard ready\n  ✔ Antigravity    : /sessioncost and /liveguard added · live guard ready\n  ✔ GitHub Copilot : /sessioncost and /liveguard added · live guard ready\nDone. Restart your agents and type /sessioncost in any chat.',
+            '#73c991',
+            'Finds all 5 agents on your computer and adds /sessioncost + /liveguard hooks automatically'
+          );
+        }
+      },
+      {
+        stepLabel: '2. Node.js (npx sessioncost setup)',
+        badge: 'Method 2 of 4: Install with Node.js (npm / npx)',
+        notify: {
+          kicker: 'INSTALL METHOD 2 OF 4',
+          title: 'Node.js Install (<code>npx sessioncost setup</code>)',
+          subtitle: 'Needs only Node.js LTS. Installs into <code>~/.sessioncost/npm/venv</code> without touching your system Python.',
+          holdMs: 3400
+        },
+        run(api) {
+          api.showCustomFileInCanvas(
+            'INSTALL-METHODS.md',
+            '<span>sessioncost</span><span>›</span><span style="color:#38bdf8;">Method 2: Node.js (npm / npx)</span>',
+            [
+              { html: '<span class="kw"># Method 2: Node.js (Needs only Node.js LTS — no Python required)</span>' },
+              { html: '<span class="str">npx sessioncost setup</span>', added: true },
+              { html: '' },
+              { html: '<span class="cmt"># From then on, run terminal commands with npx:</span>' },
+              { html: '<span class="fn">npx sessioncost</span>               <span class="cmt"># Open newest chat report</span>' },
+              { html: '<span class="fn">npx sessioncost@latest setup</span>  <span class="cmt"># Update via npm</span>' }
+            ],
+            'Method 2: One npx command sets up every agent on the computer'
+          );
+          api.appendTerminal(
+            'npx sessioncost setup',
+            'Installed SessionCost into ~/.sessioncost/npm/venv\n  ✔ Claude Code, Codex, Cursor, Antigravity, Copilot: /sessioncost and /liveguard added · live guard ready',
+            '#9cdcfe',
+            'Installs cleanly into ~/.sessioncost/npm/venv and adds /sessioncost + /liveguard to all 5 agents'
+          );
+        }
+      },
+      {
+        stepLabel: '3. Python (pip / pipx / uv)',
+        badge: 'Method 3 of 4: Install with Python 3.10+ (pip, pipx, or uv)',
+        notify: {
+          kicker: 'INSTALL METHOD 3 OF 4',
+          title: 'Python 3.10+ Install (<code>pip</code>, <code>pipx</code>, or <code>uv tool</code>)',
+          subtitle: 'Install from PyPI with <code>pip</code>, <code>pipx</code>, or <code>uv tool</code>, then run <code>setup</code> once.',
+          holdMs: 3400
+        },
+        run(api) {
+          api.showCustomFileInCanvas(
+            'INSTALL-METHODS.md',
+            '<span>sessioncost</span><span>›</span><span style="color:#38bdf8;">Method 3: Python 3.10+ (PyPI)</span>',
+            [
+              { html: '<span class="kw"># Method 3A: Standard pip</span>' },
+              { html: '<span class="str">python -m pip install -U sessioncost &amp;&amp; python -m sessioncost setup</span>', added: true },
+              { html: '' },
+              { html: '<span class="kw"># Method 3B: Isolated tool runners (pipx or uv)</span>' },
+              { html: '<span class="str">pipx install sessioncost &amp;&amp; sessioncost setup</span>', added: true },
+              { html: '<span class="str">uv tool install sessioncost &amp;&amp; sessioncost setup</span>', added: true }
+            ],
+            'Method 3: Choose standard pip or isolated pipx / uv tool'
+          );
+          api.appendTerminal(
+            'python -m pip install -U sessioncost && python -m sessioncost setup',
+            'Successfully installed sessioncost-1.1.2\n  ✔ Added /sessioncost and /liveguard to Claude Code, Codex, Cursor, Antigravity, Copilot',
+            '#73c991',
+            'After pip install, python -m sessioncost setup wires up every agent on your computer'
+          );
+        }
+      },
+      {
+        stepLabel: '4. Single-Agent Plugins',
+        badge: 'Method 4 of 4: Native Single-Agent Plugins (Needs Git)',
+        notify: {
+          kicker: 'INSTALL METHOD 4 OF 4',
+          title: 'Native Single-Agent Plugins (Claude Code, Codex, Cursor, Antigravity)',
+          subtitle: 'Prefer installing inside a single agent only? Use that agent\'s native plugin command (use one way per agent).',
+          holdMs: 3500
+        },
+        run(api) {
+          api.showCustomFileInCanvas(
+            'INSTALL-METHODS.md',
+            '<span>sessioncost</span><span>›</span><span style="color:#38bdf8;">Method 4: Single-Agent Plugins (Use One Way Per Agent)</span>',
+            [
+              { html: '<span class="cmt"># 1. Claude Code (Always choose --scope user so it works in every folder):</span>' },
+              { html: '<span class="str">claude plugin install sessioncost --marketplace kish21/sessioncost --scope user</span>', added: true },
+              { html: '' },
+              { html: '<span class="cmt"># 2. Codex (then open Customize -> Plugins -> sessioncost -> Install):</span>' },
+              { html: '<span class="str">codex plugin marketplace add kish21/sessioncost</span>', added: true },
+              { html: '' },
+              { html: '<span class="cmt"># 3. Cursor (Customize -> Plugins -> From GitHub Repository):</span>' },
+              { html: '<span class="str">https://github.com/kish21/sessioncost</span>', added: true },
+              { html: '' },
+              { html: '<span class="cmt"># 4. Antigravity CLI plugin:</span>' },
+              { html: '<span class="str">agy plugin install https://github.com/kish21/sessioncost</span>', added: true }
+            ],
+            'Native plugin commands for Claude Code (--scope user), Codex, Cursor & Antigravity'
+          );
+          api.appendTerminal(
+            'claude plugin install sessioncost --marketplace kish21/sessioncost --scope user',
+            '✔ Successfully installed plugin: sessioncost@sessioncost (scope: user)\nReload VS Code or restart the CLI, then open a new chat.',
+            '#73c991',
+            'In Claude Code, --scope user installs SessionCost for every folder on your machine'
+          );
+        }
+      },
+      {
+        stepLabel: '5. Verify & Update (/sessioncost update)',
+        badge: 'Step 5: Verify Installed Copies & Update in One Command',
+        notify: {
+          kicker: 'STAY UP TO DATE',
+          title: 'Check Copies (<code>version --all</code>) & Update (<code>/sessioncost update</code>)',
+          subtitle: 'In any chat, commands are identical no matter how you installed: <code>/sessioncost</code>, <code>/liveguard</code>, and <code>/sessioncost update</code>.',
+          holdMs: 3200
+        },
+        type: '/sessioncost update',
+        run(api) {
+          api.appendTerminal(
+            'sessioncost version --all && sessioncost update',
+            'SessionCost 1.1.2 — all 6 copies match (terminal, claude, codex, cursor, antigravity, copilot)\nUpdated every copy of SessionCost on this computer. Restart your agent to finish.',
+            '#73c991',
+            'Checks every installed copy and updates them all in one step'
+          );
+          api.appendAgentTurn(`
+            <div class="guard-card green">
+              <div class="guard-kicker">
+                <span>✔</span> Every Copy Updated (1.1.2)
+              </div>
+              <div>
+                Restart your agent after updating. Ready to see Live Guard stop secret leaks and prompt injections? Click <strong>Next: 2. Live Guard →</strong> in the top bar!
+              </div>
+            </div>
+          `, 'All 5 agents are updated and ready — click "Next: 2. Live Guard →"!');
+        }
+      }
+    ]
+  });
+</script>
+</body>
+</html>

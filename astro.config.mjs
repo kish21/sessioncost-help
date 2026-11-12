@@ -54,6 +54,7 @@ export default defineConfig({
 							],
 						},
 						{ label: 'Your first 5 minutes', slug: 'start/first-5-minutes' },
+						{ label: 'Watch and try', slug: 'watch' },
 					],
 				},
 				{

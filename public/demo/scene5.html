@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Scene 5: Saving Tokens & Long-Chat Handover — SessionCost</title>
+<link rel="stylesheet" href="walkthrough.css" />
+</head>
+<body>
+<script src="walkthrough.js"></script>
+<script>
+  initWalkthrough({
+    sceneNum: 5,
+    initialBadge: 'Scene 5: The Self-Fixing Token Loop & Long-Chat Handover',
+    steps: [
+      {
+        stepLabel: '1. Live Waste Tip in Chat (fix auto)',
+        badge: 'Step 1: Live Token Waste Tip Appears Automatically While Working',
+        notify: {
+          kicker: 'SCENE 5 · SAVE TOKENS',
+          title: 'Live Fix Tips & The Self-Fixing Loop (<code>fix it</code>)',
+          subtitle: 'When token waste shows up, your agent tells you at your next message and asks before changing anything.',
+          holdMs: 3200
+        },
+        run(api) {
+          api.appendAgentTurn(`
+            <div style="border-left:3px solid #e5a54b; background:rgba(229,165,75,0.12); padding:0.6rem 0.8rem; border-radius:0 6px 6px 0; font-size:0.81rem; color:#fce7cf;">
+              💡 <strong>SessionCost (live tip):</strong> token waste in this chat:<br/>
+              • 1 large tool result stayed in the chat long after you moved on (~24k tokens)<br/>
+              • 1 file was rewritten 5 times instead of edited (~12k tokens)<br/>
+              Say <strong>"fix it"</strong> (or type <code>/sessioncost fix</code>) to fix these.
+            </div>
+          `, 'On from install! The last line of the reply names the waste and what it cost');
+        }
+      },
+      {
+        stepLabel: '2. Say "fix it" (Backup, Then Rules)',
+        badge: 'Step 2: Say "fix it" — Backed Up, Then Added to CLAUDE.md',
+        type: 'fix it',
+        run(api) {
+          api.showTreeBadge('rulesBadge', true);
+          api.appendTerminal(
+            'sessioncost fix -y',
+            'Applied 2 fixes (backup kept; `sessioncost fix --undo` puts it back):\n  - Keep command output short: a rule added to CLAUDE.md\n  - Edit an existing file instead of rewriting all of it: a rule added to CLAUDE.md\nIn this chat they would have cut ~36k tokens. The next reports show what they save from now on.',
+            '#73c991',
+            'Two words, no command to learn: a backup first, then the rules'
+          );
+          api.showCustomFileInCanvas(
+            'CLAUDE.md',
+            '<span>payments-api</span><span>›</span><span style="color:#73c991;">CLAUDE.md (backup kept)</span>',
+            [
+              { html: '<span class="kw"># payments-api</span>' },
+              { html: 'FastAPI payments service. Run tests with <span class="str">`pytest -q`</span>.' },
+              { html: '' },
+              { html: '<span class="kw">## SessionCost rules (fewer tokens)</span>', added: true },
+              { html: '<span class="str">- Keep command output short: use head/tail or a quiet flag, or write long output to a file and read only the lines you need.</span>', added: true },
+              { html: '<span class="str">- Edit an existing file instead of rewriting all of it.</span>', added: true }
+            ],
+            'Rules added to CLAUDE.md! The next chat\'s report shows what your fix saved'
+          );
+        }
+      },
+      {
+        stepLabel: '3. Changed Your Mind? "Undo the fix"',
+        badge: 'Step 3: Say "undo the fix" — CLAUDE.md Goes Back As It Was',
+        type: 'undo the fix',
+        run(api) {
+          api.appendTerminal(
+            'sessioncost fix --undo',
+            '  - put back C:/code/payments-api/CLAUDE.md',
+            '#9cdcfe',
+            'Puts back the newest fix, unless you changed the file since'
+          );
+          api.appendAgentTurn(`
+            <div>CLAUDE.md is back as it was before the fix. Say <strong>"fix it"</strong> again any time, or <strong>"turn token tips off"</strong> to stop the tips.</div>
+          `, 'Every fix can be undone; the tips can be turned off in plain words');
+        }
+      },
+      {
+        stepLabel: '4. Long-Chat Handover (>100k Tokens)',
+        badge: 'Step 4: Long Chat (>100k Tokens) Writes Handover & Resumes Fresh',
+        notify: {
+          kicker: 'LONG CHATS & HANDOVER',
+          title: 'Start Fresh Without Losing Your Place (<code>continue from handover</code>)',
+          subtitle: 'When a chat passes 100k tokens (or custom <code>/sessioncost fix long-chat 150k</code>), your agent writes a handover file.',
+          holdMs: 3300
+        },
+        type: 'continue from handover',
+        run(api) {
+          api.showTreeItem('treeHandover', true);
+          api.appendTerminal(
+            'sessioncost fix --handover',
+            '~/.sessioncost/handover/payments-api.md',
+            '#4daafc',
+            'Finds this project\'s newest handover file in ~/.sessioncost/handover/'
+          );
+          api.showCustomFileInCanvas(
+            'payments-api.md',
+            '<span>~/.sessioncost</span><span>›</span><span>handover</span><span>›</span><span style="color:#38bdf8;">payments-api.md</span>',
+            [
+              { html: '<span class="kw"># Handover: payments-api</span>', added: true },
+              { html: '<span class="fn">## Goal</span>: Verify Stripe webhook signatures and fulfill paid orders.', added: true },
+              { html: '<span class="fn">## What Is Done</span>: Wired STRIPE_WEBHOOK_SECRET safely; 3 webhook tests pass.', added: true },
+              { html: '<span class="fn">## Files Changed</span>: src/checkout.py, CLAUDE.md', added: true },
+              { html: '<span class="fn">## Tests Run</span>: pytest tests/test_checkout.py (3 passed)', added: true },
+              { html: '<span class="fn">## What Is Next</span>: Add idempotency key check for duplicate webhook events.', added: true }
+            ],
+            'New chat starts small & cheap by reading payments-api.md and carrying on from "What Is Next"'
+          );
+        }
+      }
+    ]
+  });
+</script>
+</body>
+</html>

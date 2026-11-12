@@ -11,6 +11,12 @@
 	--sl-color-accent-high: #c9d3fb;
 	--sl-content-width: 46rem;
 }
+/* Wide screens: no "On this page" column, so the page takes that space */
+@media (min-width: 80rem) {
+	:root {
+		--sl-content-width: 62rem;
+	}
+}
 :root[data-theme='light'] {
 	--sl-color-accent-low: #e3e8fb;
 	--sl-color-accent: #2f4fd6;
@@ -195,7 +201,7 @@ h1#_top {
 /* Welcome hero: text and the report picture side by side, the picture big enough to read */
 @media (min-width: 50rem) {
 	.hero {
-		grid-template-columns: 5fr 6fr;
+		grid-template-columns: 6fr 5fr;
 		gap: 3rem;
 		padding-block: 2.5rem 3rem;
 	}
@@ -203,8 +209,14 @@ h1#_top {
 		width: 100%;
 	}
 	.hero h1 {
-		font-size: clamp(2.2rem, 3.4vw, 3.4rem);
+		font-size: clamp(2rem, 2.6vw, 2.8rem);
+		line-height: 1.15;
 	}
+}
+/* the second sentence of the headline (what SessionCost does), in the accent colour on its own line */
+.hero .hero-live {
+	display: block;
+	color: var(--sl-color-accent);
 }
 .hero .hero-shot {
 	margin-bottom: 0;
@@ -245,6 +257,21 @@ h1#_top {
 }
 .duo a + a {
 	border-top-color: #b3261e;
+}
+/* Welcome: the three moments SessionCost acts, the guard first (red), then the tips and the report (blue) */
+.duo.trio {
+	grid-template-columns: repeat(3, 1fr);
+}
+.duo.trio a:first-child {
+	border-top-color: #b3261e;
+}
+.duo.trio a + a {
+	border-top-color: var(--sl-color-accent);
+}
+@media (max-width: 60rem) {
+	.duo.trio {
+		grid-template-columns: 1fr;
+	}
 }
 .duo a:hover {
 	border-color: var(--sl-color-accent-high);

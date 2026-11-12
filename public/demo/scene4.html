@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Scene 4: /sessioncost & Inside the HTML Report — SessionCost</title>
+<link rel="stylesheet" href="walkthrough.css" />
+</head>
+<body>
+<script src="walkthrough.js"></script>
+<script>
+  initWalkthrough({
+    sceneNum: 4,
+    initialBadge: 'Scene 4: /sessioncost & Inside the HTML Report (All Views)',
+    steps: [
+      {
+        stepLabel: '1. Run /sessioncost (1-Line Link in Chat)',
+        badge: 'Step 1: /sessioncost Runs sessioncost --brief & Opens Report in Canvas',
+        notify: {
+          kicker: 'SCENE 4 · THE REPORT',
+          title: 'See Every Token of Your Chat (<code>/sessioncost</code>)',
+          subtitle: 'Replies with only a 1-line link in chat so the report itself never bloats your later turns.',
+          holdMs: 3200
+        },
+        type: '/sessioncost',
+        run(api) {
+          api.appendTerminal(
+            'sessioncost --brief',
+            'Report: ~/.sessioncost/reports/5e551077.html',
+            '#4daafc',
+            'sessioncost --brief prints only the report path (no AI model called, nothing sent online)'
+          );
+          api.appendAgentTurn(`
+            <div class="session-bar-highlight">
+              <div>
+                The full report:
+                <span class="report-link">~/.sessioncost/reports/5e551077.html</span>
+              </div>
+            </div>
+            <div style="color:var(--muted); font-size:0.78rem;">
+              (if it did not open by itself, click the path)
+            </div>
+          `, 'Only 1 line in Chat! Anything longer would be re-sent on every later turn');
+          api.openReportInCanvas(
+            'Full HTML report opens in Canvas! Top Answer: 9.9M tokens sent vs 3.6M with fixes',
+            'report.html',
+            'SessionCost Report — 5e551077.html'
+          );
+        }
+      },
+      {
+        stepLabel: '2. The Path & Step 0 (Before You Type)',
+        badge: 'Step 2: The Path Tiles & Step 0 (Sent Before You Type a Word)',
+        run(api) {
+          api.driveReport(
+            'step0',
+            'Step 0 opened in Canvas: shows instructions, MCP tools, skills & rules sent on EVERY call'
+          );
+        }
+      },
+      {
+        stepLabel: '3. Charts View (Cache-Busting Breaks)',
+        badge: 'Step 3: Charts View — Cost Per Call & Cache-Busting Breaks',
+        run(api) {
+          api.driveReport(
+            'charts',
+            'Charts View in Canvas: Turn 6 sent 1.7M tokens after a 52-minute break when the cache expired'
+          );
+        }
+      },
+      {
+        stepLabel: '4. Agent Flow (Subagents & Helpers)',
+        badge: 'Step 4: Agent Flow — Which Subagents Worked & What Each Cost',
+        run(api) {
+          api.driveReport(
+            'agents',
+            'Agent Flow in Canvas: shows every subagent/helper spawned, what it touched, and its token cost'
+          );
+        }
+      },
+      {
+        stepLabel: '5. Trace & Risk Map + Exports (Excel / JSON / SARIF)',
+        badge: 'Step 5: Trace & Risk Map + Export Excel, --json & --sarif',
+        run(api) {
+          api.driveReport(
+            'sky',
+            'Trace & Risk Map in Canvas: every turn as a star of tool calls; red stars mark risky steps'
+          );
+          api.appendTerminal(
+            'sessioncost --json > out.json && sessioncost --sarif out.sarif',
+            'Wrote out.json (all session numbers) and out.sarif (SARIF 2.1.0 security trace)',
+            '#73c991',
+            'Export Excel from the report, or export --json and --sarif 2.1.0 from the terminal'
+          );
+        }
+      }
+    ]
+  });
+</script>
+</body>
+</html>

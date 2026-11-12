@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Scene 3: Guard Controls, Project Rules & Audit Report — SessionCost</title>
+<link rel="stylesheet" href="walkthrough.css" />
+</head>
+<body>
+<script src="walkthrough.js"></script>
+<script>
+  initWalkthrough({
+    sceneNum: 3,
+    initialBadge: 'Scene 3: Guard Controls, Project Allow-Rules & Audit Report',
+    steps: [
+      {
+        stepLabel: '1. Guard Asks on a Normal Step',
+        badge: 'Step 1: Risky Step Asks You First & Gives the Exact Allow Line',
+        notify: {
+          kicker: 'SCENE 3 · GUARD CONTROLS',
+          title: 'You Control the Guard — Plain Words or One-Line Rules',
+          subtitle: 'When the guard asks about a step that is normal for your project, its question tells you how to allow it.',
+          holdMs: 3200
+        },
+        type: 'Commit the webhook and push to origin main',
+        run(api) {
+          api.appendAgentTurn(`
+            <div class="cmd-card">
+              <div class="cmd-header">
+                <span>● Bash <code>git push origin main</code></span>
+                <span style="color:var(--amber);">Waiting for your Yes</span>
+              </div>
+            </div>
+            <div class="guard-card amber">
+              <div class="guard-kicker">
+                <span>?</span> SessionCost Guard: Pushes with Git. Allow It?
+              </div>
+              <div>
+                If this is a normal step for this project, say <strong>"allow it"</strong> in your next message (or send <code>/liveguard allow git_push git push origin main</code>) and it will not ask again here. Only the user's own message counts.
+              </div>
+              <div class="ask-btns">
+                <span class="ask-btn hit">Yes</span>
+                <span class="ask-btn">No</span>
+              </div>
+            </div>
+          `, 'The question gives you the exact rule: say "allow it" or send /liveguard allow ...');
+        }
+      },
+      {
+        stepLabel: '2. Save Rule for Project (/liveguard allow)',
+        badge: 'Step 2: Save Project Allow Rule so Future Pushes Run Unasked',
+        type: '/liveguard allow git_push git push origin main',
+        run(api) {
+          api.showTreeBadge('allowBadge', true);
+          api.appendAgentTurn(`
+            <div class="guard-card green">
+              <div class="guard-kicker">
+                <span>✔</span> Allowed for This Project Only
+              </div>
+              <div>
+                Saved <code>git_push  git push origin main</code> in <code>~/.sessioncost/guard/projects/payments-api.json</code>.<br/>
+                • <code>/liveguard allow</code> lists this project's rules<br/>
+                • <code>/liveguard allow --clear</code> removes them
+              </div>
+            </div>
+          `, 'Rule saved outside your repo! Only YOUR message can add rules — never the agent');
+          api.appendTerminal(
+            'git push origin main',
+            '   9c1e0aa..4f2a91c  main -> main',
+            '#73c991',
+            'Now git push origin main runs straight through in the Terminal without asking!'
+          );
+        }
+      },
+      {
+        stepLabel: '3. Guard Switches (strict / allow-list / off)',
+        badge: 'Step 3: /liveguard strict, allow-list, fail-closed & /liveguard off',
+        type: '/liveguard strict',
+        run(api) {
+          api.setGuardStatus('🛡 Live Guard: STRICT');
+          api.appendAgentTurn(`
+            <div class="guard-card green">
+              <div class="guard-kicker">
+                <span>🛡</span> Strict Mode Active (<code>/liveguard strict</code>)
+              </div>
+              <div>
+                Outside content stays untrusted <strong>for the whole chat</strong>.<br/>
+                • <code>/liveguard off</code> turns the guard off for every chat (logs stay in <code>~/.sessioncost/guard</code>)<br/>
+                • <code>/liveguard</code> turns it back on
+              </div>
+            </div>
+          `, '/liveguard strict keeps outside content untrusted for the entire chat');
+          api.showCustomFileInCanvas(
+            '.sessioncost-allow',
+            '<span>payments-api</span><span>›</span><span style="color:#38bdf8;">.sessioncost-allow &amp; Terminal Guard Switches</span>',
+            [
+              { html: '<span class="cmt"># Optional .sessioncost-allow file in project folder:</span>' },
+              { html: '<span class="kw">step</span>             pytest *', added: true },
+              { html: '<span class="kw">git_push</span>         git push origin feature/*', added: true },
+              { html: '' },
+              { html: '<span class="cmt"># Optional terminal switches:</span>' },
+              { html: '<span class="fn">sessioncost guard allow-list on</span>  <span class="cmt"># Every write asks unless in .sessioncost-allow</span>' },
+              { html: '<span class="fn">sessioncost guard fail-closed on</span> <span class="cmt"># Block all steps if a step cannot be read</span>' }
+            ],
+            'Teams can also commit expected project patterns in .sessioncost-allow'
+          );
+        }
+      },
+      {
+        stepLabel: '4. Guard Audit Report (sessioncost guard report)',
+        badge: 'Step 4: Everything the Guard Did Across All Chats (SHA-256 Verified)',
+        notify: {
+          kicker: 'GUARD AUDIT REPORT',
+          title: 'One Page Across Every Chat & Agent (<code>sessioncost guard report</code>)',
+          subtitle: 'Shows every stopped or asked step and verifies the SHA-256 hash chain line by line.',
+          holdMs: 3200
+        },
+        run(api) {
+          api.appendTerminal(
+            'sessioncost guard report',
+            'Report: ~/.sessioncost/reports/guard.html\nWatched: 14 chats across Claude Code, Codex, Cursor, Antigravity, Copilot\nSummary: 9 risky steps noticed · 5 stopped · 4 asked · 2 allowed · 1 hidden instruction found\nLog integrity: untouched (SHA-256 hash chain verified line by line)',
+            '#73c991',
+            'Builds guard.html and verifies every log file in ~/.sessioncost/guard/ is untouched'
+          );
+          api.openReportInCanvas(
+            'Opened guard.html in Canvas Area — shows all 5 stopped steps & SHA-256 "untouched" status',
+            'claude/guard.html',
+            'Guard Audit Report — guard.html'
+          );
+        }
+      }
+    ]
+  });
+</script>
+</body>
+</html>

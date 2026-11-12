@@ -7,6 +7,9 @@ audience: technical
 contract rates, batch, cloud provider). Cursor and Copilot Chat keep no token counts, so for them tokens are estimated
 from the size of the text, and the money is shown as a range.
 
+Prefer to watch? [See the prices in use and how to set your own](/sessioncost-help/demo/scene6.html) in a walkthrough
+that plays by itself. All of them: [Watch and try](/sessioncost-help/watch/).
+
 ## How exact, by agent
 
 | Agent | Tokens |
@@ -27,23 +30,44 @@ from the size of the text, and the money is shown as a range.
 | **Re-read from the cache** | Earlier chat sent again, served from the cache. | About a tenth of the input price. |
 | **Output** | What the model writes back. | The output price. |
 
-Prices are the providers' public API prices. The report shows the date of the price list it used.
+## Where the prices come from
+
+SessionCost ships with a price list that was checked on the providers' own pricing pages. It records the day it was
+checked. Each report shows that day.
+
+- **Price changes with a date.** When a provider announces a new price from a given day, the list keeps both prices.
+  Each call is priced at the rate for the day it ran.
+- **An old list warns you.** When the list is more than 60 days old, every report says so and tells you how to
+  update it.
+
+To see the prices in use, type `/sessioncost prices` in a chat or run `sessioncost prices` in a terminal. It shows
+each model's prices, where each price came from and the day the list was checked.
+
+Prices are applied in this order. Each one wins over the ones before it:
+
+1. **The price list**: the built-in one, or a newer one you fetched with `sessioncost prices update`.
+2. **Your team's file**, if you set one.
+3. **Your own prices.**
 
 ## Your own prices
 
-Write only what differs, in USD per million tokens; the rest stays built in. Price classes are `input`, `output`,
-`cache_read`, `cache_write_5m` and `cache_write_1h`.
+All prices are US dollars per million tokens. Set only the models whose price differs from the list.
 
-```json
-{
-  "models": {
-    "claude-sonnet-5-5": { "input": 1.6, "output": 8.0 }
-  }
-}
-```
+| Type in a chat | Or run in a terminal | What it does |
+|---|---|---|
+| "Opus: 4 input, 20 output" | `sessioncost prices set claude-opus-5-5 --input 4 --output 20` | Sets one model. Add `--cache-read R` and `--cache-write W` if you know them. If you leave them out, they come from the list. A model the list does not know gets its cache priced as input. |
+| `/sessioncost prices import rates.csv` | `sessioncost prices import rates.csv` | Imports a `.csv` with the columns `model, input, output, cache_read, cache_write`, or a `.json` file. |
+| `/sessioncost prices team rates.csv` | `sessioncost prices team rates.csv` | Uses a price file your team shares, for example on a shared drive. It is read again for every report, so a change to it takes effect at once. `team off` stops using it. |
+| `/sessioncost prices update` | `sessioncost prices update` | Fetches SessionCost's newest checked price list. |
 
-- For one report: `sessioncost --prices my-prices.json`.
-- Every time: save it as `~/.sessioncost/prices.json`.
+Once you set your own prices, reports say **"at your own prices"**. Your prices are saved in
+`~/.sessioncost/prices.json`. To use a price file for one report only, run `sessioncost --prices my-prices.json`.
+
+## Does it go online?
+
+Only when you run `prices update`. That command fetches the price list from the public SessionCost repository and
+sends nothing. If the fetch fails, nothing changes and the list you had stays in use. Apart from installing and
+updating SessionCost itself, no other part of it goes online.
 
 ## On a subscription
 

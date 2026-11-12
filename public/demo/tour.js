@@ -40,7 +40,7 @@
 		{ el: '#secSafety', title: 'Safety rules', text: 'When the agent took risky steps, here are the rules that would have stopped them, ready to paste.' },
 		{ view: 'sky', el: '#skyWatch', title: 'Trace & risk map: what to check', text: 'The kinds of risky steps found in the chat, such as installs, network use, or a step taken right after reading outside content. Tap one to light those steps up.' },
 		{ view: 'sky', el: '#sky', title: 'Every step, on one map', text: 'Each turn is a star of its calls; the small dots are tool steps. Red stars are the steps to check. Point at one to see what it did and why it is marked.' },
-		{ view: 'sky', el: '#skyGuard', title: 'The guard', text: 'With the live guard on, risky steps are stopped or asked about while the agent works, not found afterwards. Type /livesession at the start of a chat (Claude Code).' },
+		{ view: 'sky', el: '#skyGuard', title: 'The guard', text: 'With the live guard on from install, risky steps are stopped or asked about while the agent works, not found afterwards. Type /liveguard off to turn it off, or /liveguard to turn it back on.' },
 		{ el: '.help', title: 'Lost? Press ?', text: 'Every section has a ? beside its name. It opens that section’s page on this help site.' },
 		{ el: '#theme', title: 'Light or dark', text: 'The report opens light. The switch changes it, and the report remembers your choice.' },
 		{ title: 'Now try your own', text: 'Type /sessioncost at the end of any chat, and your own report opens. Close this tour to look around the demo.' },

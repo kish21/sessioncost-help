@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Scene 6: Custom Prices, History & CLI Tools — SessionCost</title>
+<link rel="stylesheet" href="walkthrough.css" />
+</head>
+<body>
+<script src="walkthrough.js"></script>
+<script>
+  initWalkthrough({
+    sceneNum: 6,
+    initialBadge: 'Scene 6: Custom & Team Prices, Multi-Project History & CLI',
+    steps: [
+      {
+        stepLabel: '1. Inspect Model Prices (/sessioncost prices)',
+        badge: 'Step 1: See Active Model Prices & When They Were Checked',
+        notify: {
+          kicker: 'SCENE 6 · PRICES & CLI',
+          title: 'Custom Model Prices, Chat History & Housekeeping',
+          subtitle: 'Inspect or override model prices, open reports from older chats or other projects, and clean old reports.',
+          holdMs: 3200
+        },
+        type: '/sessioncost prices',
+        run(api) {
+          api.appendTerminal(
+            'sessioncost prices',
+            'MODEL                  INPUT / 1M   OUTPUT / 1M   CACHE READ   SOURCE\nclaude-sonnet-4        $3.00        $15.00        $0.30        built-in (checked 2026-11)\ngpt-5                  $2.50        $10.00        $0.25        built-in (checked 2026-11)\ngemini-2.5-pro         $1.25        $10.00        $0.31        built-in (checked 2026-11)',
+            '#9cdcfe',
+            'Lists the prices in use, where each came from, and the date the list was checked'
+          );
+        }
+      },
+      {
+        stepLabel: '2. Custom, Team & Subscription Prices',
+        badge: 'Step 2: Set Your Own Prices, Share Team Prices or Use --subscription',
+        run(api) {
+          api.showCustomFileInCanvas(
+            'prices.json',
+            '<span>~/.sessioncost</span><span>›</span><span style="color:#38bdf8;">prices.json &amp; Team Pricing Commands</span>',
+            [
+              { html: '<span class="cmt"># Set custom price for one model ($ per 1M tokens):</span>' },
+              { html: '<span class="str">sessioncost prices set claude-sonnet-4 --input 2.4 --output 12</span>', added: true },
+              { html: '' },
+              { html: '<span class="cmt"># Import from CSV/JSON or share a team price file:</span>' },
+              { html: '<span class="str">sessioncost prices import my-prices.csv</span>', added: true },
+              { html: '<span class="str">sessioncost prices team ./team-prices.json</span>', added: true },
+              { html: '' },
+              { html: '<span class="cmt"># Fetch newest checked price list (only command that goes online):</span>' },
+              { html: '<span class="str">sessioncost prices update</span>' },
+              { html: '<span class="cmt"># On Claude Pro/Max or ChatGPT plan? Label money as API-equivalent:</span>' },
+              { html: '<span class="str">sessioncost --subscription</span>' }
+            ],
+            'Override model prices, share a team price file, or add --subscription for monthly plans'
+          );
+        }
+      },
+      {
+        stepLabel: '3. Browse Older Chats (sessioncost list)',
+        badge: 'Step 3: List Recent Chats & Open Any Chat by ID Prefix',
+        run(api) {
+          api.appendTerminal(
+            'sessioncost list --limit 20',
+            'ID        WHEN          AGENT         COST    TURNS  FIRST MESSAGE\n5e551077  Today 16:40   claude-code   $4.12   12     "Set up the payments library"\n3f2a9c1e  Today 14:15   cursor        $1.08   7      "Refactor webhook retry queue"\n8b4d201a  Yesterday     antigravity   $0.64   5      "Add idempotency key test"',
+            '#73c991',
+            'sessioncost list shows recent chats here across all 5 agents'
+          );
+          api.appendTerminal(
+            'sessioncost 3f2a9c1e',
+            'Report: ~/.sessioncost/reports/3f2a9c1e.html (or use --project ../other-app for another folder)',
+            '#4daafc',
+            'Pass the first characters of any chat ID from sessioncost list to open its report'
+          );
+        }
+      },
+      {
+        stepLabel: '4. Clean Up Old Reports (/sessioncost clean)',
+        badge: 'Step 4: Delete Older Reports & Keep the Latest (/sessioncost clean)',
+        type: '/sessioncost clean',
+        run(api) {
+          api.appendTerminal(
+            'sessioncost clean',
+            'Deleted 18 older report files from ~/.sessioncost/reports/ (kept newest: 5e551077.html, guard.html).',
+            '#73c991',
+            '/sessioncost clean deletes older report HTML files and keeps the latest'
+          );
+          api.appendAgentTurn(`
+            <div class="guard-card green">
+              <div class="guard-kicker">
+                <span>✔</span> All 6 Walkthrough Scenes Complete!
+              </div>
+              <div>
+                Use the <strong>1–6 buttons</strong> in the top bar any time to jump to any feature flow.
+              </div>
+            </div>
+          `, 'All 6 scenes complete! Click any 1–6 button in the top bar to revisit a scene');
+        }
+      }
+    ]
+  });
+</script>
+</body>
+</html>
