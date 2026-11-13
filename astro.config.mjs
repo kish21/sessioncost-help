@@ -62,6 +62,7 @@ export default defineConfig({
 					items: [
 						{ label: 'When to use what', slug: 'use/when-to-use-what' },
 						{ label: 'Save tokens', slug: 'use/save-tokens' },
+						{ label: 'Token best practices', slug: 'use/best-practices' },
 						{ label: 'Stay safe', slug: 'use/stay-safe' },
 						{ label: 'Long chats and handover', slug: 'use/long-chats' },
 						{
