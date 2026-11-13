@@ -96,8 +96,6 @@ page read just before a push. Those are tested in real chats only.
 
 ## Known problems
 
-- In Antigravity on Windows, a black window flashes briefly before and after each step. That is the guard starting;
-  it does no harm.
 - The log's turn-taking (two steps written at the same moment) is tested on Windows only so far.
 
 ## Report a security problem
