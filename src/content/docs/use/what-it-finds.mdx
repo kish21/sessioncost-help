@@ -1,0 +1,89 @@
+---
+title: What SessionCost finds
+description: Everything SessionCost catches, on one page. On the left, the token waste it finds and the fix it proposes; on the right, the risky steps the Live Guard blocks or asks about.
+---
+
+SessionCost does two jobs while your agent works: it finds **token waste** and proposes the fix, and the **Live
+Guard** stops risky steps before they run. Both run on your computer and send nothing anywhere.
+
+<div class="split">
+<section class="split-half">
+
+## Token waste: found and fixed
+
+**How you see it:** type `/sessioncost` for the report, `/sessioncost fix` for the list. With tips on, a one-line
+tip ends the agent's reply when there is waste worth fixing.
+
+**What "fix it" does:** shows the change first, makes a backup, then applies it. `sessioncost fix --undo` puts it
+back. The report later shows what the fix saved.
+
+### What it finds
+
+- **Long chat.** Every message re-sends the whole chat. *Fix:* the agent writes a handover; you start a fresh chat.
+- **Cache gone.** A long pause or a mid-chat change of model, tools or settings re-sends everything at full price.
+- **Same file read again.** A second copy rides along with every later message.
+- **Whole file rewritten** for a few changed lines.
+- **Failing step retried** again and again with no change.
+- **Tests re-run** with nothing changed in between.
+- **Helpers checked on** over and over instead of reporting back.
+- **Helpers re-reading** what the main agent already knew.
+- **Turns spent asking "may I?"** for steps you would always allow.
+- **Tools never used**: connected servers and built-in tools. *Fix:* switched off for this project (Claude Code).
+- **Old big output** still carried in the chat.
+- **Big tool results**: whole lockfiles, build folders, long logs.
+- **Long always-on instructions** sent with every message.
+- **Screenshots** where text would do.
+- **Long answers** and deep thinking on routine steps.
+- **A big model on routine steps.** *Fix:* you choose the model at the start of the next chat.
+
+For the other items, "fix it" adds one short rule to your agent's own rules file (`CLAUDE.md`, `AGENTS.md`,
+`GEMINI.md`, Cursor rules or Copilot instructions).
+
+**Each item says** how many tokens it cost, what that is in money, why it costs, and the best practice.
+
+[Token best practices](/sessioncost-help/use/best-practices/) · [Save tokens](/sessioncost-help/use/save-tokens/)
+
+</section>
+<section class="split-half">
+
+## Live Guard: stopped before it runs
+
+**How you see it:** a blocked or asked step shows a line in the chat saying what and why. `/sessioncost` starts with
+this chat's count of steps checked, blocked and asked; the report's Trace & risk map lists each one.
+
+**What it does:** checks every tool step before it runs. *Blocked* steps never run; *asked* steps wait for your
+yes; the rest go ahead and are logged. Say "allow it" to stop being asked about that step in this project.
+
+### Blocked: the never list
+
+- **Reading or sending a secret**: `.env`, SSH keys, cloud logins, also disguised (`cat .e*`).
+- **Printing the environment**, where keys live.
+- **Running code from the internet** (`curl … | sh`) or hidden commands.
+- **Rewriting shared history** (`git push --force`).
+- **Switching off commit checks** (`--no-verify`, `core.hooksPath`).
+- **Wiping a disk or home folder**; persistence; switching off a security tool.
+- **Changing the guard** itself, or a poisoned MCP server's tools.
+
+### Asks you first
+
+- **Push**, once per destination.
+- **Installing** a package, every time if it is not in the project's lists.
+- **Deleting files or work**, and writing outside the project.
+- **A new website**, once per site.
+- **The agent's own rules and checks** (`CLAUDE.md`, CI, git hooks), every time.
+- **Raising its own rights** (`sudo`, execution policy).
+- **A third try** of a command that failed twice.
+
+### Extra care
+
+After a web page, an outside file or a result with signs of a **prompt injection**, risky steps ask again or are
+blocked, until your next message. A key that shows up in a result makes anything that sends data out ask.
+
+[What the guard checks](/sessioncost-help/guard/checks/) · [Stay safe](/sessioncost-help/use/stay-safe/)
+
+</section>
+</div>
+
+**Not every agent shows the guard everything.** Codex and Cursor do not tell it about web pages or failed commands,
+and Antigravity does not pass on what a step returned. The full table is on
+[What the guard checks](/sessioncost-help/guard/checks/#by-agent).

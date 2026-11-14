@@ -446,3 +446,36 @@ h1#_top {
 		grid-template-columns: 1fr;
 	}
 }
+/* What SessionCost finds: two equal halves, stacked on narrow screens */
+.sl-markdown-content .split {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1.5rem;
+	align-items: start;
+}
+.sl-markdown-content .split-half {
+	margin-top: 0;
+	padding: 0 1.25rem 1.25rem;
+	border: 1px solid var(--sl-color-gray-5);
+	border-top: 4px solid var(--sl-color-accent);
+	border-radius: 0.5rem;
+	font-size: 0.95rem;
+}
+.sl-markdown-content .split-half:last-child {
+	border-top-color: #b3261e;
+}
+.sl-markdown-content .split-half h2 {
+	margin-top: 1rem;
+	font-size: 1.35rem;
+}
+.sl-markdown-content .split-half h3 {
+	font-size: 1.05rem;
+}
+.sl-markdown-content .split-half li + li {
+	margin-top: 0.3rem;
+}
+@media (max-width: 56rem) {
+	.sl-markdown-content .split {
+		grid-template-columns: 1fr;
+	}
+}
