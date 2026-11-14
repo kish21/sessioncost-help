@@ -451,7 +451,7 @@ h1#_top {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 1.5rem;
-	align-items: start;
+	align-items: stretch;
 }
 .sl-markdown-content .split-half {
 	margin-top: 0;

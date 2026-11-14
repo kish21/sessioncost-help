@@ -17,7 +17,7 @@ tip ends the agent's reply when there is waste worth fixing.
 **What "fix it" does:** shows the change first, makes a backup, then applies it. `sessioncost fix --undo` puts it
 back. The report later shows what the fix saved.
 
-### What it finds
+### What it finds (17)
 
 - **Long chat.** Every message re-sends the whole chat. *Fix:* the agent writes a handover; you start a fresh chat.
 - **Cache gone.** A long pause or a mid-chat change of model, tools or settings re-sends everything at full price.
@@ -54,30 +54,52 @@ this chat's count of steps checked, blocked and asked; the report's Trace & risk
 **What it does:** checks every tool step before it runs. *Blocked* steps never run; *asked* steps wait for your
 yes; the rest go ahead and are logged. Say "allow it" to stop being asked about that step in this project.
 
-### Blocked: the never list
+### Blocked: the never list (13)
 
 - **Reading or sending a secret**: `.env`, SSH keys, cloud logins, also disguised (`cat .e*`).
-- **Printing the environment**, where keys live.
-- **Running code from the internet** (`curl … | sh`) or hidden commands.
+- **A secrets file in a commit**, including what `git add .` would pick up.
+- **Printing the environment** (`printenv`, `echo $API_KEY`).
+- **Running code from the internet** (`curl … | sh`).
+- **Hidden commands** (`-EncodedCommand`, `base64 -d | sh`).
 - **Rewriting shared history** (`git push --force`).
 - **Switching off commit checks** (`--no-verify`, `core.hooksPath`).
-- **Wiping a disk or home folder**; persistence; switching off a security tool.
-- **Changing the guard** itself, or a poisoned MCP server's tools.
+- **Persistence**: scheduled tasks, startup entries, shell profiles.
+- **Switching off a security tool**: Defender, the firewall.
+- **Wiping** a disk or home folder (`rm -rf ~`, `format`).
+- **Changing the guard**: its settings, log or the agents' hooks.
+- **A poisoned MCP server's tools**, for the whole chat.
+- **A risky step right after a prompt injection.**
 
-### Asks you first
+### Asks you first (15)
 
 - **Push**, once per destination.
-- **Installing** a package, every time if it is not in the project's lists.
-- **Deleting files or work**, and writing outside the project.
+- **Install**, once per package.
+- **A package not in the project's lists**, every time.
+- **Deleting files or work** (`git restore`, `stash drop`).
+- **Writing outside the project.**
 - **A new website**, once per site.
-- **The agent's own rules and checks** (`CLAUDE.md`, CI, git hooks), every time.
-- **Raising its own rights** (`sudo`, execution policy).
+- **The agent's own rules and checks** (`CLAUDE.md`, CI), every time.
+- **An MCP tool that changes or sends**, once per server.
+- **Raising its own rights** (`sudo`, registry, PATH), every time.
+- **A script that prints a key.**
+- **Sending data out after a key appeared**, every time.
+- **A script on disk with a never-list step**, per version.
+- **A new or changed skill, plugin or MCP server** (Claude Code).
+- **Reading a whole big file** (lockfile, bundle, 2,000+ lines).
 - **A third try** of a command that failed twice.
 
-### Extra care
+### When the chat starts (3)
 
-After a web page, an outside file or a result with signs of a **prompt injection**, risky steps ask again or are
-blocked, until your next message. A key that shows up in a result makes anything that sends data out ask.
+- **Rules and memory files** read for prompt injection.
+- **MCP tool descriptions** read; a poisoned server is blocked.
+- **Fingerprints** of skills, plugins and servers (Claude Code).
+
+### After each result (2)
+
+- **Injection signs**: steering phrases, fake system tags, hidden characters.
+- **Keys**: from then on, sending data out asks.
+
+After a web page or an outside file, pushes, secrets and rule changes ask again until your next message.
 
 [What the guard checks](/sessioncost-help/guard/checks/) · [Stay safe](/sessioncost-help/use/stay-safe/)
 
