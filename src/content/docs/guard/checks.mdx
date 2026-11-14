@@ -99,8 +99,8 @@ others.
 | Asked steps | you are asked | blocked; the agent asks you in the chat, and your yes allows that step once | you are asked (a file read cannot ask, so it is blocked) | asked with `force_ask`, so Antigravity's "Always allow" cannot skip it | you are asked; in Autopilot mode, blocked |
 | Results scanned for injection and keys | yes | yes | shell, MCP and file reads | no (its hook carries no result; a page still counts as untrusted) | yes |
 | A line at once when a result shows injection signs | yes | sent (not tried yet) | no (in the log and report) | no | no (in the log and report) |
-| Third try of a failing command | yes | no | no | no | no |
-| Untrusted content lasts until | your next message | your next message | the end of the chat | the end of the chat, unless the build sends your message | your next message |
+| Third try of a failing command | yes | no (its hook is not told the exit code) | no (its hook is not told the exit code) | yes (from 1.1.4) | yes (from 1.1.4) |
+| Untrusted content lasts until | your next message | your next message | your next message (from 1.1.4; before: the end of the chat) | your next message (from 1.1.4; before: the end of the chat) | your next message |
 | Turn on (every chat, until off) | On from install; again: `/liveguard`, or `sessioncost guard on` | On from `sessioncost setup`; plugin: `/liveguard` once. Again: `/liveguard`, or `sessioncost guard on` | same as Codex | same as Codex | On from setup; again: `sessioncost guard on` |
 | Turn off | "turn the guard off" or `/liveguard off`, or `sessioncost guard off` | `sessioncost guard off` in a terminal | same | same | same |
 | Says it is on when a chat starts | a line, and **🛡 Guard on** beside the model name (terminal, desktop app) or under the message box (VS Code) | the agent says it | the agent says it | the agent says it after `/liveguard` | the agent says it |
@@ -111,6 +111,12 @@ others.
 seconds. Antigravity reads its hooks only when it starts: after setup, close it fully (a window reload is not
 enough). On Windows the guard starts without a console window in every agent, so no window flashes at each step
 (from 1.1.4; Claude Code and Antigravity already before).
+
+**A safety net, not a wall.** The guard reads each step the way the shell will run it, disguises included: a
+pattern that matches `.env` (`cat .e*`), a file name the command works out (`cat $(ls -a | grep en)`), a name built
+from pieces (`open('.'+'env')`), deletes and commit-check switches in other forms. It is there to catch an agent's
+mistakes. Code that sets out to hide a step can still find a way no check sees, so keep your own care for secrets
+and pushes.
 
 ## What it cannot do
 
