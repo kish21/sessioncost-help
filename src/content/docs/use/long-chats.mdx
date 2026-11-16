@@ -31,7 +31,8 @@ A new chat starts small. The handover is how you start one without losing your p
 1. **SessionCost offers it.** When a chat passes **100k tokens**, the last line of your agent's next reply says so
    (with the live tips, on unless you turned them off), for example:
    *💡 SessionCost: This chat is at 114k tokens: every message re-sends all of it. Say "write a handover" (or type
-   /sessioncost fix) so you can start a fresh chat.* Say **write a handover**.
+   /sessioncost fix) so you can start a fresh chat.* Say **write a handover**. If you carry on instead, the tip
+   comes back each time the chat doubles in size (here at about 230k, then 460k tokens).
 2. **Your agent writes it**: the goal, what is done, files changed, tests run, what is next,
    and a short "other token waste in this chat" section. SessionCost calls no AI model; your own agent writes the
    words. It shows you the handover in its reply.

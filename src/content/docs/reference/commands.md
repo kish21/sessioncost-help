@@ -87,7 +87,7 @@ Add any of these after `sessioncost` or after a chat id. They combine, for examp
 | `--subscription` | On a monthly plan (Claude Pro or Max, ChatGPT), money is labelled what it would cost at API prices. |
 | `--cursor-usage usage.csv` | Cursor only: your usage export, for exact tokens. It is also picked up from Downloads by itself. |
 | `--prices my-prices.json` | Your own prices laid over the built-in ones. |
-| `--json` | Every number as JSON. It is long: send it to a file, `sessioncost --json > out.json`. |
+| `--json` | Every number as JSON, and nothing else: notes go to stderr. It is long: send it to a file, `sessioncost --json > out.json`. |
 | `--sarif FILE` | The risky steps (and the guard's decisions) as SARIF 2.1.0, for security tools. |
 | `--version` | The installed version. |
 | `--help` | Every command and option. |

@@ -64,6 +64,11 @@ All prices are US dollars per million tokens. Set only the models whose price di
 Once you set your own prices, reports say **"at your own prices"**. Your prices are saved in
 `~/.sessioncost/prices.json`. To use a price file for one report only, run `sessioncost --prices my-prices.json`.
 
+**A mistake in your price file** (for example after editing it by hand) does not stop your reports. List prices are
+used instead, and the report and `sessioncost prices` name the file and what is wrong with it. Fix the file, or
+delete it and set your prices again with `sessioncost prices set`. A file given with `--prices` must be right: if it
+cannot be read, the command stops and names it.
+
 ## Does it go online?
 
 Only when you run `prices update`. That command fetches the price list from the public SessionCost repository and

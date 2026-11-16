@@ -52,6 +52,7 @@ export default defineConfig({
 								{ label: 'Cursor', slug: 'start/install/cursor' },
 								{ label: 'Antigravity', slug: 'start/install/antigravity' },
 								{ label: 'GitHub Copilot', slug: 'start/install/copilot' },
+								{ label: 'Editor extension', slug: 'start/install/editor' },
 							],
 						},
 						{ label: 'Your first 5 minutes', slug: 'start/first-5-minutes' },

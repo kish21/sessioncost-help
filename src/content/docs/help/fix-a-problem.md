@@ -7,6 +7,12 @@ audience: everyone
 
 Restart the agent after installing. Agents read their skills when they start.
 
+## "No chat found for …"
+
+SessionCost looks for chats whose folder is the one you run it in. The message lists where it looked (Claude Code,
+Codex, Copilot CLI, VS Code Copilot Chat, Antigravity and Cursor). Run it in the folder you opened your agent in, or
+name that folder: `sessioncost --project <folder>`.
+
 ## "sessioncost is not recognized" (Windows)
 
 Use `python -m sessioncost` instead of `sessioncost`. This is common with the Microsoft Store Python.

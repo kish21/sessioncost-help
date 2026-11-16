@@ -12,7 +12,7 @@ Commands on this page run in a terminal. Type them the way that matches
 
 | Path | What it holds |
 |---|---|
-| `reports/` | One report file per chat, and `guard.html` from `sessioncost guard report`. `sessioncost clean` deletes the older ones. |
+| `reports/` | One report file per chat, and `guard.html` from `sessioncost guard report`. After each report, only the newest 20 are kept; `sessioncost clean` deletes the older ones at once. |
 | `guard/config.json` | The switches on this page: guard on or off, strict, allow-list, fail-closed, auto reports, fix auto. |
 | `guard/` (other files) | The guard's log, one file per chat, each with a small `.lock` file. |
 | `guard/projects/` | Allow rules you added from the chat with `/liveguard allow`, per project. |
@@ -24,6 +24,10 @@ Commands on this page run in a terminal. Type them the way that matches
 | `prices-team.json` | Where your team's price file is, from `sessioncost prices team`. |
 | `prices-update.json` | The newer price list, from `sessioncost prices update`. Delete it to go back to the built-in list. |
 | `npm/venv/` | The program itself, when installed with npm. |
+| `editor/venv/` | The program itself, when installed by the [editor extension](/sessioncost-help/start/install/editor/). |
+
+To keep this folder somewhere else, set the environment variable `SESSIONCOST_DIR` to that folder. Everything above,
+reports included, then goes there.
 
 **In each agent's folder** (added by setup or the plugin)
 
