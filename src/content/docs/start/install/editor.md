@@ -6,11 +6,11 @@ audience: everyone
 
 The extension shows SessionCost in your editor's status bar, for example:
 
-`🛡 Guard on · 84k tokens · $0.62`
+`🛡 Guard on · fix the login · 84k tokens · $0.62`
 
-- **Status bar:** the guard, and the tokens and cost of this folder's newest chat (Claude Code, Codex, Copilot,
-  Antigravity or Cursor). It turns amber when the guard stopped a step, and switches to a new chat as soon as you
-  start one.
+- **Status bar:** the guard, and the name, tokens and cost of this folder's newest chat (Claude Code, Codex, Copilot,
+  Antigravity or Cursor). Hover over it for the full chat name and details. It turns amber when the guard stopped a
+  step, and switches to a new chat as soon as you start one.
 - **Pop-up** when the guard stops or asks about a step, with **Show** for the guard report.
 - **Click it** for the menu: open the report, token tips on or off, fix token waste, undo the last fix, guard on or
   off, the guard report, the handover, prices, set up your agents, and update.
@@ -24,7 +24,9 @@ The extension shows SessionCost in your editor's status bar, for example:
 3. Click **SessionCost** in the status bar, then **Set up your agents**, to add `/sessioncost` and the guard to your
    agents.
 
-When the extension updates, it updates its SessionCost to the same version. If you already installed SessionCost
+When the extension updates, it updates its SessionCost to the same version; the status bar says **Updating
+SessionCost…** until it is done (about a minute). VS Code, Cursor and Antigravity share this one copy: an editor whose
+extension is older uses the newer copy as it is and never puts an older one back. If you already installed SessionCost
 another way (one-line install, npm, Python or the Claude Code plugin), that keeps working; both use the same data in
 `~/.sessioncost`.
 
