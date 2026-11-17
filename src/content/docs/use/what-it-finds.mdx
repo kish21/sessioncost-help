@@ -36,6 +36,10 @@ back. The report later shows what the fix saved.
 - **Long answers** and deep thinking on routine steps.
 - **A big model on routine steps.** *Fix:* you choose the model at the start of the next chat.
 
+**Stopped before it happens:** when the agent is about to read all of a big file (about 10k tokens, or a lockfile
+from about 3k) without a line range, it is turned back once and told to search first or read only the lines it needs.
+Reading it again goes through. Works with the guard on or tips on; it asks you nothing.
+
 For the other items, "fix it" adds one short rule to your agent's own rules file (`CLAUDE.md`, `AGENTS.md`,
 `GEMINI.md`, Cursor rules or Copilot instructions).
 
@@ -70,7 +74,7 @@ yes; the rest go ahead and are logged. Say "allow it" to stop being asked about 
 - **A poisoned MCP server's tools**, for the whole chat.
 - **A risky step right after a prompt injection.**
 
-### Asks you first (15)
+### Asks you first (14)
 
 - **Push**, once per destination.
 - **Install**, once per package.
@@ -85,7 +89,6 @@ yes; the rest go ahead and are logged. Say "allow it" to stop being asked about 
 - **Sending data out after a key appeared**, every time.
 - **A script on disk with a never-list step**, per version.
 - **A new or changed skill, plugin or MCP server** (Claude Code).
-- **Reading a whole big file** (lockfile, bundle, 2,000+ lines).
 - **A third try** of a command that failed twice.
 
 ### When the chat starts (3)

@@ -28,19 +28,22 @@ A new chat starts small. The handover is how you start one without losing your p
 
 <HandoverFlow />
 
-1. **SessionCost offers it.** When a chat passes **100k tokens**, the last line of your agent's next reply says so
-   (with the live tips, on unless you turned them off), for example:
-   *💡 SessionCost: This chat is at 114k tokens: every message re-sends all of it. Say "write a handover" (or type
-   /sessioncost fix) so you can start a fresh chat.* Say **write a handover**. If you carry on instead, the tip
-   comes back each time the chat doubles in size (here at about 230k, then 460k tokens).
-2. **Your agent writes it**: the goal, what is done, files changed, tests run, what is next,
-   and a short "other token waste in this chat" section. SessionCost calls no AI model; your own agent writes the
-   words. It shows you the handover in its reply.
+1. **Your agent writes it at once.** When a chat passes **100k tokens** (with the live tips, on unless you turned
+   them off), your agent finishes your request, then writes the handover in `NEXT-SESSION.md` in the project, without
+   asking. The handover covers the goal, what is done, files changed, tests run and what is next, plus a short "other
+   token waste in this chat" section. SessionCost calls no AI model; your own agent writes the words and shows them in
+   its reply. In a git project, `NEXT-SESSION.md` is added to `.gitignore`, so the handover is never committed.
+2. **The last line tells you**, for example: *💡 SessionCost: This chat is at 114k tokens: every message re-sends all
+   of it. A handover is in NEXT-SESSION.md: start a fresh chat and say "continue from handover".* If you carry on
+   instead, the handover is written again each time the chat doubles in size (here at about 230k, then 460k tokens).
 3. **Start a new chat** in the same project and say **"continue from handover"**. The agent reads the file and carries
    on from "what is next".
 
 For a week after a handover, a new chat in that project is told one exists; the agent reads it only when you ask.
 There is one handover per project, replaced by the next one.
+
+This works in Claude Code, Codex and Antigravity. Cursor and Copilot let SessionCost add text only when a chat starts,
+too late for the chat that grew long: there, type `/sessioncost fix` in the long chat and say **write a handover**.
 
 ## Choose when a chat counts as long
 

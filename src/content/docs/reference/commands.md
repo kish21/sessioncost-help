@@ -32,7 +32,7 @@ your agent's own question.
 |---|---|---|
 | "Fix my token waste" | `/sessioncost fix` | This project's token waste as a to-do list, with the change for each. Say "fix it" (or "fix 1 and 3") to apply, after a backup. |
 | "Undo the fix" | `/sessioncost fix --undo` | Puts back the newest fix, unless you changed the file since. |
-| "Write a handover" | `/sessioncost fix` | After the long-chat tip: your agent writes a handover so you can start a fresh chat. There, say "continue from handover". |
+| "Write a handover" | `/sessioncost fix` | Your agent writes a handover so you can start a fresh chat. There, say "continue from handover". A chat past 100k tokens gets one without asking (Claude Code, Codex, Antigravity). |
 | "Turn token tips off" / "on" | `/sessioncost fix auto off` / `on` | The live tips. They are on from install: after each answer that wasted tokens, the last line of the next reply names it. |
 | "Warn me at 150k tokens" | `/sessioncost fix long-chat 150k` | When a chat counts as long (100k by default). |
 | "Set my budget to $5" / "clear my budget" | `/sessioncost fix budget 5` / `off` | A dollar ceiling per chat for the handover tip. |
