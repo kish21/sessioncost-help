@@ -1,16 +1,23 @@
 ---
 title: Install in Antigravity
-description: The one-line install covers Antigravity; or install the command-line plugin. Both bring /sessioncost and /liveguard.
+description: Put SessionCost into Antigravity with the one-line install or the command-line plugin, check it works, turn the guard on and keep it up to date.
 audience: everyone
 ---
 
-The [one-line install](/sessioncost-help/start/install/) covers Antigravity, the app and the command line.
+SessionCost brings two commands into Antigravity: **`/sessioncost`** (where your chat's tokens went) and
+**`/liveguard`** (the guard). Pick one way:
 
-**Command-line plugin** (the other way): `agy plugin install https://github.com/kish21/sessioncost`, then start a new
-chat. It brings `/sessioncost` and `/liveguard`, and needs Git. No Python? The first `/sessioncost` or
-`/liveguard` fetches one.
+| | **One-line install** (recommended) | **Command-line plugin** |
+|---|---|---|
+| **Covers** | The Antigravity app and its command line, and every other agent on this computer | Antigravity only |
+| **Needs** | Nothing | [Git](https://git-scm.com/downloads); Python is fetched by itself the first time |
+| **1. Install** | Follow [Install in one line](/sessioncost-help/start/install/) | In a terminal: `agy plugin install https://github.com/kish21/sessioncost` |
+| **2. Check it worked** | Restart Antigravity, open a **new** chat and type `/`: **/sessioncost** and **/liveguard** are in the list | The same |
+| **3. Turn the guard on** | Already on | Type `/liveguard`, then restart Antigravity once |
+| **Keep it up to date** | `/sessioncost update` in a chat | `/sessioncost update` in a chat, or install again the same way |
 
-**The guard:** type `/liveguard`. The first time, it puts the guard into Antigravity and asks you to restart it
-once. You can see the guard's hooks under **Customizations → Hooks**.
+Use one way only: both together would give Antigravity two `/sessioncost`.
 
-**New versions:** `/sessioncost update` in a chat, or install again the same way.
+To open a terminal: **Windows:** Windows key, type `powershell`, Enter. **Mac:** Cmd + Space, type `terminal`, Enter.
+
+You can see the guard's hooks under **Customizations → Hooks**.

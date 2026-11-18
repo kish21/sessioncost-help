@@ -1,42 +1,57 @@
 ---
 title: Install in Claude Code
-description: Install the SessionCost plugin in Claude Code from the plugin menu or with one command. It brings /sessioncost, /liveguard and the guard's hooks.
+description: Install the SessionCost plugin in Claude Code (VS Code or CLI), check it works, keep it up to date or remove it.
 audience: everyone
 ---
 
-The plugin brings `/sessioncost`, `/liveguard` and the guard's hooks by itself, and needs Git. No Python? The first
-`/sessioncost` or `/liveguard` fetches one. Use one way per agent: the plugin and the
-[one-line install](/sessioncost-help/start/install/) together would give Claude Code two `/sessioncost`.
+The plugin brings two commands into Claude Code: **`/sessioncost`** (where your chat's tokens went) and
+**`/liveguard`** (the guard). The guard is on as soon as it is installed. It needs [Git](https://git-scm.com/downloads).
+Python is fetched by itself the first time.
 
-## From Claude Code's plugin menu
+Use one way per agent: the plugin and the [one-line install](/sessioncost-help/start/install/) together would give
+Claude Code two `/sessioncost`. The VS Code extension and the CLI share one install.
 
-1. Open **Manage Plugins** (in VS Code: the Claude Code panel's plugin menu; in the CLI: type `/plugin`).
-2. **Marketplaces** tab: paste `kish21/sessioncost` and click **Add**.
-3. **Plugins** tab: type `sessioncost` in **Search plugins…** (the list is sorted by installs, so it sits far down
-   without a search), then click **Install**. Where it asks where to install, choose **user** (every folder), not
-   **project** or **local**: those give SessionCost to one folder only.
-4. Reload VS Code (Ctrl+Shift+P → **Developer: Reload Window**) or restart the CLI, open a **new** chat and type
-   `/`: **/sessioncost** and **/liveguard** are in the list (they may show as `/sessioncost:sessioncost` and
-   `/sessioncost:liveguard`).
+## Install
 
-## Or one command in a terminal
+| | **Claude Code in VS Code** | **Claude Code CLI** |
+|---|---|---|
+| **1. Open the plugin menu** | In the Claude Code panel, open **Manage Plugins** | Type `/plugin` |
+| **2. Add SessionCost's source** | **Marketplaces** tab: paste `kish21/sessioncost`, click **Add** | The same |
+| **3. Install the plugin** | **Plugins** tab: type `sessioncost` in **Search plugins…**, click **Install**, choose **user** | The same |
+| **4. Reload** | Ctrl+Shift+P (Mac: Cmd+Shift+P) → **Developer: Reload Window** | Quit and start `claude` again |
+| **5. Check it worked** | Open a **new** chat and type `/`: **/sessioncost** and **/liveguard** are in the list | The same |
+
+In step 3, search: the list is sorted by installs, so SessionCost sits far down without it. Choose **user** (every
+folder), not **project** or **local**: those give SessionCost to one folder only. In step 5 the commands may show as
+`/sessioncost:sessioncost` and `/sessioncost:liveguard`.
+
+### Or one line in a terminal
+
+Open a terminal (**Windows:** Windows key, type `powershell`, Enter. **Mac:** Cmd + Space, type `terminal`, Enter),
+paste this and press Enter:
 
 ```sh
 claude plugin install sessioncost --marketplace kish21/sessioncost --scope user
 ```
 
-It ends with `✔ Successfully installed plugin: sessioncost@sessioncost (scope: user)`. Reload VS Code or restart the
-CLI, then open a new chat. The CLI and VS Code share one install.
+It ends with `✔ Successfully installed plugin: sessioncost@sessioncost (scope: user)`. Then do steps 4 and 5.
+
+## Keep it up to date
+
+| **Claude Code in VS Code** | **Claude Code CLI** |
+|---|---|
+| In a terminal: `claude plugin update sessioncost@sessioncost`, then reload | Once: `/plugin` → **Marketplaces** → sessioncost → **Enable auto-update** |
+
+## Remove it
+
+In a terminal: `claude plugin uninstall sessioncost@sessioncost`, then reload.
 
 ## It does not show up?
 
 | What you see | What to do |
 |---|---|
-| `claude` is not recognized | Only the VS Code extension is installed. Use the [one-line install](/sessioncost-help/start/install/). |
-| `git` is not found | Install [Git](https://git-scm.com/downloads) and open a new terminal, or use the one-line install. |
+| `claude` is not recognized | Only the VS Code extension is installed. Use the plugin menu (steps 1-5), or the [one-line install](/sessioncost-help/start/install/). |
+| `git` is not found | Install [Git](https://git-scm.com/downloads), open a new terminal, and try again. |
 | Installed, but no `/sessioncost` | The chat was open before the install. Reload and open a **new** chat. |
 | Works in one folder only | It was installed for one folder. `claude plugin install sessioncost@sessioncost --scope user`, reload, new chat. |
 | Claude Code older than 2.1.275 | `claude plugin marketplace add kish21/sessioncost`, then `claude plugin install sessioncost@sessioncost --scope user`. |
-
-**New versions:** in the CLI, once: `/plugin` → **Marketplaces** → sessioncost → **Enable auto-update**. In VS Code:
-`claude plugin update sessioncost@sessioncost` in a terminal.

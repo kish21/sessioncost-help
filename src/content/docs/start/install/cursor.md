@@ -1,20 +1,40 @@
 ---
 title: Install in Cursor
-description: Install the SessionCost plugin in Cursor from GitHub. It brings /sessioncost and /liveguard.
+description: Install the SessionCost plugin in Cursor from GitHub, check it works, turn the guard on and keep it up to date.
 audience: everyone
 ---
 
-The plugin brings `/sessioncost` and `/liveguard`, and needs Git. No Python? The first `/sessioncost` or
-`/liveguard` fetches one.
+The plugin brings two commands into Cursor: **`/sessioncost`** (where your chat's tokens went) and **`/liveguard`**
+(the guard). It needs [Git](https://git-scm.com/downloads). Python is fetched by itself the first time. No terminal
+needed.
 
-1. Open **Customize → Plugins**, choose **From GitHub Repository** (or **Add Marketplace**).
+Use one way per agent: the plugin and the [one-line install](/sessioncost-help/start/install/) together would give
+Cursor two `/sessioncost`.
+
+## Install
+
+1. Open **Customize → Plugins** and choose **From GitHub Repository** (or **Add Marketplace**).
 2. Paste `https://github.com/kish21/sessioncost` and install **sessioncost**.
-3. Restart Cursor and type **`/sessioncost`** in a chat.
+3. Restart Cursor.
 
-If no plugin shows up, use the [one-line install](/sessioncost-help/start/install/) instead.
+## Check it worked
 
-**The guard:** type `/liveguard`. The first time, it puts the guard into Cursor and asks you to restart Cursor once.
-Cursor's hooks cannot read the chat, so to switch the guard off type `/liveguard off` in another agent, or
-`sessioncost guard off` in a terminal.
+Open a **new** chat and type `/`: **/sessioncost** and **/liveguard** are in the list.
 
-**New versions:** **Customize** → the marketplace with SessionCost → **Refresh**.
+## Turn the guard on
+
+Type `/liveguard`. The first time, it puts the guard into Cursor and asks you to restart Cursor once.
+
+To turn it off later, type `/liveguard off` in another agent's chat, or `sessioncost guard off` in a terminal:
+Cursor's hooks cannot read the chat, so saying it in Cursor does not reach the guard.
+
+## Keep it up to date
+
+**Customize** → the marketplace with SessionCost → **Refresh**, then restart Cursor.
+
+## It does not show up?
+
+| What you see | What to do |
+|---|---|
+| No plugin to install after step 2 | Use the [one-line install](/sessioncost-help/start/install/) instead. |
+| Installed, but no `/sessioncost` | The chat was open before the install. Restart Cursor and open a **new** chat. |

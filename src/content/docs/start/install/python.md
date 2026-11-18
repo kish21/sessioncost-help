@@ -4,17 +4,33 @@ description: Install SessionCost with pip, pipx or uv, then one setup command gi
 audience: everyone
 ---
 
-Needs Python 3.10 or newer.
+Needs Python 3.10 or newer. It gives every agent on this computer **`/sessioncost`** (where your chat's tokens went)
+and **`/liveguard`** (the guard, on from install).
 
-```sh
-python -m pip install -U sessioncost     # -U also updates an older copy
-python -m sessioncost setup              # adds /sessioncost and /liveguard to your agents
-```
+## Install
 
-On Mac or Linux, use `python3` if `python` is not found. Prefer isolated tools? `pipx install sessioncost` or
-`uv tool install sessioncost`, then `sessioncost setup`.
+1. Open a terminal. **Windows:** Windows key, type `powershell`, Enter. **Mac:** Cmd + Space, type `terminal`, Enter.
+2. Paste the lines for the tool you use and press Enter:
 
-For each agent it finds, setup prints `/sessioncost and /liveguard added` and `live guard ready`. Restart your
-agents, then type **`/sessioncost`** in a chat. Installed an agent later? Run `setup` again.
+| | **pip** | **pipx** | **uv** |
+|---|---|---|---|
+| **Install** | `python -m pip install -U sessioncost` | `pipx install sessioncost` | `uv tool install sessioncost` |
+| **Add to your agents** | `python -m sessioncost setup` | `sessioncost setup` | `sessioncost setup` |
 
-**New versions:** `/sessioncost update` in a chat, or `python -m sessioncost update` in a terminal.
+3. For each agent it finds, setup prints `/sessioncost and /liveguard added` and `live guard ready`.
+4. Restart your agents.
+
+On Mac or Linux, use `python3` if `python` is not found.
+
+## Check it worked
+
+Open a **new** chat in any agent and type **`/sessioncost`**: the report opens in your browser.
+
+## Keep it up to date
+
+Type `/sessioncost update` in a chat, or in a terminal `python -m sessioncost update` (pip) or
+`sessioncost update` (pipx, uv). Then restart your agents.
+
+## Good to know
+
+Installed an agent later? Run `setup` again.
