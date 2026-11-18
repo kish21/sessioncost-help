@@ -41,6 +41,8 @@ A new chat starts small. The handover is how you start one without losing your p
 
 For a week after a handover, a new chat in that project is told one exists; the agent reads it only when you ask.
 There is one handover file per project. Each new handover goes at the top; older ones and your own notes stay below.
+Each handover ends with a marker line, so "continue from handover" reads only the newest one, however long the file
+grows.
 
 This works in Claude Code, Codex and Antigravity. Cursor and Copilot let SessionCost add text only when a chat starts,
 too late for the chat that grew long: there, type `/sessioncost fix` in the long chat and say **write a handover**.
