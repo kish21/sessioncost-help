@@ -18,10 +18,11 @@ about to run it, and each result as it comes back. This page is the complete lis
   answer yes or no. *Goes ahead*: logged only.
 - **Asked once, then remembered for the chat**, unless the table says *every time*. A push is remembered per
   destination; an MCP tool per server; a script on disk per version of the file.
-- **Untrusted content raises the bar.** After the agent reads a web page, an MCP or network result, or a file from
-  outside the project, pushes, sending data out, secrets and rule changes ask again even if you allowed them. After a
-  result with **signs of a prompt injection**, any risky step is blocked instead, and a SessionCost line says so at
-  once, to you and the agent. Your next message resets this; with **strict** mode it lasts for the whole chat.
+- **Outside content is scanned.** A web page, an MCP or network result, or a file from outside the project is
+  checked for hidden instructions; a clean one changes nothing. After a result with **signs of a prompt injection**,
+  any risky step is blocked, and a SessionCost line says so at once, to you and the agent, quoting what was found.
+  Your next message resets this; with **strict** mode it lasts for the whole chat.
+- **Your own work runs quietly**: the agent's own tools, memory and logs, and your project's own files and scripts.
 - **Commands are read the way the shell reads them**: quotes joined (`.e''nv` is `.env`), inner shells opened
   (`bash -c`, `sh -c`, `pwsh -Command`, `cmd /c`), heredocs, PowerShell here-strings and `python -c` scripts looked
   into. Text that is only quoted (a commit message, an issue comment) is not taken for a command.
@@ -58,7 +59,12 @@ about to run it, and each result as it comes back. This page is the complete lis
 | An MCP tool that changes or sends | once per server; arguments with a path outside the project, `DROP TABLE` or `DELETE FROM` ask too | ASI02 |
 | Raising its own rights or changing the computer | **every time**: `sudo`, `su`, `runas`, `chmod 777`, an execution-policy bypass; new users and admin groups, services, the machine's registry or PATH, shutting down, a container with the host's rights, `rundll32` / `regsvr32` / `mshta` | LLM06:2025, ASI03 |
 | A script that prints a key | a script about to print a key, token or password variable | LLM02:2025, ASI03 |
-| Sending data out after a key appeared | **every time**, once a key-shaped value came back in a tool result | LLM02:2025, ASI03 |
+| Sending data out after a key appeared | **every time**, once a key-shaped value came back in a tool result; only steps that can carry data out (an upload, a post, a push) | LLM02:2025, ASI03 |
+| Data in a web address | a key, a long encoded block or several lines of text put into an address the agent opens | LLM02:2025 |
+| Memory or rules changed after outside content | an edit to the agent's memory or rules, right after a page or MCP result, that adds a command or steers the agent | LLM01:2025 |
+| The agent's rules sent out | a rule or instruction file uploaded or pasted into what is sent | LLM07:2025 |
+| The same step over and over | the same command, web or MCP step run many times in one turn with no file changed | LLM10:2025 |
+| A brand-new package version | installing a version released only days ago | LLM03:2025 |
 | A script on disk with a never-list step | `sh setup.sh`, `python tool.py`, `./build.sh`: once per version of the file | ASI05 |
 | A new or changed skill, plugin or MCP server | before its first use (Claude Code) | ASI04 |
 | A third try of a failing command | the same command failed twice in a row with no file changed (Claude Code) | — |
@@ -96,7 +102,7 @@ Before any tool runs, the guard reads what the chat loads into the model:
 
 ## After each result
 
-- **Injection signs**: steering phrases, fake system tags, characters a person cannot see, and text that addresses its
+- **Injection signs**: steering phrases (also reworded ones), fake system tags, characters a person cannot see, and text that addresses its
   reader as an agent. Only a yes/no is kept, never the text. A result of the agent's own Edit or Write is not scanned
   (it wrote that text); reading the file back is.
 - **Keys**: a key-shaped value in a result is marked, and from then on anything that sends data out asks.
