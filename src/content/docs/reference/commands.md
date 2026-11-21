@@ -20,6 +20,7 @@ your agent's own question.
 
 | Say | Or type | What it does |
 |---|---|---|
+| "Show me the SessionCost help" or "what can SessionCost do?" | `/sessioncost help` | The short list of what you can say, and the address of this guide. Your first chat shows it once by itself. You can also just ask "how do I stop the pop-ups?" and your agent tells you what to say or type. |
 | "Show my report" or "where did my tokens go?" | `/sessioncost` | Builds the report of this chat, gives you its link and names the top fix. |
 | "Fix it" | `/sessioncost fix` | After a 💡 tip: applies the fixes it named, after a backup. |
 | "Allow it" | `/liveguard allow …` | After the guard asked about a step that is normal here: it stops asking about that step in this project. Secrets and never-list steps cannot be allowed. |
@@ -32,9 +33,9 @@ your agent's own question.
 |---|---|---|
 | "Fix my token waste" | `/sessioncost fix` | This project's token waste as a to-do list, with the change for each. Say "fix it" (or "fix 1 and 3") to apply, after a backup. |
 | "Undo the fix" | `/sessioncost fix --undo` | Puts back the newest fix, unless you changed the file since. |
-| "Write a handover" | `/sessioncost fix` | Your agent writes a handover so you can start a fresh chat. There, say "continue from handover". A chat past 100k tokens gets one without asking (Claude Code, Codex, Antigravity). |
+| "Write a handover" | `/sessioncost fix` | Your agent writes a handover so you can start a fresh chat. There, say "continue from handover". A chat past 200k tokens gets one without asking (Claude Code, Codex, Antigravity). |
 | "Turn token tips off" / "on" | `/sessioncost fix auto off` / `on` | The live tips. They are on from install: after each answer that wasted tokens, the last line of the next reply names it. |
-| "Warn me at 150k tokens" | `/sessioncost fix long-chat 150k` | When a chat counts as long (100k by default). |
+| "Warn me at 1m tokens" | `/sessioncost fix long-chat 1m` | When a chat counts as long (200k by default). |
 | "Set my budget to $5" / "clear my budget" | `/sessioncost fix budget 5` / `off` | A dollar ceiling per chat for the handover tip. |
 | "Guard strict" | `/liveguard strict` | The guard, stricter: outside content stays untrusted for the whole chat. |
 | "Show my allowed steps" / "clear my allowed steps" | `/liveguard allow --list` / `--clear` | This project's allow rules. |
@@ -54,6 +55,7 @@ installed with pip, or `npx sessioncost` with npm: see
 | Command | What it does |
 |---|---|
 | `sessioncost` | The report of the newest chat of this folder's project, from any agent. |
+| `sessioncost help` | What you can say in a chat, and the address of this guide. |
 | `sessioncost list` | Your recent chats here: when, which agent, the chat id, cost, turns, the first message. `--limit 20` for more. |
 | `sessioncost 3f2a9c1e` | The report of one chat: the first characters of its id from `sessioncost list`, or the path of a session file. |
 | `sessioncost setup` | Adds `/sessioncost` to every agent it finds. Restart the agents. |

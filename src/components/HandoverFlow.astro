@@ -2,7 +2,7 @@
 // A long chat ends in a handover: the agent writes where things stand, a new chat starts small and reads it.
 const now = [
 	{ x: 20, title: 'The chat grows', sub: 'every turn re-sends it all' },
-	{ x: 270, title: 'Passes 100k tokens', sub: 'or the limit you set' },
+	{ x: 270, title: 'Passes 200k tokens', sub: 'or the limit you set' },
 	{ x: 520, title: 'Your agent writes', sub: 'the handover' },
 ];
 const next = [
@@ -11,7 +11,7 @@ const next = [
 	{ x: 20, title: 'It carries on', sub: 'from a small chat' },
 ];
 ---
-<figure class="diagram" aria-label="This chat grows past 100k tokens, or the limit you set. Your agent writes a handover at once, without asking: the goal, what is done, files, what is next. In a new chat you say continue from handover; the agent reads the file and carries on from a small chat.">
+<figure class="diagram" aria-label="This chat grows past 200k tokens, or the limit you set. Your agent writes a handover at once, without asking: the goal, what is done, files, what is next. In a new chat you say continue from handover; the agent reads the file and carries on from a small chat.">
 	<svg viewBox="0 0 740 300" role="img">
 		<text class="kicker" x="20" y="20">This chat</text>
 		{now.map((s, i) => (

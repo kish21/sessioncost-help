@@ -28,14 +28,15 @@ A new chat starts small. The handover is how you start one without losing your p
 
 <HandoverFlow />
 
-1. **Your agent writes it at once.** When a chat passes **100k tokens** (with the live tips, on unless you turned
+1. **Your agent writes it at once.** When a chat passes **200k tokens** (with the live tips, on unless you turned
    them off), your agent finishes your request, then writes the handover in `NEXT-SESSION.md` in the project, without
    asking. The handover covers the goal, what is done, files changed, tests run and what is next, plus a short "other
    token waste in this chat" section. SessionCost calls no AI model; your own agent writes the words and shows them in
    its reply. In a git project, `NEXT-SESSION.md` is added to `.gitignore`, so the handover is never committed.
-2. **The last line tells you**, for example: *💡 SessionCost: This chat is at 114k tokens: every message re-sends all
+2. **The last line tells you**, for example: *💡 SessionCost: This chat is at 214k tokens: every message re-sends all
    of it. A handover is in NEXT-SESSION.md: start a fresh chat and say "continue from handover".* If you carry on
-   instead, the handover is written again each time the chat doubles in size (here at about 230k, then 460k tokens).
+   instead, the handover is written again each time the chat doubles in size (here at about 430k, then 860k tokens).
+   The first handover on a computer also says once how to change the 200k.
 3. **Start a new chat** in the same project and say **"continue from handover"**. The agent reads the file and carries
    on from "what is next".
 
@@ -51,7 +52,7 @@ too late for the chat that grew long: there, type `/sessioncost fix` in the long
 
 | Say | Or type | What it does |
 |---|---|---|
-| "Warn me at 150k tokens" | `/sessioncost fix long-chat 150k` | The handover is offered from 150k tokens instead of 100k (10k or more). |
+| "Warn me at 1m tokens" | `/sessioncost fix long-chat 1m` | The handover is offered from 1m tokens instead of 200k (any number from 10k). |
 | "Set my budget to $5" | `/sessioncost fix budget 5` | Also offer it once a chat passes $5. "Clear my budget" (`fix budget off`) removes the dollar budget. |
 
 In a terminal:
