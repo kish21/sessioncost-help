@@ -106,6 +106,14 @@ Before any tool runs, the guard reads what the chat loads into the model:
   reader as an agent. Only a yes/no is kept, never the text. A result of the agent's own Edit or Write is not scanned
   (it wrote that text); reading the file back is.
 - **Keys**: a key-shaped value in a result is marked, and from then on anything that sends data out asks.
+- **Unsafe code the agent wrote** (a tip, never a pop-up): after the agent writes or edits a code file, the new code is
+  checked for a few well-known weaknesses. You get one line that names the weakness by its CWE number (MITRE's
+  catalogue of software weaknesses) and the good practice: the HTTPS certificate check switched off (CWE-295), an SQL
+  query built by pasting in values (CWE-89), a shell command built from changing text (CWE-78), text run as code
+  (CWE-94), YAML loaded the unsafe way (CWE-502), text put into a web page as HTML (CWE-79), a secret key in the code
+  (CWE-798). Test files are skipped. Each weakness is named once per file per chat. Claude Code shows it at once;
+  Codex and Antigravity at your next message. Cursor (no hook after a file edit) and Copilot (its hooks cannot add a
+  line mid-chat) do not show it.
 
 ## By agent
 

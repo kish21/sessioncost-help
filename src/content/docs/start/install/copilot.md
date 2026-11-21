@@ -24,6 +24,12 @@ The guard is already on, for Copilot and every other agent on this computer. Say
 
 Type `/sessioncost update` in a chat, then restart VS Code or Copilot CLI.
 
+## Remove it
+
+Say **"remove SessionCost"** in a chat: your agent gives you one command to paste into a terminal (it cannot run it itself). The command lists what it takes out: the guard's hooks in every agent, the `/sessioncost` and `/liveguard` skills, and SessionCost's own folder with your reports. It asks before it changes anything and keeps a backup copy in your home folder.
+
+Then restart VS Code or Copilot CLI.
+
 ## It does not show up?
 
 | What you see | What to do |

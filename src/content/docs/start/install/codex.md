@@ -42,7 +42,9 @@ Then restart Codex.
 
 ## Remove it
 
-Turn the plugin off in **Customize → Plugins** (app) or `/plugins` (CLI), then remove the source in a terminal:
+Say **"remove SessionCost"** in a chat: your agent gives you one command to paste into a terminal (it cannot run it itself). The command lists what it takes out: the guard's hooks in every agent, the `/sessioncost` and `/liveguard` skills, and SessionCost's own folder with your reports. It asks before it changes anything and keeps a backup copy in your home folder.
+
+Then turn the plugin off in **Customize → Plugins** (app) or `/plugins` (CLI), and remove the source in a terminal:
 
 ```sh
 codex plugin marketplace remove sessioncost

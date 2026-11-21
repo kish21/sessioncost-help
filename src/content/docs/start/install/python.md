@@ -31,6 +31,12 @@ Open a **new** chat in any agent and type **`/sessioncost`**: the report opens i
 Type `/sessioncost update` in a chat, or in a terminal `python -m sessioncost update` (pip) or
 `sessioncost update` (pipx, uv). Then restart your agents.
 
+## Remove it
+
+In a terminal: `sessioncost uninstall` (or `python -m sessioncost uninstall`). It lists what it takes out: the guard's hooks in every agent, the `/sessioncost` and `/liveguard` skills, and SessionCost's own folder with your reports. It asks before it changes anything and keeps a backup copy in your home folder.
+
+Then remove the program: `uv tool uninstall sessioncost` (or `pip uninstall sessioncost`).
+
 ## Good to know
 
 Installed an agent later? Run `setup` again.

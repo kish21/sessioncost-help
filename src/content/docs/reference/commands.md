@@ -22,6 +22,7 @@ your agent's own question.
 |---|---|---|
 | "Show me the SessionCost help" or "what can SessionCost do?" | `/sessioncost help` | The short list of what you can say, and the address of this guide. Your first chat shows it once by itself. You can also just ask "how do I stop the pop-ups?" and your agent tells you what to say or type. |
 | "Show my report" or "where did my tokens go?" | `/sessioncost` | Builds the report of this chat, gives you its link and names the top fix. |
+| "Remove SessionCost" | | Your agent gives you one command to paste into a terminal. It takes SessionCost out of every agent, asks first and keeps a backup. |
 | "Fix it" | `/sessioncost fix` | After a 💡 tip: applies the fixes it named, after a backup. |
 | "Allow it" | `/liveguard allow …` | After the guard asked about a step that is normal here: it stops asking about that step in this project. Secrets and never-list steps cannot be allowed. |
 | "Turn the guard off" | `/liveguard off` | The [guard](/sessioncost-help/use/stay-safe/) is on from install, in every chat and every agent. This turns it off. Only your own message turns it off, and only when these words are the whole message: the agent cannot. |
@@ -36,6 +37,7 @@ your agent's own question.
 | "Write a handover" | `/sessioncost fix` | Your agent writes a handover so you can start a fresh chat. There, say "continue from handover". A chat past 200k tokens gets one without asking (Claude Code, Codex, Antigravity). |
 | "Turn token tips off" / "on" | `/sessioncost fix auto off` / `on` | The live tips. They are on from install: after each answer that wasted tokens, the last line of the next reply names it. |
 | "Warn me at 1m tokens" | `/sessioncost fix long-chat 1m` | When a chat counts as long (200k by default). |
+| "Open the fresh chat for me" / "stop opening the fresh chat" | `/sessioncost fix fresh-chat on` / `off` | After the handover your agent gives you a link that opens a fresh chat with "continue from handover" filled in; on, it opens that chat by itself. Claude Code (VS Code, terminal, Desktop) and Cursor; other agents: start a new chat yourself. |
 | "Set my budget to $5" / "clear my budget" | `/sessioncost fix budget 5` / `off` | A dollar ceiling per chat for the handover tip. |
 | "Guard strict" | `/liveguard strict` | The guard, stricter: outside content stays untrusted for the whole chat. |
 | "Show my allowed steps" / "clear my allowed steps" | `/liveguard allow --list` / `--clear` | This project's allow rules. |
@@ -60,6 +62,7 @@ installed with pip, or `npx sessioncost` with npm: see
 | `sessioncost 3f2a9c1e` | The report of one chat: the first characters of its id from `sessioncost list`, or the path of a session file. |
 | `sessioncost setup` | Adds `/sessioncost` to every agent it finds. Restart the agents. |
 | `sessioncost clean` | Deletes the reports of older chats and keeps the latest. |
+| `sessioncost uninstall` | Takes SessionCost out of every agent: the guard's hooks (your other hooks stay), the skills, and its own folder. It asks first and keeps a backup in your home folder; then it lists what only you can remove (plugins, the editor extension, the program). |
 | `sessioncost update` | Updates every copy. `--dry-run` shows the steps without running them. |
 | `sessioncost version` | This copy's version, and how many other copies are on this computer. `--all` lists every copy (terminal, each agent's plugin, each `/sessioncost` from setup) with its version and names the ones that differ. |
 | `sessioncost auto off` | Stops rebuilding each chat's report after each answer. `sessioncost auto on` starts it again. |

@@ -32,6 +32,12 @@ Cursor's hooks cannot read the chat, so saying it in Cursor does not reach the g
 
 **Customize** → the marketplace with SessionCost → **Refresh**, then restart Cursor.
 
+## Remove it
+
+Say **"remove SessionCost"** in a chat: your agent gives you one command to paste into a terminal (it cannot run it itself). The command lists what it takes out: the guard's hooks in every agent, the `/sessioncost` and `/liveguard` skills, and SessionCost's own folder with your reports. It asks before it changes anything and keeps a backup copy in your home folder.
+
+Then restart Cursor.
+
 ## It does not show up?
 
 | What you see | What to do |

@@ -21,3 +21,9 @@ Use one way only: both together would give Antigravity two `/sessioncost`.
 To open a terminal: **Windows:** Windows key, type `powershell`, Enter. **Mac:** Cmd + Space, type `terminal`, Enter.
 
 You can see the guard's hooks under **Customizations → Hooks**.
+
+## Remove it
+
+Say **"remove SessionCost"** in a chat: your agent gives you one command to paste into a terminal (it cannot run it itself). The command lists what it takes out: the guard's hooks in every agent, the `/sessioncost` and `/liveguard` skills, and SessionCost's own folder with your reports. It asks before it changes anything and keeps a backup copy in your home folder.
+
+Then restart Antigravity.

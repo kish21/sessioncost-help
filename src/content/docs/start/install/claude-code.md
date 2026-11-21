@@ -44,7 +44,9 @@ It ends with `✔ Successfully installed plugin: sessioncost@sessioncost (scope:
 
 ## Remove it
 
-In a terminal: `claude plugin uninstall sessioncost@sessioncost`, then reload.
+Say **"remove SessionCost"** in a chat: your agent gives you one command to paste into a terminal (it cannot run it itself). The command lists what it takes out: the guard's hooks in every agent, the `/sessioncost` and `/liveguard` skills, and SessionCost's own folder with your reports. It asks before it changes anything and keeps a backup copy in your home folder.
+
+Then take out the plugin in a terminal: `claude plugin uninstall sessioncost@sessioncost`, and reload.
 
 ## It does not show up?
 

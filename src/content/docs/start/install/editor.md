@@ -40,6 +40,12 @@ them, after a backup, to that same chat. **Undo the last fix** puts the files ba
 The status bar shows the chat of the folder your open file is in. Opening a file in another folder switches it at
 once.
 
+## Remove it
+
+Say **"remove SessionCost"** in a chat: your agent gives you one command to paste into a terminal (it cannot run it itself). The command lists what it takes out: the guard's hooks in every agent, the `/sessioncost` and `/liveguard` skills, and SessionCost's own folder with your reports. It asks before it changes anything and keeps a backup copy in your home folder.
+
+Then remove the extension: **Extensions** panel → SessionCost → **Uninstall**.
+
 ## Settings
 
 | Setting | Default | What it does |
