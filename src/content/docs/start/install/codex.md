@@ -59,3 +59,5 @@ codex plugin marketplace remove sessioncost
 | **sessioncost** is not in Plugins | Restart Codex after step 1, then look again. |
 | Installed, but no `/sessioncost` | The chat was open before the install. Start a **new** chat. |
 | The guard does nothing | Type `/hooks` and trust SessionCost's hooks, then restart Codex. |
+| Codex says **Python isn't available** | Codex still uses an older copy of the plugin. Run `codex plugin marketplace upgrade sessioncost` in a terminal, close Codex fully and open it again. |
+| The upgrade says `unknown variant 'default', expected 'fast' or 'flex'` | Your Codex settings have a value its command line does not accept. Run it this way instead: `codex -c service_tier=flex plugin marketplace upgrade sessioncost`. Your settings file stays as it is. |
