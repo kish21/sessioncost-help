@@ -25,9 +25,10 @@ A terminal already showing Codex's chat will not do: open a new window.
 |---|---|---|
 | **1. Add SessionCost's source** | In the terminal, paste and press Enter:<br/>`codex plugin marketplace add kish21/sessioncost` | The same line, in the terminal |
 | **2. Install the plugin** | Open **Customize → Plugins**, choose **sessioncost**, click **Install plugin** | Type `codex` to start it, then `/plugins`, pick **sessioncost**, install it |
-| **3. Check it worked** | Start a **new** chat and type `/`: **/sessioncost** and **/liveguard** are in the list | The same, in a new chat |
-| **4. Turn the guard on** | Type `/liveguard`. Restart the app once, then type `/hooks` and trust SessionCost's hooks | The same: `/liveguard`, restart `codex`, `/hooks` |
+| **3. Check it worked** | Start a **new** chat and say **which SessionCost version do I have?**: it answers with a number. (The app lists plugins under `@`, not `/`: type `@sessioncost` to pick it) | The same, in a new chat |
+| **4. Turn the guard on** | Say **turn the guard on**. Restart the app once, then type `/hooks` and trust SessionCost's hooks | The same: **turn the guard on**, restart `codex`, `/hooks` |
 
+The plugin adds no hooks by itself: step 4 is what adds the guard to Codex, so Codex asks nothing about hooks before it.
 Codex asks you to trust every new hook once; that is why step 4 has `/hooks`.
 
 ## Keep it up to date
