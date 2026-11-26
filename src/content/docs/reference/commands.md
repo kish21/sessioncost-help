@@ -60,10 +60,10 @@ installed with pip, or `npx sessioncost` with npm: see
 | `sessioncost help` | What you can say in a chat, and the address of this guide. |
 | `sessioncost list` | Your recent chats here: when, which agent, the chat id, cost, turns, the first message. `--limit 20` for more. |
 | `sessioncost 3f2a9c1e` | The report of one chat: the first characters of its id from `sessioncost list`, or the path of a session file. |
-| `sessioncost setup` | Adds `/sessioncost` to every agent it finds. Restart the agents. |
+| `sessioncost setup` | Adds `/sessioncost` and `/liveguard` to every agent it finds. Add `--offline` to enable strict offline mode (zero outbound network calls). Restart the agents. |
 | `sessioncost clean` | Deletes the reports of older chats and keeps the latest. |
 | `sessioncost uninstall` | Takes SessionCost out of every agent: the guard's hooks (your other hooks stay), the skills, and its own folder. It asks first and keeps a backup in your home folder; then it lists what only you can remove (plugins, the editor extension, the program). |
-| `sessioncost update` | Updates every copy. `--dry-run` shows the steps without running them. |
+| `sessioncost update` | Updates every copy to a pinned release (never `main.zip`). `--to <version>` pins a specific version (e.g. `1.2.9`); `--dry-run` shows the steps without running them. Disabled in offline mode. |
 | `sessioncost version` | This copy's version, and how many other copies are on this computer. `--all` lists every copy (terminal, each agent's plugin, each `/sessioncost` from setup) with its version and names the ones that differ. |
 | `sessioncost auto off` | Stops rebuilding each chat's report after each answer. `sessioncost auto on` starts it again. |
 | `sessioncost prices` | The prices in use, where each one came from and the day the list was checked. |

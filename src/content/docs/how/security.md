@@ -6,12 +6,14 @@ audience: technical
 ## What it reads, keeps and sends
 
 - It reads your agent's own log files **on your computer**.
-- It calls **no AI model** and sends **nothing anywhere**. Reports and logs are files on your computer.
-- An API key or token inside a command (`sk-…`, `ghp_…`, `AKIA…` and the like) is shown as **[secret hidden]**
-  everywhere in the report, the exports and the guard's notes.
+- It calls **no AI model** and collects **zero telemetry**. Reports and logs are files on your computer.
+- **Strict offline mode (zero outbound network calls):** run `sessioncost setup --offline`, `sessioncost guard offline on`, or set `SESSIONCOST_OFFLINE=1`. This guarantees zero outbound network requests across LiveGuard, price updates, and self-updates.
+- **Default online mode:** the only automatic outbound lookup is LiveGuard's fresh-release check, which sends **only** the public package name to `pypi.org` or `registry.npmjs.org` when an agent installs a public package. Installs using private/custom registries (`--index-url`, `--extra-index-url`, `--find-links`, `--registry`, `PIP_INDEX_URL`, `UV_INDEX_URL`, `NPM_CONFIG_REGISTRY`) and scoped npm packages (`@org/pkg`) are skipped automatically so internal package names never leave your machine. Disable this check alone with `sessioncost guard fresh-releases off`.
+- **Explicit user-triggered commands only:** `sessioncost update` (or `--to <version>`) and `sessioncost prices update` contact PyPI / GitHub only when you run them, and both refuse to go online when offline mode is enabled.
+- An API key or token inside a command (`sk-…`, `ghp_…`, `AKIA…` and the like) is shown as **[secret hidden]** everywhere in the report, the exports and the guard's notes.
 - The guard keeps only a yes/no for "signs of an injection", never the text of the page or result.
 
-Where each file lives: [Files and settings](/sessioncost-help/how/files-and-settings/).
+For InfoSec reviewers: see [SECURITY.md](https://github.com/kish21/sessioncost/blob/main/SECURITY.md) (file & network access table) and the full [Threat model](https://github.com/kish21/sessioncost/blob/main/docs/security/THREAT-MODEL.md). Where each local file lives: [Files and settings](/sessioncost-help/how/files-and-settings/).
 
 ## What the guard protects against
 
@@ -79,20 +81,15 @@ The test program also checks the guard itself:
 
 ## Results
 
-**Release tested:** 1.0.0, 2 November 2026.
+**Release:** 1.2.9 (26 November 2026). Full test suite: **786 automated tests** across all five agents (Claude Code, GitHub Copilot [VS Code & CLI], Cursor, Codex, and Antigravity), including native Windows hook tests without `bash` on `PATH`, strict offline mode, and pinned update flows.
 
-| | Claude Code | Codex | Cursor | Antigravity | Copilot |
+- **Red-team suite:** **81 cases** — **76 handled as intended**, **5 known gaps** (documented in the [Threat model](https://github.com/kish21/sessioncost/blob/main/docs/security/THREAT-MODEL.md)).
+- **Real-world replay:** **637 sessions** across Claude Code (290), Antigravity (153), Codex (119), and Cursor (75), **59,111 tool steps** — **97.95% passed**, **1.30% blocked**, **0.75% asked** (~0.7 prompts per session).
+
+| | Claude Code | Codex | Cursor | Antigravity | Copilot (VS Code & CLI) |
 |---|---|---|---|---|---|
-| Steps with the expected answer | 249 of 249 | 215 of 215 | 205 of 205 | 220 of 220 | 220 of 220 |
-| Steps the agent's hooks do not show the guard | none | file reads, searches and web fetches (Codex does these through its shell, which is checked) | file writes, searches and web fetches | none | none |
-| Tried in the real agent for this release | yes | not yet | not yet | yes (Windows) | not yet |
-
-**What "not yet" means.** For Codex, Cursor and Copilot, the guard reads their hook messages as their documentation
-describes them, and its answers to those messages are tested above. Nobody has yet confirmed in the real agent that
-the hooks start and that the agent obeys the answer. Until then, treat the guard in those agents as a preview.
-
-Some answers depend on what happened earlier in the chat: a yes you already gave, a file the agent made itself, a web
-page read just before a push. Those are tested in real chats only.
+| Hook support | Full lifecycle + subagents (`guard.sh` + native Windows `guard.ps1`) | `~/.codex/hooks.json` (asks map to chat-confirm blocks) | `~/.cursor/hooks.json` (toggle via terminal; read asks map to deny) | `~/.gemini/config/hooks.json` (`ask` → `force_ask`) | `~/.copilot/hooks/sessioncost-guard.json` (native Windows `pythonw.exe`, no `bash` required) |
+| Steps the agent's hooks do not show the guard | none | built-in web search | file writes, searches, web fetches | `PostToolUse` tool output text | none (10s hook timeout fails open) |
 
 ## Known problems
 

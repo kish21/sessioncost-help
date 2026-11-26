@@ -52,6 +52,8 @@ hooks live in the agent's plugin folder instead.
 | `sessioncost guard` | Is it on? |
 | `sessioncost guard on` | Guards every chat, open ones from their next step, until you turn it off. The same switch as "turn the guard on" (`/liveguard`) in a chat. Add `strict` for the stricter mode. |
 | `sessioncost guard off` | Off for every chat, as "turn the guard off" (`/liveguard off`) does in a chat. The logs are kept. |
+| `sessioncost guard offline on` | Strict offline mode: guarantees zero outbound network calls across LiveGuard, `sessioncost prices update`, and `sessioncost update`. `off` re-enables online lookups (can also be enforced via `SESSIONCOST_OFFLINE=1`). |
+| `sessioncost guard fresh-releases off` | Stops checking public package release ages on `pypi.org` / `registry.npmjs.org` while keeping other commands online. `on` turns it back on. (Private registries and scoped `@org/pkg` npm packages are always skipped automatically.) |
 | `sessioncost guard allow-list on` | Every step that changes something asks you, unless `.sessioncost-allow` lists it. Reads and searches still go ahead. `off` goes back to asking only for risky steps. |
 | `sessioncost guard fail-closed on` | If the guard itself breaks, or gets a step it cannot read, every step is blocked until it is fixed. `off` lets ordinary steps pass; the never list stays blocked. |
 | `sessioncost guard auto on` | Guards every chat and builds its report after each answer. |

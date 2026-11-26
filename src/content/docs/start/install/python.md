@@ -14,8 +14,9 @@ and **`/liveguard`** (the guard, on from install).
 
 | | **pip** | **pipx** | **uv** |
 |---|---|---|---|
-| **Install** | `python -m pip install -U sessioncost` | `pipx install sessioncost` | `uv tool install sessioncost` |
+| **Install (pinned)** | `python -m pip install sessioncost==1.2.9` | `pipx install sessioncost==1.2.9` | `uv tool install sessioncost==1.2.9` |
 | **Add to your agents** | `python -m sessioncost setup` | `sessioncost setup` | `sessioncost setup` |
+| **Strict offline setup** | `python -m sessioncost setup --offline` | `sessioncost setup --offline` | `sessioncost setup --offline` |
 
 3. For each agent it finds, setup prints `/sessioncost and /liveguard added` and `live guard ready`.
 4. Restart your agents.

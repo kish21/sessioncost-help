@@ -16,9 +16,30 @@ command and its words: [Commands](/sessioncost-help/reference/commands/).
 
 <WatchPair video="01-install-and-update" scene="scene1" title="Install and update" wide={false} />
 
-## Install in one line
+## Standard install (recommended, corporate / InfoSec-friendly)
 
-Nothing else needed: no Python, no Node, no Git. It fetches what it needs by itself.
+Install a pinned release directly from PyPI — no `irm | iex`, no `curl | sh`, no `ExecutionPolicy Bypass`, and no unpinned branch archives:
+
+```sh
+# With pip (Python 3.10+)
+python -m pip install sessioncost==1.2.9
+python -m sessioncost setup
+
+# With uv
+uv tool install sessioncost==1.2.9
+sessioncost setup
+```
+
+**Zero-network / corporate environments:** pass `--offline` to `setup` (or set `SESSIONCOST_OFFLINE=1`) to guarantee **zero outbound network calls** at runtime:
+
+```sh
+python -m pip install sessioncost==1.2.9
+python -m sessioncost setup --offline
+```
+
+## Quick-install script (one line)
+
+Installs the pinned `1.2.9` release using `uv` or `python3` without `ExecutionPolicy Bypass`:
 
 1. Open a terminal. **Windows:** press the Windows key, type `powershell`, press Enter. **Mac:** Cmd + Space, type
    `terminal`, press Enter.
@@ -26,15 +47,18 @@ Nothing else needed: no Python, no Node, no Git. It fetches what it needs by its
 
    **Windows**
    ```powershell
-   irm https://raw.githubusercontent.com/kish21/sessioncost/main/install.ps1 | iex
+   irm https://raw.githubusercontent.com/kish21/sessioncost/v1.2.9/install.ps1 | iex
    ```
    **Mac / Linux**
    ```sh
-   curl -fsSL https://raw.githubusercontent.com/kish21/sessioncost/main/install.sh | sh
+   curl -fsSL https://raw.githubusercontent.com/kish21/sessioncost/v1.2.9/install.sh | sh
    ```
 3. Wait about a minute. For each agent it finds (Claude Code, Codex, Cursor, Antigravity, GitHub Copilot in VS Code
    or its CLI) it prints `/sessioncost and /liveguard added` and `live guard ready`.
 4. Restart your agents. In a chat, type **`/sessioncost`**: the report opens in your browser.
+
+Already installed? Use **`/sessioncost update`** in a chat or **`sessioncost update`** in a terminal — do not re-run
+the one-line installer (LiveGuard blocks `irm | iex` and `curl | sh`).
 
 It says **no agent found**? Install your agent first (for example VS Code with GitHub Copilot), then paste the line
 again. The same goes for an agent you install later.

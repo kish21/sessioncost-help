@@ -17,8 +17,9 @@ Copilot Chat in VS Code and Copilot CLI, even when Copilot is your only agent. I
 | **2. Find the commands** | Switch Copilot Chat to **Agent** mode and type `/`: **/sessioncost** and **/liveguard** are in the list | Type `/`: the same two are in the list |
 | **3. See your report** | Say "show my report" (or type `/sessioncost`): the report of your Copilot chat opens | The same |
 
-The guard is already on, for Copilot and every other agent on this computer. Say "turn the guard off" (or type
-`/liveguard off`) to turn it off.
+The guard is already on, for Copilot and every other agent on this computer. On Windows, Copilot hooks invoke
+`pythonw.exe` directly — no `bash` on `PATH`, no console window flashing, and no PowerShell execution-policy
+workarounds. Say "turn the guard off" (or type `/liveguard off`) to turn it off.
 
 ## Keep it up to date
 
