@@ -22,24 +22,24 @@ Install a pinned release directly from PyPI — no `irm | iex`, no `curl | sh`, 
 
 ```sh
 # With pip (Python 3.10+)
-python -m pip install sessioncost==1.2.9
+python -m pip install sessioncost==1.2.10
 python -m sessioncost setup
 
 # With uv
-uv tool install sessioncost==1.2.9
+uv tool install sessioncost==1.2.10
 sessioncost setup
 ```
 
 **Zero-network / corporate environments:** pass `--offline` to `setup` (or set `SESSIONCOST_OFFLINE=1`) to guarantee **zero outbound network calls** at runtime:
 
 ```sh
-python -m pip install sessioncost==1.2.9
+python -m pip install sessioncost==1.2.10
 python -m sessioncost setup --offline
 ```
 
 ## Quick-install script (one line)
 
-Installs the pinned `1.2.9` release using `uv` or `python3` without `ExecutionPolicy Bypass`:
+Installs the pinned `1.2.10` release using `uv` or `python3` without `ExecutionPolicy Bypass`:
 
 1. Open a terminal. **Windows:** press the Windows key, type `powershell`, press Enter. **Mac:** Cmd + Space, type
    `terminal`, press Enter.
@@ -47,11 +47,11 @@ Installs the pinned `1.2.9` release using `uv` or `python3` without `ExecutionPo
 
    **Windows**
    ```powershell
-   irm https://raw.githubusercontent.com/kish21/sessioncost/v1.2.9/install.ps1 | iex
+   irm https://raw.githubusercontent.com/kish21/sessioncost/v1.2.10/install.ps1 | iex
    ```
    **Mac / Linux**
    ```sh
-   curl -fsSL https://raw.githubusercontent.com/kish21/sessioncost/v1.2.9/install.sh | sh
+   curl -fsSL https://raw.githubusercontent.com/kish21/sessioncost/v1.2.10/install.sh | sh
    ```
 3. Wait about a minute. For each agent it finds (Claude Code, Codex, Cursor, Antigravity, GitHub Copilot in VS Code
    or its CLI) it prints `/sessioncost and /liveguard added` and `live guard ready`.
@@ -105,3 +105,8 @@ In a chat the commands are the same for everyone: `/sessioncost`, `/liveguard`, 
 Type `/sessioncost update` in a chat, or `update` in a terminal (`sessioncost update`, `python -m sessioncost update`
 or `npx sessioncost update`). It updates every copy of SessionCost on the computer, each the right way. Then restart
 your agent. Plugin users: see your agent's page above.
+
+## Uninstall
+
+To remove SessionCost and LiveGuard completely in one go, run `sessioncost uninstall` in a terminal.
+See [Uninstall SessionCost](/sessioncost-help/start/uninstall/).

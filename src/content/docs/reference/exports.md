@@ -12,6 +12,10 @@ as **[secret hidden]** in every format.
 | PDF | **Export PDF** (your browser's Save as PDF, A4 landscape) | Attaching to a review, a ticket or an incident |
 | JSON | `sessioncost --json > chat.json` | Scripts, dashboards, your own analysis |
 | SARIF 2.1.0 | `sessioncost --sarif findings.sarif` | Security tools: GitHub code scanning, SARIF viewers |
+| Insights dashboard | `sessioncost insights` (`--days N`, `--no-open`, `--json`) | Comparing all 5 agents, projects, waste, safety, and trends on one offline page |
+| Weekly summary | `sessioncost week` (`--no-open`, `--json`) | This week vs last week, top 3 wastes, and whether applied fixes are working |
+| Totals & CSV | `sessioncost totals` (`--csv`, `--html`, `--json`, `totals budget`) | Cross-project, team, agent, model, and week spend with monthly budgets and Excel-ready UTF-8 BOM CSV |
+| Local MCP server | `sessioncost mcp` (`sessioncost mcp config`) | Exposing `sessioncost_summary`, `sessioncost_status`, `sessioncost_fix`, and `sessioncost_report` to MCP-compatible agents over local stdio |
 | Guard report | `sessioncost guard report` (`--json` for numbers) | Every guarded chat on this computer, across agents |
 
 Each command works for the newest chat of the folder, or any chat: `sessioncost 3f2a9c1e --sarif f.sarif --no-open`.

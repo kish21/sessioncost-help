@@ -57,6 +57,7 @@ export default defineConfig({
 						},
 						{ label: 'Your first 5 minutes', slug: 'start/first-5-minutes' },
 						{ label: 'What SessionCost finds', slug: 'use/what-it-finds' },
+						{ label: 'Uninstall SessionCost', slug: 'start/uninstall' },
 					],
 				},
 				{

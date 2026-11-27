@@ -81,7 +81,7 @@ The test program also checks the guard itself:
 
 ## Results
 
-**Release:** 1.2.9 (26 November 2026). Full test suite: **786 automated tests** across all five agents (Claude Code, GitHub Copilot [VS Code & CLI], Cursor, Codex, and Antigravity), including native Windows hook tests without `bash` on `PATH`, strict offline mode, and pinned update flows.
+**Release:** 1.2.10 (27 November 2026). Full test suite: **846 automated Python tests** (+ **43 editor extension tests**) across all five agents (Claude Code, GitHub Copilot [VS Code & CLI], Cursor, Codex, and Antigravity), including native Windows hook tests without `bash` on `PATH`, strict offline mode, pinned update flows, canonical report path containment, NTFS junction-safe uninstall, strict MCP path/framing validation, confined git hooks (`pre-commit` secrets and `pre-push` force-push), and strict report/insights CSP.
 
 - **Red-team suite:** **81 cases** — **76 handled as intended**, **5 known gaps** (documented in the [Threat model](https://github.com/kish21/sessioncost/blob/main/docs/security/THREAT-MODEL.md)).
 - **Real-world replay:** **637 sessions** across Claude Code (290), Antigravity (153), Codex (119), and Cursor (75), **59,111 tool steps** — **97.95% passed**, **1.30% blocked**, **0.75% asked** (~0.7 prompts per session).

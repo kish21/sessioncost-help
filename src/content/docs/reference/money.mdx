@@ -75,6 +75,18 @@ Only when you run `prices update`. That command fetches the price list from the 
 sends nothing. If the fetch fails, nothing changes and the list you had stays in use. Apart from installing and
 updating SessionCost itself, no other part of it goes online.
 
+## Cloud providers, service tiers, and regions
+
+If you call models through a cloud provider or a non-standard tier, pass any combination of these flags:
+
+| Flag | Values | Notes |
+|---|---|---|
+| `--provider` | `direct`, `bedrock`, `vertex`, `azure` | Also auto-detected from AWS Bedrock and Google Vertex model IDs. |
+| `--tier` | `standard`, `batch`, `priority`, `flex`, `fast` | Also auto-detected from Codex `service_tier`. |
+| `--region` | `global`, `us`, `eu`, `regional` | Applies regional pricing premiums where providers charge them. |
+
+For example: `sessioncost --provider bedrock --region us` or `sessioncost --tier batch`.
+
 ## On a subscription
 
 On a monthly plan (Claude Pro or Max, ChatGPT) you are not billed per token. `sessioncost --subscription` labels the

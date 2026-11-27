@@ -34,9 +34,7 @@ Type `/sessioncost update` in a chat, or `npx sessioncost@latest setup` in a ter
 
 ## Remove it
 
-In a terminal: `npx sessioncost uninstall`. It lists what it takes out: the guard's hooks in every agent, the `/sessioncost` and `/liveguard` skills, and SessionCost's own folder with your reports. It asks before it changes anything and keeps a backup copy in your home folder.
-
-If you installed it globally, then: `npm uninstall -g sessioncost`.
+In a terminal: `npx sessioncost uninstall`. It removes SessionCost and LiveGuard cleanly in one go — hooks in every agent (keeping your other hooks), `/sessioncost` and `/liveguard` skills, `~/.sessioncost`, plugins, editor extensions, and global `npm` packages. Add `--backup` to keep a copy first. See [Uninstall SessionCost](/sessioncost-help/start/uninstall/).
 
 ## Good to know
 

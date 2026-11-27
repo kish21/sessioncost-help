@@ -14,7 +14,7 @@ and **`/liveguard`** (the guard, on from install).
 
 | | **pip** | **pipx** | **uv** |
 |---|---|---|---|
-| **Install (pinned)** | `python -m pip install sessioncost==1.2.9` | `pipx install sessioncost==1.2.9` | `uv tool install sessioncost==1.2.9` |
+| **Install (pinned)** | `python -m pip install sessioncost==1.2.10` | `pipx install sessioncost==1.2.10` | `uv tool install sessioncost==1.2.10` |
 | **Add to your agents** | `python -m sessioncost setup` | `sessioncost setup` | `sessioncost setup` |
 | **Strict offline setup** | `python -m sessioncost setup --offline` | `sessioncost setup --offline` | `sessioncost setup --offline` |
 
@@ -34,9 +34,7 @@ Type `/sessioncost update` in a chat, or in a terminal `python -m sessioncost up
 
 ## Remove it
 
-In a terminal: `sessioncost uninstall` (or `python -m sessioncost uninstall`). It lists what it takes out: the guard's hooks in every agent, the `/sessioncost` and `/liveguard` skills, and SessionCost's own folder with your reports. It asks before it changes anything and keeps a backup copy in your home folder.
-
-Then remove the program: `uv tool uninstall sessioncost` (or `pip uninstall sessioncost`).
+In a terminal: `sessioncost uninstall` (or `python -m sessioncost uninstall`). It removes SessionCost and LiveGuard cleanly in one go — hooks in every agent (keeping your other hooks), `/sessioncost` and `/liveguard` skills, `~/.sessioncost`, plugins, editor extensions, and the Python package itself. Add `--backup` to keep a copy first. See [Uninstall SessionCost](/sessioncost-help/start/uninstall/).
 
 ## Good to know
 

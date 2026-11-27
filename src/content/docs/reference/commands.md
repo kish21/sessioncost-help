@@ -22,7 +22,7 @@ your agent's own question.
 |---|---|---|
 | "Show me the SessionCost help" or "what can SessionCost do?" | `/sessioncost help` | The short list of what you can say, and the address of this guide. Your first chat shows it once by itself. You can also just ask "how do I stop the pop-ups?" and your agent tells you what to say or type. |
 | "Show my report" or "where did my tokens go?" | `/sessioncost` | Builds the report of this chat, gives you its link and names the top fix. |
-| "Remove SessionCost" | | Your agent gives you one command to paste into a terminal. It takes SessionCost out of every agent, asks first and keeps a backup. |
+| "Remove SessionCost" | | Your agent gives you one command to paste into a terminal. It removes SessionCost and LiveGuard cleanly in one go (hooks, skills, plugins, editor extensions, package, and data), asking first. See [Uninstall SessionCost](/sessioncost-help/start/uninstall/). |
 | "Fix it" | `/sessioncost fix` | After a 💡 tip: applies the fixes it named, after a backup. |
 | "Allow it" | `/liveguard allow …` | After the guard asked about a step that is normal here: it stops asking about that step in this project. Secrets and never-list steps cannot be allowed. |
 | "Turn the guard off" | `/liveguard off` | The [guard](/sessioncost-help/use/stay-safe/) is on from install, in every chat and every agent. This turns it off. Only your own message turns it off, and only when these words are the whole message: the agent cannot. |
@@ -32,6 +32,9 @@ your agent's own question.
 
 | Say | Or type | What it does |
 |---|---|---|
+| "Show my insights" or "compare my agents" | `/sessioncost insights` | Opens the offline all-agent Insights dashboard (`insights.html`) comparing Claude Code, Codex, Cursor, Antigravity, and Copilot across projects, waste, safety, and trends. You can also say "insights for the last 7 days". |
+| "Show my weekly summary" or "how was my week?" | `/sessioncost week` | Compares this week vs last week across all projects, ranks the top 3 wastes with dollar/token deltas, and checks whether applied fixes are working. |
+| "Turn on git guard" / "turn off git guard" | `/liveguard git on` / `off` | Installs or removes optional per-repo `pre-commit` (secrets) and `pre-push` (force-push) git hooks. |
 | "Fix my token waste" | `/sessioncost fix` | This project's token waste as a to-do list, with the change for each. Say "fix it" (or "fix 1 and 3") to apply, after a backup. |
 | "Undo the fix" | `/sessioncost fix --undo` | Puts back the newest fix, unless you changed the file since. |
 | "Write a handover" | `/sessioncost fix` | Your agent writes a handover so you can start a fresh chat. There, say "continue from handover". A chat past 200k tokens gets one without asking (Claude Code, Codex, Antigravity). |
@@ -60,10 +63,16 @@ installed with pip, or `npx sessioncost` with npm: see
 | `sessioncost help` | What you can say in a chat, and the address of this guide. |
 | `sessioncost list` | Your recent chats here: when, which agent, the chat id, cost, turns, the first message. `--limit 20` for more. |
 | `sessioncost 3f2a9c1e` | The report of one chat: the first characters of its id from `sessioncost list`, or the path of a session file. |
+| `sessioncost insights` | Builds the all-agent offline Insights dashboard (`~/.sessioncost/reports/insights.html`) comparing Claude Code, Codex, Cursor, Antigravity, and Copilot across projects, agents, waste, safety, and trends. Supports `--days N`, `--no-open`, `--json`. |
+| `sessioncost week` | Weekly summary comparing this week vs last week across all projects, ranking the top 3 wastes and tracking whether applied fixes are working. Supports `--no-open`, `--json`. |
+| `sessioncost totals` | Aggregates spend by project, team, agent, model, and week with per-project/team monthly budgets (`sessioncost totals budget`) and CSV/HTML/JSON export (`--csv`, `--html`, `--json`, `--no-open`). |
+| `sessioncost status` | Shows guard state, offline mode, configured agents, and any agent version compatibility warnings. |
+| `sessioncost mcp` | Starts the zero-dependency local stdio MCP server (`sessioncost_summary`, `sessioncost_status`, `sessioncost_fix`, `sessioncost_report`). Run `sessioncost mcp config` to print the JSON config snippet for your agent. |
+| `sessioncost guard git on` | Installs optional per-repo `pre-commit` (secrets) and `pre-push` (force-push) git hooks. Use `off` to remove or `status` to check. |
 | `sessioncost setup` | Adds `/sessioncost` and `/liveguard` to every agent it finds. Add `--offline` to enable strict offline mode (zero outbound network calls). Restart the agents. |
 | `sessioncost clean` | Deletes the reports of older chats and keeps the latest. |
-| `sessioncost uninstall` | Takes SessionCost out of every agent: the guard's hooks (your other hooks stay), the skills, and its own folder. It asks first and keeps a backup in your home folder; then it lists what only you can remove (plugins, the editor extension, the program). |
-| `sessioncost update` | Updates every copy to a pinned release (never `main.zip`). `--to <version>` pins a specific version (e.g. `1.2.9`); `--dry-run` shows the steps without running them. Disabled in offline mode. |
+| `sessioncost uninstall` | Removes SessionCost and LiveGuard cleanly in one go: hooks in every agent (your other hooks stay), git hooks in the current repo, skills, `~/.sessioncost`, agent plugins, editor extensions, the package itself, and old backups. Asks first; add `--backup` to keep a copy in your home folder. See [Uninstall SessionCost](/sessioncost-help/start/uninstall/). |
+| `sessioncost update` | Updates every copy to a pinned release (never `main.zip`). `--to <version>` pins a specific version (e.g. `1.2.10`); `--dry-run` shows the steps without running them. Disabled in offline mode. |
 | `sessioncost version` | This copy's version, and how many other copies are on this computer. `--all` lists every copy (terminal, each agent's plugin, each `/sessioncost` from setup) with its version and names the ones that differ. |
 | `sessioncost auto off` | Stops rebuilding each chat's report after each answer. `sessioncost auto on` starts it again. |
 | `sessioncost prices` | The prices in use, where each one came from and the day the list was checked. |
@@ -92,6 +101,9 @@ Add any of these after `sessioncost` or after a chat id. They combine, for examp
 | `--subscription` | On a monthly plan (Claude Pro or Max, ChatGPT), money is labelled what it would cost at API prices. |
 | `--cursor-usage usage.csv` | Cursor only: your usage export, for exact tokens. It is also picked up from Downloads by itself. |
 | `--prices my-prices.json` | Your own prices laid over the built-in ones. |
+| `--provider NAME` | Cloud provider pricing: `direct`, `bedrock`, `vertex`, or `azure` (also auto-detected from Bedrock/Vertex model IDs). |
+| `--tier NAME` | Service tier pricing: `standard`, `batch`, `priority`, `flex`, or `fast` (also auto-detected from Codex `service_tier`). |
+| `--region NAME` | Regional pricing: `global`, `us`, `eu`, or `regional`. |
 | `--json` | Every number as JSON, and nothing else: notes go to stderr. It is long: send it to a file, `sessioncost --json > out.json`. |
 | `--sarif FILE` | The risky steps (and the guard's decisions) as SARIF 2.1.0, for security tools. |
 | `--version` | The installed version. |

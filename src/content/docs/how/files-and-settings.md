@@ -12,7 +12,7 @@ Commands on this page run in a terminal. Type them the way that matches
 
 | Path | What it holds |
 |---|---|
-| `reports/` | One report file per chat, and `guard.html` from `sessioncost guard report`. After each report, only the newest 20 are kept; `sessioncost clean` deletes the older ones at once. |
+| `reports/` | One report file per chat, `insights.html` from `sessioncost insights`, and `guard.html` from `sessioncost guard report`. After each report, only the newest 20 chat reports are kept; `sessioncost clean` deletes the older ones at once. |
 | `guard/config.json` | The switches on this page: guard on or off, strict, allow-list, fail-closed, auto reports, fix auto. |
 | `guard/` (other files) | The guard's log, one file per chat, each with a small `.lock` file. |
 | `guard/projects/` | Allow rules you added from the chat with `/liveguard allow`, per project. |
@@ -49,7 +49,8 @@ hooks live in the agent's plugin folder instead.
 
 | Command | What it does |
 |---|---|
-| `sessioncost guard` | Is it on? |
+| `sessioncost guard` | Is it on? (`sessioncost status` shows guard state, offline mode, configured agents, and agent compatibility warnings.) |
+| `sessioncost guard git on` | Installs optional per-repo `pre-commit` (secrets) and `pre-push` (force-push) git hooks. Use `off` to remove or `status` to check. |
 | `sessioncost guard on` | Guards every chat, open ones from their next step, until you turn it off. The same switch as "turn the guard on" (`/liveguard`) in a chat. Add `strict` for the stricter mode. |
 | `sessioncost guard off` | Off for every chat, as "turn the guard off" (`/liveguard off`) does in a chat. The logs are kept. |
 | `sessioncost guard offline on` | Strict offline mode: guarantees zero outbound network calls across LiveGuard, `sessioncost prices update`, and `sessioncost update`. `off` re-enables online lookups (can also be enforced via `SESSIONCOST_OFFLINE=1`). |

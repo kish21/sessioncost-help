@@ -100,10 +100,13 @@ terminal: `sessioncost guard off`. **The agent itself cannot turn the guard off*
 tells it to, that step is blocked. Cursor's hooks cannot read the chat: there, say it in another agent or use the
 terminal.
 
+## Extra layer: Git hooks (survive agent changes)
+
+Even if an agent updates its hook format or you run git commands outside an agent, you can add optional per-repo git hooks (`pre-commit` to block secrets, `pre-push` to block force-pushes): say **"turn on git guard"** (or run `sessioncost guard git on` in the repo). Say **"turn off git guard"** (`sessioncost guard git off`) to remove them. Run `sessioncost status` anytime to check guard status and agent version compatibility warnings.
+
 ## How often will it bother me?
 
-On the author's own 497 chats across four agents (48,835 tool steps), replayed through the guard: **0.53% of steps were
-blocked and 3.8% were asked**. Everything else went ahead with no question.
+On **637 real chats** across four agents (**59,111 tool steps**), replayed through the guard: **97.95% passed quietly**, **1.30% were blocked**, and **0.75% were asked** (~0.7 prompts per session). Everything else went ahead with no question.
 
 It checks steps against known patterns; it does not understand them the way a person does. Treat it as a safety
 net, not a guarantee. How it decides, step by step: [The guard's decision flow](/sessioncost-help/how/guard-decisions/).

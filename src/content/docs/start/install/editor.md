@@ -8,12 +8,13 @@ The extension shows SessionCost in your editor's status bar, for example:
 
 `🛡 Guard on · fix the login · 84k tokens · $0.62`
 
-- **Status bar:** the guard, and the name, tokens and cost of this folder's newest chat (Claude Code, Codex, Copilot,
-  Antigravity or Cursor). Hover over it for the full chat name and details. It turns amber when the guard stopped a
+- **Status bar:** the guard, setup status indicator, context meter (turns amber at `>= 75%` of the context window), unread tip badge (`💡`), and the name, tokens and cost of this folder's newest chat (Claude Code, Codex, Copilot,
+  Antigravity or Cursor). Hover over it for the full chat name and details. It also turns amber when the guard stopped a
   step, and switches to a new chat as soon as you start one.
 - **Pop-up** when the guard stops or asks about a step, with **Show** for the guard report.
-- **Click it** for the menu: open the report, token tips on or off, fix token waste, undo the last fix, guard on or
-  off, the guard report, the handover, prices, set up your agents, and update.
+- **Click it** for the menu: open the report, open the Insights dashboard, token tips on or off, fix token waste, undo the last fix, guard on or
+  off, the guard report, the handover, prices, set up your agents, update, and uninstall.
+- **Auto-refresh on upgrade:** when the extension updates, it automatically refreshes configured skills across your agents.
 
 ## Install
 
@@ -42,9 +43,7 @@ once.
 
 ## Remove it
 
-Say **"remove SessionCost"** in a chat: your agent gives you one command to paste into a terminal (it cannot run it itself). The command lists what it takes out: the guard's hooks in every agent, the `/sessioncost` and `/liveguard` skills, and SessionCost's own folder with your reports. It asks before it changes anything and keeps a backup copy in your home folder.
-
-Then remove the extension: **Extensions** panel → SessionCost → **Uninstall**.
+Say **"remove SessionCost"** in a chat: your agent gives you one command to paste into a terminal (it cannot run it itself). It removes SessionCost and LiveGuard cleanly in one go — hooks, skills, `~/.sessioncost`, plugins, the editor extension, and any CLI package. Add `--backup` to keep a copy first, then restart your editor. Full guide: [Uninstall SessionCost](/sessioncost-help/start/uninstall/).
 
 ## Settings
 

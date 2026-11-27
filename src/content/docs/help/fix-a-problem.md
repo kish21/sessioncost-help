@@ -52,6 +52,12 @@ project. See [Stay safe](/sessioncost-help/use/stay-safe/#it-asks-about-a-normal
 
 That agent got SessionCost two ways, for example its plugin and the one-line install. Use one way per agent.
 
+## Uninstall
+
+Run `sessioncost uninstall` in a terminal (not in an agent chat — LiveGuard blocks agents from removing it). It removes
+SessionCost and LiveGuard cleanly in one go: hooks, skills, plugins, editor extensions, package, and data. Full guide:
+[Uninstall SessionCost](/sessioncost-help/start/uninstall/).
+
 ## Still stuck?
 
 Open an issue on [GitHub](https://github.com/kish21/sessioncost/issues).
